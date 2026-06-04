@@ -1,0 +1,14 @@
+{
+  "repo": "tongji",
+  "feeds": [
+    {
+      "source": "https://www.tongji.edu.cn/",
+      "feed_url": "https://www.tongji.edu.cn/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

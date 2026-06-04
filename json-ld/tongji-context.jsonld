@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "@vocab": "https://api.tongji.edu.cn/vocab#",
+    "schema": "https://schema.org/",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "logo": "schema:logo",
+    "sameAs": "schema:sameAs",
+    "address": "schema:address",
+    "Organization": "schema:CollegeOrUniversity",
+    "developerPortal": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "documentation": {
+      "@id": "schema:documentation",
+      "@type": "@id"
+    },
+    "api": {
+      "@id": "schema:WebAPI",
+      "@type": "@id"
+    },
+    "baseURL": {
+      "@id": "schema:EntryPoint",
+      "@type": "@id"
+    }
+  },
+  "@type": "Organization",
+  "@id": "https://www.tongji.edu.cn/",
+  "name": "Tongji University",
+  "url": "https://www.tongji.edu.cn/",
+  "description": "Tongji University is a leading public research university in Shanghai, China, operating an official institutional Open Platform at api.tongji.edu.cn that exposes campus data and capability APIs to authorized faculty and students.",
+  "address": {
+    "@type": "schema:PostalAddress",
+    "schema:addressLocality": "Shanghai",
+    "schema:addressCountry": "CN"
+  },
+  "sameAs": [
+    "https://en.tongji.edu.cn/",
+    "https://www.linkedin.com/school/tongji-university/"
+  ],
+  "developerPortal": "https://api.tongji.edu.cn/docs",
+  "api": {
+    "@type": "schema:WebAPI",
+    "name": "Tongji University Open Platform",
+    "url": "https://api.tongji.edu.cn/docs",
+    "documentation": "https://api.tongji.edu.cn/docs",
+    "baseURL": "https://api.tongji.edu.cn"
+  }
+}
