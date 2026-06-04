@@ -1,0 +1,43 @@
+---
+name: Tongji University
+description: Tongji University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      Tongji University operates a real, official institutional Open Platform at
+      api.tongji.edu.cn/docs whose documentation home resolves live (HTTP 200).
+      The platform documents a broad set of campus APIs (personnel, teaching,
+      library, one-card, research, notifications) but is gated behind a faculty/
+      student application and approval flow using authorization-code/token auth
+      with scope-based permissions and rate limiting, so no openly callable
+      public endpoints were confirmed. Deep-linked SPA doc routes returned 404
+      to plain HTTP probes (client-side routed). Official .edu.cn websites and
+      the institutional LinkedIn school page were verified. No official Tongji
+      University GitHub organization was confirmed, so none is claimed. No
+      endpoints or properties were fabricated.
+    endpoints:
+      - url: https://api.tongji.edu.cn/docs
+        status: 200
+        note: Official Open Platform API documentation home; resolves live.
+      - url: https://api.tongji.edu.cn/docs/intro/other
+        status: 200
+        note: Platform intro / data-resource overview page; resolves live.
+      - url: https://api.tongji.edu.cn/docs/interface/other_research/v1_rt_research_patent
+        status: 404
+        note: Deep doc route 404 to plain HTTP probe; SPA client-side routed under /docs.
+      - url: https://www.tongji.edu.cn/
+        status: 200
+        note: Official Chinese-language university website.
+      - url: https://en.tongji.edu.cn/
+        status: 200
+        note: Official English-language university website.
+      - url: https://www.lib.tongji.edu.cn/
+        status: 200
+        note: Tongji University Library; no public OAI-PMH/REST API endpoint confirmed.
+      - url: https://www.linkedin.com/school/tongji-university/
+        status: 200
+        note: Official institutional LinkedIn school page.
