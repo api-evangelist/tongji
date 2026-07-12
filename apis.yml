@@ -49,6 +49,8 @@ apis:
       - type: Authentication
         url: https://api.tongji.edu.cn/docs
 common:
+  - type: DomainSecurity
+    url: security/tongji-domain-security.yml
   - type: Website
     url: https://www.tongji.edu.cn/
   - type: Website
