@@ -54,7 +54,22 @@ apis:
       limiting.
     humanURL: https://api.tongji.edu.cn/docs
     baseURL: https://api.tongji.edu.cn
-    tags: [ Open Platform, Campus Data, Teaching, Library, Research, Notifications, OAuth ]
+    tags:
+    - Open Platform
+    - Campus Data
+    - Teaching
+    - Library
+    - Research
+    - Notification
+    - Authentication
+    tags_raw:
+    - Open Platform
+    - Campus Data
+    - Teaching
+    - Library
+    - Research
+    - Notifications
+    - OAuth
     properties:
       - type: Documentation
         url: https://api.tongji.edu.cn/docs
