@@ -71,166 +71,353 @@ created: '2026-06-03'
 modified: '2026-09-01'
 specificationVersion: '0.23'
 apis:
-  - aid: tongji:open-platform
-    name: Tongji University Open Platform
-    description: >-
-      The university's own institutional data and capability API platform, operated by the Tongji
-      University Information Office. Roughly 234 documented interfaces across fifteen families:
-      personnel, student, teacher, teaching management, research, school management, library,
-      campus-card and access control, asset and procurement, education-data verification, AI
-      services, notifications, calendar, cloud meeting and electronic signature. Routes carry a
-      version segment (/v1/, /v2/) and a delivery-mode segment — `rt` for real-time queries against
-      the system of record, `dc` for warehouse-served batch data, `infra` for shared campus
-      capabilities, `metadata` for reference code tables. Interfaces are called with an OAuth 2.0
-      bearer token from the platform's Keycloak realm under either client-credentials or
-      authorization-code mode; thirteen reference-metadata interfaces need no credential at all and
-      were confirmed callable on 2026-09-01. Rate limiting is a documented token bucket at 50
-      requests per second per application per IP, with 429 on exhaustion. Notably, every interface
-      page names the upstream system of record it draws from — a provenance practice most
-      university platforms do not have.
-    humanURL: https://api.tongji.edu.cn/docs
-    baseURL: https://api.tongji.edu.cn
-    x-operator: institution
-    x-operator-evidence: >-
-      api.tongji.edu.cn is under Tongji University's own registrable domain and resolves to
-      202.120.182.237 in CERNET-CN (China Education and Research Network), the national academic
-      network — no vendor CNAME, no shared SaaS host. The authorization server is a Keycloak realm
-      the university runs itself at api.tongji.edu.cn/keycloak/realms/OpenPlatform, whose issuer is
-      its own domain. Probed 2026-09-01: /docs 200, /keycloak/realms/OpenPlatform/.well-known/openid-configuration
-      200 application/json, /v1/metadata/user/sex_code 200 application/json unauthenticated,
-      /v1/rt/research/patent 401 unauthenticated, /v1/token 405 on GET.
-    tags:
-    - Open Platform
-    - Campus Data
-    - Research Data
-    - Library
-    - Reference Data
-    - Notification
-    - Authentication
-    - Artificial Intelligence
-    tags_raw:
-    - Open Platform
-    - Campus Data
-    - Research
-    - Library
-    - Metadata
-    - Notifications
-    - OAuth
-    - AI
-    properties:
-      - type: OpenAPI
-        url: openapi/tongji-reference-metadata-openapi.yml
-      - type: OpenAPI
-        url: openapi/tongji-research-openapi.yml
-      - type: OpenAPI
-        url: openapi/tongji-library-openapi.yml
-      - type: OpenAPI
-        url: openapi/tongji-education-data-verification-openapi.yml
-      - type: OpenAPI
-        url: openapi/tongji-assets-and-procurement-openapi.yml
-      - type: OpenAPI
-        url: openapi/tongji-ai-services-openapi.yml
-      - type: Documentation
-        url: https://api.tongji.edu.cn/docs
-      - type: APIReference
-        url: https://api.tongji.edu.cn/docs/interface
-      - type: Authentication
-        url: authentication/tongji-open-platform-authentication.yml
-      - type: Scopes
-        url: scopes/tongji-open-platform-scopes.yml
-      - type: Errors
-        url: errors/tongji-open-platform-errors.yml
-      - type: RateLimits
-        url: rate-limits/tongji-rate-limits.yml
-      - type: JSONSchema
-        url: json-schema/tongji-open-platform-envelope.json
-      - type: JSONSchema
-        url: json-schema/tongji-open-platform-records.json
-      - type: JSONSchema
-        url: json-schema/tongji-reference-metadata-code-table.json
-      - type: Examples
-        url: examples/tongji-v1-metadata-user-sex-code-example.json
-      - type: Examples
-        url: examples/tongji-v1-metadata-asset-campus-gate-example.json
-      - type: Examples
-        url: examples/tongji-v2-metadata-student-accom-building-code-example.json
-      - type: Vocabulary
-        url: vocabulary/tongji-open-platform-reference-metadata.yml
-      - type: Rules
-        url: rules/tongji-open-platform-rules.yml
-      - type: Lifecycle
-        url: lifecycle/tongji-open-platform-lifecycle.yml
-      - type: Conformance
-        url: conformance/tongji-education-standards-conformance.yml
-      - type: JSONLD
-        url: json-ld/tongji-context.jsonld
-      - type: Support
-        url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
-  - aid: tongji:identity-provider
-    name: Tongji University Shibboleth Identity Provider (CARSI / eduGAIN)
-    description: >-
-      Tongji University's own SAML 2.0 identity provider, registered into eduGAIN by CARSI, the
-      CERNET Authentication and Resource Sharing Infrastructure — China's national research and
-      education identity federation, an eduGAIN member since 2019 and in production interfederation
-      since 2019-06-18. Tongji's entity has been in the eduGAIN aggregate since 2020-02-22, carries
-      both IDPSSODescriptor and AttributeAuthorityDescriptor roles, and asserts scope
-      tongji.edu.cn. This is a machine-readable, institution-operated identity surface and it is
-      the strongest education-regime conformance evidence in the repo. Caveat recorded honestly in
-      the artifact: the copy served at the IdP's own /idp/shibboleth location is Shibboleth's stock
-      self-generated example metadata with an expired 2020 validUntil; the authoritative signed
-      copy is the one CARSI publishes into eduGAIN.
-    humanURL: https://www.carsi.edu.cn/
-    baseURL: https://idp2.tongji.edu.cn/idp
-    x-operator: federation
-    x-operator-evidence: >-
-      A federation is shared by definition and the IdP behind it is the institution's.
-      idp2.tongji.edu.cn is under Tongji's own registrable domain and resolves to 202.120.188.209
-      in CERNET-CN with no vendor CNAME in front of it. Probed 2026-09-01:
-      https://idp2.tongji.edu.cn/idp/shibboleth 200 application/xml 14,592 bytes;
-      https://technical.edugain.org/api.php?action=list_entities&format=json 200 returns entity
-      671755 entityID https://idp2.tongji.edu.cn/idp/shibboleth registered by
-      https://www.carsi.edu.cn.
-    tags:
-    - Identity Federation
-    - Shibboleth
-    - SAML
-    - eduGAIN
-    - CARSI
-    - Single Sign-On
-    properties:
-      - type: IdentityFederation
-        url: identity-federation/tongji-identity-federation.yml
-      - type: Metadata
-        url: identity-federation/tongji-idp-saml-metadata.xml
-      - type: Conformance
-        url: conformance/tongji-education-standards-conformance.yml
-      - type: Documentation
-        url: https://www.carsi.edu.cn/
-  - aid: tongji:ror
-    name: ROR Organization Registration
-    description: >-
-      Tongji University is registered in the Research Organization Registry with ROR ID
-      https://ror.org/03rc6as71 (同济大学, Shanghai, China). This is a registry membership, not a
-      contract the university publishes — the ROR API belongs to ROR. It is recorded because being
-      registered is a fact about the institution and is how machine agents resolve it. Four related
-      Tongji-named entities are separately registered (Shanghai East Hospital, Tongji Hospital,
-      Yangpu Hospital, Tongji Zhejiang College) and are distinct organizations, not this one.
-      Tongji is NOT a DataCite member and NOT a Crossref member — both registries return zero
-      matches.
-    humanURL: https://ror.org/03rc6as71
-    baseURL: https://api.ror.org/v2/organizations/03rc6as71
-    x-operator: registry
-    x-operator-evidence: >-
-      Probed 2026-09-01: https://api.ror.org/v2/organizations/03rc6as71 200 application/json.
-      api.ror.org is ROR's own host, shared by every registered organization on earth; only the
-      membership is Tongji's and only the membership is recorded here.
-    tags:
-    - Research Organization Registry
-    - Persistent Identifiers
-    - Registry Membership
-    properties:
-      - type: Documentation
-        url: https://ror.org/03rc6as71
+- aid: tongji:identity-provider
+  name: Tongji University Shibboleth Identity Provider (CARSI / eduGAIN)
+  description: >-
+    Tongji University's own SAML 2.0 identity provider, registered into eduGAIN by CARSI, the CERNET Authentication
+    and Resource Sharing Infrastructure — China's national research and education identity federation,
+    an eduGAIN member since 2019 and in production interfederation since 2019-06-18. Tongji's entity has
+    been in the eduGAIN aggregate since 2020-02-22, carries both IDPSSODescriptor and AttributeAuthorityDescriptor
+    roles, and asserts scope tongji.edu.cn. This is a machine-readable, institution-operated identity
+    surface and it is the strongest education-regime conformance evidence in the repo. Caveat recorded
+    honestly in the artifact: the copy served at the IdP's own /idp/shibboleth location is Shibboleth's
+    stock self-generated example metadata with an expired 2020 validUntil; the authoritative signed copy
+    is the one CARSI publishes into eduGAIN.
+  humanURL: https://www.carsi.edu.cn/
+  baseURL: https://idp2.tongji.edu.cn/idp
+  x-operator: federation
+  x-operator-evidence: >-
+    A federation is shared by definition and the IdP behind it is the institution's. idp2.tongji.edu.cn
+    is under Tongji's own registrable domain and resolves to 202.120.188.209 in CERNET-CN with no vendor
+    CNAME in front of it. Probed 2026-09-01: https://idp2.tongji.edu.cn/idp/shibboleth 200 application/xml
+    14,592 bytes; https://technical.edugain.org/api.php?action=list_entities&format=json 200 returns entity
+    671755 entityID https://idp2.tongji.edu.cn/idp/shibboleth registered by https://www.carsi.edu.cn.
+  tags:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - eduGAIN
+  - CARSI
+  - Single Sign-On
+  properties:
+  - type: IdentityFederation
+    url: identity-federation/tongji-identity-federation.yml
+  - type: Metadata
+    url: identity-federation/tongji-idp-saml-metadata.xml
+  - type: Conformance
+    url: conformance/tongji-education-standards-conformance.yml
+  - type: Documentation
+    url: https://www.carsi.edu.cn/
+- aid: tongji:ror
+  name: ROR Organization Registration
+  description: >-
+    Tongji University is registered in the Research Organization Registry with ROR ID https://ror.org/03rc6as71
+    (同济大学, Shanghai, China). This is a registry membership, not a contract the university publishes —
+    the ROR API belongs to ROR. It is recorded because being registered is a fact about the institution
+    and is how machine agents resolve it. Four related Tongji-named entities are separately registered
+    (Shanghai East Hospital, Tongji Hospital, Yangpu Hospital, Tongji Zhejiang College) and are distinct
+    organizations, not this one. Tongji is NOT a DataCite member and NOT a Crossref member — both registries
+    return zero matches.
+  humanURL: https://ror.org/03rc6as71
+  baseURL: https://api.ror.org/v2/organizations/03rc6as71
+  x-operator: registry
+  x-operator-evidence: >-
+    Probed 2026-09-01: https://api.ror.org/v2/organizations/03rc6as71 200 application/json. api.ror.org
+    is ROR's own host, shared by every registered organization on earth; only the membership is Tongji's
+    and only the membership is recorded here.
+  tags:
+  - Research Organization Registry
+  - Persistent Identifiers
+  - Registry Membership
+  properties:
+  - type: Documentation
+    url: https://ror.org/03rc6as71
+- aid: tongji:tongji-ai-services-api
+  name: Tongji University AI Services API
+  description: >-
+    Asynchronous speech-recognition and document-OCR services offered to campus applications by the Tongji
+    University Information Office.
+  humanURL: https://api.tongji.edu.cn/docs
+  baseURL: https://api.tongji.edu.cn
+  tags:
+  - AI Services
+  properties:
+  - type: OpenAPI
+    url: openapi/tongji-ai-services-api-openapi.yml
+  - type: Documentation
+    url: https://api.tongji.edu.cn/docs
+  - type: APIReference
+    url: https://api.tongji.edu.cn/docs/interface
+  - type: Authentication
+    url: authentication/tongji-open-platform-authentication.yml
+  - type: Scopes
+    url: scopes/tongji-open-platform-scopes.yml
+  - type: Errors
+    url: errors/tongji-open-platform-errors.yml
+  - type: RateLimits
+    url: rate-limits/tongji-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-envelope.json
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-records.json
+  - type: JSONSchema
+    url: json-schema/tongji-reference-metadata-code-table.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-user-sex-code-example.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-asset-campus-gate-example.json
+  - type: Examples
+    url: examples/tongji-v2-metadata-student-accom-building-code-example.json
+  - type: Vocabulary
+    url: vocabulary/tongji-open-platform-reference-metadata.yml
+  - type: Rules
+    url: rules/tongji-open-platform-rules.yml
+  - type: Lifecycle
+    url: lifecycle/tongji-open-platform-lifecycle.yml
+  - type: Conformance
+    url: conformance/tongji-education-standards-conformance.yml
+  - type: JSONLD
+    url: json-ld/tongji-context.jsonld
+  - type: Support
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+- aid: tongji:tongji-assets-and-procurement-api
+  name: Tongji University Assets and Procurement API
+  description: >-
+    Contract, equipment-asset and purchase-requisition records drawn from the university procurement and
+    asset-management systems.
+  humanURL: https://api.tongji.edu.cn/docs
+  baseURL: https://api.tongji.edu.cn
+  tags:
+  - Assets and Procurement
+  properties:
+  - type: OpenAPI
+    url: openapi/tongji-assets-and-procurement-api-openapi.yml
+  - type: Documentation
+    url: https://api.tongji.edu.cn/docs
+  - type: APIReference
+    url: https://api.tongji.edu.cn/docs/interface
+  - type: Authentication
+    url: authentication/tongji-open-platform-authentication.yml
+  - type: Scopes
+    url: scopes/tongji-open-platform-scopes.yml
+  - type: Errors
+    url: errors/tongji-open-platform-errors.yml
+  - type: RateLimits
+    url: rate-limits/tongji-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-envelope.json
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-records.json
+  - type: JSONSchema
+    url: json-schema/tongji-reference-metadata-code-table.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-user-sex-code-example.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-asset-campus-gate-example.json
+  - type: Examples
+    url: examples/tongji-v2-metadata-student-accom-building-code-example.json
+  - type: Vocabulary
+    url: vocabulary/tongji-open-platform-reference-metadata.yml
+  - type: Rules
+    url: rules/tongji-open-platform-rules.yml
+  - type: Lifecycle
+    url: lifecycle/tongji-open-platform-lifecycle.yml
+  - type: Conformance
+    url: conformance/tongji-education-standards-conformance.yml
+  - type: JSONLD
+    url: json-ld/tongji-context.jsonld
+  - type: Support
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+- aid: tongji:tongji-education-data-verification-api
+  name: Tongji University Education Data Verification API
+  description: >-
+    Identity, qualification, degree, enrolment and insurance verification services backed by national
+    and Shanghai municipal education data sources.
+  humanURL: https://api.tongji.edu.cn/docs
+  baseURL: https://api.tongji.edu.cn
+  tags:
+  - Education Data Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/tongji-education-data-verification-api-openapi.yml
+  - type: Documentation
+    url: https://api.tongji.edu.cn/docs
+  - type: APIReference
+    url: https://api.tongji.edu.cn/docs/interface
+  - type: Authentication
+    url: authentication/tongji-open-platform-authentication.yml
+  - type: Scopes
+    url: scopes/tongji-open-platform-scopes.yml
+  - type: Errors
+    url: errors/tongji-open-platform-errors.yml
+  - type: RateLimits
+    url: rate-limits/tongji-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-envelope.json
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-records.json
+  - type: JSONSchema
+    url: json-schema/tongji-reference-metadata-code-table.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-user-sex-code-example.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-asset-campus-gate-example.json
+  - type: Examples
+    url: examples/tongji-v2-metadata-student-accom-building-code-example.json
+  - type: Vocabulary
+    url: vocabulary/tongji-open-platform-reference-metadata.yml
+  - type: Rules
+    url: rules/tongji-open-platform-rules.yml
+  - type: Lifecycle
+    url: lifecycle/tongji-open-platform-lifecycle.yml
+  - type: Conformance
+    url: conformance/tongji-education-standards-conformance.yml
+  - type: JSONLD
+    url: json-ld/tongji-context.jsonld
+  - type: Support
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+- aid: tongji:tongji-library-api
+  name: Tongji University Library API
+  description: Library gate-access and loan records from the Tongji University Library systems.
+  humanURL: https://api.tongji.edu.cn/docs
+  baseURL: https://api.tongji.edu.cn
+  tags:
+  - Library
+  properties:
+  - type: OpenAPI
+    url: openapi/tongji-library-api-openapi.yml
+  - type: Documentation
+    url: https://api.tongji.edu.cn/docs
+  - type: APIReference
+    url: https://api.tongji.edu.cn/docs/interface
+  - type: Authentication
+    url: authentication/tongji-open-platform-authentication.yml
+  - type: Scopes
+    url: scopes/tongji-open-platform-scopes.yml
+  - type: Errors
+    url: errors/tongji-open-platform-errors.yml
+  - type: RateLimits
+    url: rate-limits/tongji-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-envelope.json
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-records.json
+  - type: JSONSchema
+    url: json-schema/tongji-reference-metadata-code-table.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-user-sex-code-example.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-asset-campus-gate-example.json
+  - type: Examples
+    url: examples/tongji-v2-metadata-student-accom-building-code-example.json
+  - type: Vocabulary
+    url: vocabulary/tongji-open-platform-reference-metadata.yml
+  - type: Rules
+    url: rules/tongji-open-platform-rules.yml
+  - type: Lifecycle
+    url: lifecycle/tongji-open-platform-lifecycle.yml
+  - type: Conformance
+    url: conformance/tongji-education-standards-conformance.yml
+  - type: JSONLD
+    url: json-ld/tongji-context.jsonld
+  - type: Support
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+- aid: tongji:tongji-reference-metadata-api
+  name: Tongji University Reference Metadata API
+  description: >-
+    Openly callable code tables (metadata dictionaries) that define the controlled vocabularies used across
+    every other Open Platform interface.
+  humanURL: https://api.tongji.edu.cn/docs
+  baseURL: https://api.tongji.edu.cn
+  tags:
+  - Reference Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/tongji-reference-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://api.tongji.edu.cn/docs
+  - type: APIReference
+    url: https://api.tongji.edu.cn/docs/interface
+  - type: Authentication
+    url: authentication/tongji-open-platform-authentication.yml
+  - type: Scopes
+    url: scopes/tongji-open-platform-scopes.yml
+  - type: Errors
+    url: errors/tongji-open-platform-errors.yml
+  - type: RateLimits
+    url: rate-limits/tongji-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-envelope.json
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-records.json
+  - type: JSONSchema
+    url: json-schema/tongji-reference-metadata-code-table.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-user-sex-code-example.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-asset-campus-gate-example.json
+  - type: Examples
+    url: examples/tongji-v2-metadata-student-accom-building-code-example.json
+  - type: Vocabulary
+    url: vocabulary/tongji-open-platform-reference-metadata.yml
+  - type: Rules
+    url: rules/tongji-open-platform-rules.yml
+  - type: Lifecycle
+    url: lifecycle/tongji-open-platform-lifecycle.yml
+  - type: Conformance
+    url: conformance/tongji-education-standards-conformance.yml
+  - type: JSONLD
+    url: json-ld/tongji-context.jsonld
+  - type: Support
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+- aid: tongji:tongji-research-api
+  name: Tongji University Research API
+  description: >-
+    Patent, software-copyright, project, funding, award, publication and monograph records from the university
+    research-management systems.
+  humanURL: https://api.tongji.edu.cn/docs
+  baseURL: https://api.tongji.edu.cn
+  tags:
+  - Research
+  properties:
+  - type: OpenAPI
+    url: openapi/tongji-research-api-openapi.yml
+  - type: Documentation
+    url: https://api.tongji.edu.cn/docs
+  - type: APIReference
+    url: https://api.tongji.edu.cn/docs/interface
+  - type: Authentication
+    url: authentication/tongji-open-platform-authentication.yml
+  - type: Scopes
+    url: scopes/tongji-open-platform-scopes.yml
+  - type: Errors
+    url: errors/tongji-open-platform-errors.yml
+  - type: RateLimits
+    url: rate-limits/tongji-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-envelope.json
+  - type: JSONSchema
+    url: json-schema/tongji-open-platform-records.json
+  - type: JSONSchema
+    url: json-schema/tongji-reference-metadata-code-table.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-user-sex-code-example.json
+  - type: Examples
+    url: examples/tongji-v1-metadata-asset-campus-gate-example.json
+  - type: Examples
+    url: examples/tongji-v2-metadata-student-accom-building-code-example.json
+  - type: Vocabulary
+    url: vocabulary/tongji-open-platform-reference-metadata.yml
+  - type: Rules
+    url: rules/tongji-open-platform-rules.yml
+  - type: Lifecycle
+    url: lifecycle/tongji-open-platform-lifecycle.yml
+  - type: Conformance
+    url: conformance/tongji-education-standards-conformance.yml
+  - type: JSONLD
+    url: json-ld/tongji-context.jsonld
+  - type: Support
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
 common:
   - type: Website
     url: https://www.tongji.edu.cn/
