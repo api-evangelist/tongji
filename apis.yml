@@ -98,6 +98,13 @@ apis:
   - SAML
   - eduGAIN
   - CARSI
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - eduGAIN
+  - CARSI
   - Single Sign-On
   properties:
   - type: IdentityFederation
