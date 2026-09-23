@@ -1,0 +1,131 @@
+---
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live fetch on 2026-09-01 of the Open Platform's own OpenID Connect discovery document
+  https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration
+  (HTTP 200, application/json, 19,727 bytes) and of the realm root
+  https://api.tongji.edu.cn/keycloak/realms/OpenPlatform (HTTP 200), read together with the
+  platform's published authentication guide
+  https://api.tongji.edu.cn/docs/intro/develop/authentication (HTTP 200) and scope guide
+  https://api.tongji.edu.cn/docs/intro/develop/scopes (HTTP 200). Anonymous access was
+  confirmed by unauthenticated GETs against thirteen documented interfaces.
+provider: Tongji University
+providerId: tongji
+x-operator: institution
+operator_basis: >-
+  Every endpoint below is under api.tongji.edu.cn, the university's own registrable domain,
+  resolving to 202.120.182.237 in CERNET-CN (China Education and Research Network) address
+  space. The authorization server is a Keycloak deployment the university runs itself in a
+  realm it named OpenPlatform; it is not a shared vendor tenancy and no vendor host appears
+  anywhere in the flow.
+summary:
+  types:
+  - none
+  - oauth2
+  - openid-connect
+  - bearer
+  authorization_server: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform
+  software: Keycloak
+  anonymous_interfaces_confirmed: 13
+  access_token_default_lifetime_seconds: 7200
+schemes:
+- name: AnonymousMetadata
+  type: none
+  operator: institution
+  applies_to: https://api.tongji.edu.cn/v1/metadata/, https://api.tongji.edu.cn/v2/metadata/
+  description: >-
+    Thirteen reference-metadata interfaces are documented as 无需授权可直接访问 ("directly
+    accessible, no authorization required") and were confirmed callable with no credential on
+    2026-09-01, each returning HTTP 200 application/json with the standard {code,data,msg}
+    envelope and code A00000. This is the only openly callable public API surface Tongji
+    University operates that this pipeline could confirm.
+  evidence:
+  - url: https://api.tongji.edu.cn/v1/metadata/user/sex_code
+    status: 200
+    content_type: application/json; charset=utf-8
+    detail: Returned four gender code-table rows with no Authorization header.
+  - url: https://api.tongji.edu.cn/v1/metadata/asset/campus_gate
+    status: 200
+    content_type: application/json; charset=utf-8
+    detail: Returned 23 campus and campus-gate reference rows with no Authorization header.
+  - url: https://api.tongji.edu.cn/v2/metadata/student/accom_building_code
+    status: 200
+    content_type: application/json; charset=utf-8
+    detail: Returned 100 dormitory-building reference rows with no Authorization header.
+- name: OpenPlatformClientCredentials
+  type: oauth2
+  flow: client_credentials
+  operator: institution
+  applies_to: https://api.tongji.edu.cn/v1/, https://api.tongji.edu.cn/v2/
+  description: >-
+    Machine-to-machine interfaces (客户端模式) are called with an access token obtained from the
+    Keycloak realm using client_id and client_secret issued through the platform's
+    application-and-approval process. The platform also documents a legacy token exchange at
+    POST https://api.tongji.edu.cn/v1/token, which answers HTTP 405 to GET, confirming the route
+    is live and method-restricted.
+  token_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+  evidence:
+  - url: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration
+    status: 200
+  - url: https://api.tongji.edu.cn/v1/token
+    status: 405
+    detail: Method Not Allowed on GET — the documented POST token route exists.
+- name: OpenPlatformAuthorizationCode
+  type: openid-connect
+  flow: authorization_code
+  operator: institution
+  applies_to: Interfaces documented as 授权码模式 (user-context data)
+  description: >-
+    User-context interfaces use the OIDC authorization-code flow against the same realm, with
+    kc_idp_hint=tjiam brokering to the university's own identity-and-access-management identity
+    provider. The platform states the flow is integrated with the university's CAS deployment
+    and interoperates with campus single sign-on, while requiring applications to keep their own
+    session independent of the SSO session.
+  authorization_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth
+  token_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+  userinfo_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/userinfo
+  end_session_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/logout
+  pkce_supported:
+  - plain
+  - S256
+- name: BearerToken
+  type: bearer
+  operator: institution
+  applies_to: Every non-anonymous interface
+  description: >-
+    Whatever flow issued it, the access token is presented as `Authorization: Bearer
+    <access_token>`. The platform documents a 7200-second default lifetime, asks callers to
+    cache the token rather than re-request it, and returns 401 when the token is expired or
+    unauthorized and 403 when the token's scope does not cover the interface.
+discovery:
+  issuer: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform
+  jwks_uri: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/certs
+  introspection_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token/introspect
+  revocation_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/revoke
+  registration_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/clients-registrations/openid-connect
+  device_authorization_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth/device
+  pushed_authorization_request_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/ext/par/request
+  backchannel_authentication_endpoint: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/ext/ciba/auth
+  grant_types_supported:
+  - authorization_code
+  - implicit
+  - refresh_token
+  - password
+  - client_credentials
+  - urn:ietf:params:oauth:grant-type:device_code
+  - urn:openid:params:grant-type:ciba
+  token_endpoint_auth_methods_supported:
+  - private_key_jwt
+  - client_secret_basic
+  - client_secret_post
+  - tls_client_auth
+  - client_secret_jwt
+notes: >-
+  The discovery document advertises an open dynamic client registration endpoint path, but
+  registration on a Keycloak realm is normally gated by an initial access token; this pipeline
+  did not attempt a registration and makes no claim that it is open. Access to non-anonymous
+  interfaces is granted per application by the Information Office, not self-service.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,37 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/json-schema/tongji-open-platform-envelope.json",
+ "title": "Tongji University Open Platform Response Envelope",
+ "description": "Every Tongji Open Platform interface that answers 200 returns this three-field envelope. Derived from openapi/_original/tongji-open-platform-openapi.yml and confirmed against thirteen live unauthenticated responses captured 2026-09-01. Note that failure responses (401, 404, 405) do NOT use this envelope — they return an empty or plain-text body.",
+ "x-provenance": {
+  "generated": "2026-09-01",
+  "method": "derived",
+  "source": "openapi/_original/tongji-open-platform-openapi.yml plus live probes 2026-09-01",
+  "x-operator": "institution"
+ },
+ "type": "object",
+ "required": [
+  "code",
+  "msg"
+ ],
+ "properties": {
+  "code": {
+   "type": "string",
+   "description": "Business status code, independent of the HTTP status. A00000 indicates success.",
+   "examples": [
+    "A00000"
+   ]
+  },
+  "msg": {
+   "type": "string",
+   "description": "Human-readable result message, in Chinese.",
+   "examples": [
+    "操作成功",
+    "成功"
+   ]
+  },
+  "data": {
+   "description": "Interface-specific payload: an array of records for the reference-metadata interfaces, or an object carrying `infos` and `count` for the paged record interfaces."
+  }
+ }
+}

@@ -1,0 +1,2119 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/json-schema/tongji-open-platform-records.json",
+ "title": "Tongji University Open Platform Record Schemas",
+ "description": "One schema per documented Open Platform record type, lifted from the derived OpenAPI. Field names and types come from the platform's own published parameter tables at https://api.tongji.edu.cn/docs; the reference-metadata record shapes were observed live. Field descriptions are the original Chinese annotations.",
+ "x-provenance": {
+  "generated": "2026-09-01",
+  "method": "derived",
+  "source": "openapi/_original/tongji-open-platform-openapi.yml",
+  "x-operator": "institution"
+ },
+ "$defs": {
+  "V1AiAudioTranscriptionsResultItem": {
+   "type": "object",
+   "description": "Record fields for Speech recognition — fetch task result.",
+   "properties": {
+    "text": {
+     "type": "string",
+     "description": "识别文字"
+    }
+   }
+  },
+  "V1AiAudioTranscriptionsTaskItem": {
+   "type": "object",
+   "description": "Record fields for Speech recognition — submit task.",
+   "properties": {
+    "created_time": {
+     "type": "string",
+     "description": "创建时间"
+    },
+    "state": {
+     "type": "string",
+     "description": "任务状态"
+    },
+    "task_id": {
+     "type": "string",
+     "description": "任务id"
+    }
+   }
+  },
+  "V1AiToolsFile2mdResultItem": {
+   "type": "object",
+   "description": "Record fields for Document OCR / file-to-Markdown — fetch task result.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "是"
+    },
+    "result_url": {
+     "type": "string",
+     "description": "结果的文件链接"
+    }
+   }
+  },
+  "V1AiToolsFile2mdTaskItem": {
+   "type": "object",
+   "description": "Record fields for Document OCR / file-to-Markdown — submit task.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "任务id，提交至result接口返回结果"
+    },
+    "detail": {
+     "type": "string"
+    }
+   }
+  },
+  "V1DcContractInfoContractItem": {
+   "type": "object",
+   "description": "Record fields for Internal contract records.",
+   "properties": {
+    "recordDate": {
+     "type": "string",
+     "description": "登记日期"
+    },
+    "contractNo": {
+     "type": "string",
+     "description": "合同编号"
+    },
+    "contractName": {
+     "type": "string",
+     "description": "名称"
+    },
+    "firstParty": {
+     "type": "string",
+     "description": "甲方"
+    },
+    "secondParty": {
+     "type": "string",
+     "description": "乙方"
+    },
+    "thirdParty": {
+     "type": "string",
+     "description": "丙方"
+    },
+    "contractAmt": {
+     "type": "string",
+     "description": "金额",
+     "x-documented-type": "number"
+    },
+    "currenctName": {
+     "type": "string",
+     "description": "币种名称"
+    },
+    "rmbAmt": {
+     "type": "string",
+     "description": "人民币金额"
+    },
+    "conAscriptionDept": {
+     "type": "string",
+     "description": "合同归属单位"
+    },
+    "userId": {
+     "type": "string",
+     "description": "项目负责人工号"
+    },
+    "projectLeaderName": {
+     "type": "string",
+     "description": "项目负责人姓名"
+    },
+    "operatorNo": {
+     "type": "string",
+     "description": "经办人工号"
+    },
+    "operatorName": {
+     "type": "string",
+     "description": "经办人姓名"
+    },
+    "conStartDate": {
+     "type": "string",
+     "description": "起始日期"
+    },
+    "conEndDate": {
+     "type": "string",
+     "description": "终止日期"
+    },
+    "conSignDeptNo": {
+     "type": "string",
+     "description": "合同签署管理部门代码"
+    },
+    "conSignDeptName": {
+     "type": "string",
+     "description": "合同签署管理部门"
+    },
+    "auditRecords": {
+     "type": "string",
+     "description": "审核记录"
+    },
+    "sealType": {
+     "type": "string",
+     "description": "盖章种类"
+    },
+    "conImplDeptNo": {
+     "type": "string",
+     "description": "合同实施管理部门代码"
+    },
+    "conImplDeptName": {
+     "type": "string",
+     "description": "合同实施管理部门"
+    },
+    "conPereDeptNo": {
+     "type": "string",
+     "description": "履约部门代码"
+    },
+    "conPereDeptName": {
+     "type": "string",
+     "description": "履约部门"
+    },
+    "conPereRepNo": {
+     "type": "string",
+     "description": "履约代表工号"
+    },
+    "conPereRepName": {
+     "type": "string",
+     "description": "履约代表姓名"
+    },
+    "executionRecord": {
+     "type": "string",
+     "description": "执行记录"
+    },
+    "conStatus": {
+     "type": "string",
+     "description": "合同状态"
+    },
+    "fillingDeptNo": {
+     "type": "string",
+     "description": "归档部门代码"
+    },
+    "fillingDeptName": {
+     "type": "string",
+     "description": "归档部门"
+    },
+    "fillingOperatorNo": {
+     "type": "string",
+     "description": "归档联系人工号"
+    },
+    "fillingOperatorName": {
+     "type": "string",
+     "description": "归档联系人姓名"
+    },
+    "conType": {
+     "type": "string",
+     "description": "合同类型"
+    },
+    "num": {
+     "type": "string",
+     "description": "游标",
+     "x-documented-type": "number"
+    }
+   }
+  },
+  "V1DcLibLibAccessControlItem": {
+   "type": "object",
+   "description": "Record fields for Library gate access records.",
+   "properties": {
+    "visitno": {
+     "type": "string",
+     "description": "流水号"
+    },
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "type": {
+     "type": "string",
+     "description": "类型"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "院系"
+    },
+    "visitTime": {
+     "type": "string",
+     "description": "刷卡时间"
+    },
+    "gateNo": {
+     "type": "string",
+     "description": "闸机号"
+    },
+    "direction": {
+     "type": "string",
+     "description": "进出模式，1-进，2-出"
+    },
+    "door": {
+     "type": "string",
+     "description": "所属区域"
+    },
+    "libPlace": {
+     "type": "string",
+     "description": "所属校区"
+    }
+   }
+  },
+  "V1InfraEducationDataDegreeItem": {
+   "type": "object",
+   "description": "Record fields for Degree award lookup.",
+   "properties": {
+    "xm": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "xb": {
+     "type": "string",
+     "description": "性别"
+    },
+    "csrq": {
+     "type": "string",
+     "description": "出生日期"
+    },
+    "xwsydw": {
+     "type": "string",
+     "description": "学位授予单位"
+    },
+    "xkzy": {
+     "type": "string",
+     "description": "学科专业"
+    },
+    "xxgdlx": {
+     "type": "string",
+     "description": "学习或攻读类型"
+    },
+    "xwlb": {
+     "type": "string",
+     "description": "获学位名称"
+    },
+    "xwzsbh": {
+     "type": "string",
+     "description": "学位证书编号"
+    },
+    "hxwrq": {
+     "type": "string",
+     "description": "获学位日期"
+    },
+    "zppath": {
+     "type": "string",
+     "description": "未知"
+    }
+   }
+  },
+  "V1InfraEducationDataEducationItem": {
+   "type": "object",
+   "description": "Record fields for Academic qualification lookup.",
+   "properties": {
+    "xm": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "zjhm": {
+     "type": "string",
+     "description": "证件号码"
+    },
+    "yxmc": {
+     "type": "string",
+     "description": "毕业学校名称"
+    },
+    "zymc": {
+     "type": "string",
+     "description": "专业名称"
+    },
+    "cc": {
+     "type": "string",
+     "description": "层次"
+    },
+    "rxrq": {
+     "type": "string",
+     "description": "入学日期"
+    },
+    "byrq": {
+     "type": "string",
+     "description": "毕业日期"
+    },
+    "xxxs": {
+     "type": "string",
+     "description": "学习形式"
+    },
+    "zsbh": {
+     "type": "string",
+     "description": "学历证书编号"
+    }
+   }
+  },
+  "V1InfraEducationDataEmployeeInsuranceItem": {
+   "type": "object",
+   "description": "Record fields for Employee social-insurance enrolment.",
+   "properties": {
+    "tyxym": {
+     "type": "string",
+     "description": "统一信用码"
+    },
+    "dsjzxTaskid": {
+     "type": "string",
+     "description": "批次号"
+    },
+    "jhptUpdateTime": {
+     "type": "string",
+     "description": "平台更新时间"
+    },
+    "sfzwss": {
+     "type": "string",
+     "description": "是否转外省市1：是，0：否"
+    },
+    "jnsj": {
+     "type": "string",
+     "description": "缴纳时间"
+    },
+    "jndwmc": {
+     "type": "string",
+     "description": "缴纳单位名称"
+    },
+    "rtsfjn": {
+     "type": "string",
+     "description": "养老保险是否缴纳1：是，0：否"
+    },
+    "uesfjn": {
+     "type": "string",
+     "description": "失业保险是否缴纳1：是，0：否"
+    },
+    "gjId": {
+     "type": "string",
+     "description": "含国籍代码使用中文表述而不使用代码"
+    },
+    "ywUpdateTime": {
+     "type": "string",
+     "description": "字段描述：业务更新时间"
+    },
+    "sfbj": {
+     "type": "string",
+     "description": "是否补缴1：是，0：否"
+    },
+    "zjlx": {
+     "type": "string",
+     "description": "证件类型"
+    },
+    "mdsfjn": {
+     "type": "string",
+     "description": "医疗保险是否缴纳1：是，0：否"
+    },
+    "jhptUpdateFlag": {
+     "type": "string",
+     "description": "更新标志"
+    },
+    "jhptDelete": {
+     "type": "string",
+     "description": "删除标志"
+    },
+    "zjhm": {
+     "type": "string",
+     "description": "证件号码"
+    },
+    "zhztId": {
+     "type": "string",
+     "description": "账户状态"
+    },
+    "misfjn": {
+     "type": "string",
+     "description": "生育保险是否缴纳"
+    },
+    "iwisfjn": {
+     "type": "string",
+     "description": "工伤保险是否缴纳"
+    },
+    "xm": {
+     "type": "string",
+     "description": "姓名"
+    }
+   }
+  },
+  "V1InfraEducationDataFaceCheckItem": {
+   "type": "object",
+   "description": "Record fields for Face verification against national ID record.",
+   "properties": {
+    "score": {
+     "type": "string",
+     "description": "得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人"
+    },
+    "match": {
+     "type": "boolean",
+     "description": "是否匹配：true匹配，false不匹配"
+    },
+    "description": {
+     "type": "string",
+     "description": "认证描述"
+    }
+   }
+  },
+  "V1InfraEducationDataIdCardInfoCheckItem": {
+   "type": "object",
+   "description": "Record fields for National ID record verification.",
+   "properties": {
+    "nameMatchScore": {
+     "type": "string",
+     "description": "姓名匹配度代码"
+    },
+    "idCardMatchScore": {
+     "type": "string",
+     "description": "公民身份证号码匹配度代码"
+    },
+    "isTJUser": {
+     "type": "boolean",
+     "description": "是否为同济大学人员"
+    }
+   }
+  },
+  "V1InfraEducationDataIdCardInfoQueryItem": {
+   "type": "object",
+   "description": "Record fields for National ID record lookup.",
+   "properties": {
+    "idCardNo": {
+     "type": "string",
+     "description": "公民身份号码（非空项）"
+    },
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "sex": {
+     "type": "string",
+     "description": "性别"
+    },
+    "nationName": {
+     "type": "string",
+     "description": "民族"
+    },
+    "birthDate": {
+     "type": "string",
+     "description": "出生日期"
+    },
+    "country": {
+     "type": "string",
+     "description": "出生地-国家（地区）"
+    },
+    "nativePlaceName": {
+     "type": "string",
+     "description": "出生地-省市县（区）"
+    },
+    "idCardMatchScore": {
+     "type": "string",
+     "description": "公民身份号码-匹配度代码"
+    },
+    "nameMatchScore": {
+     "type": "string",
+     "description": "姓名-匹配度代码"
+    },
+    "deathFlag": {
+     "type": "string",
+     "description": "死亡标识（0有效人口，1死亡人口）"
+    },
+    "dataSource": {
+     "type": "string",
+     "description": "数据来源（1同济大学数据库， 2国家公安部）",
+     "x-documented-type": "number"
+    },
+    "isTJUser": {
+     "type": "boolean",
+     "description": "是否为同济大学人员"
+    },
+    "tjUserList": {
+     "type": "string",
+     "description": "同济大学人员学工信息",
+     "x-documented-type": "array[object]"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "部门/学院代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "部门/学院名称"
+    },
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "userTypeCode": {
+     "type": "string",
+     "description": "人员类型代码"
+    },
+    "userTypeName": {
+     "type": "string",
+     "description": "人员类型名称"
+    }
+   }
+  },
+  "V1InfraEducationDataSchoolRollItem": {
+   "type": "object",
+   "description": "Record fields for Student enrolment (school roll) lookup.",
+   "properties": {
+    "xm": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "zjhm": {
+     "type": "string",
+     "description": "证件号码"
+    },
+    "yxmc": {
+     "type": "string",
+     "description": "毕业学校名称"
+    },
+    "rxrq": {
+     "type": "string",
+     "description": "入学日期"
+    },
+    "xz": {
+     "type": "string",
+     "description": "学制"
+    },
+    "xjzt": {
+     "type": "string",
+     "description": "学籍状态"
+    }
+   }
+  },
+  "V1InfraEducationDataShQrcodeQueryItem": {
+   "type": "object",
+   "description": "Record fields for Shanghai Suishenma health-code lookup.",
+   "properties": {
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "cardNo": {
+     "type": "string",
+     "description": "身份证号"
+    }
+   }
+  },
+  "V1MetadataAssetCampusGateItem": {
+   "type": "object",
+   "description": "Record fields for Campus and campus-gate reference list.",
+   "properties": {
+    "lctnId": {
+     "type": "string",
+     "description": "校区校门代码"
+    },
+    "parentId": {
+     "type": "string",
+     "description": "校区校门上级代码"
+    },
+    "lctnName": {
+     "type": "string",
+     "description": "校区校门名称"
+    },
+    "lctnDesc": {
+     "type": "string",
+     "description": "校区校门分类"
+    },
+    "campus": {
+     "type": "string",
+     "description": "校区代码"
+    },
+    "campusDesc": {
+     "type": "string",
+     "description": "校区中文描述"
+    },
+    "allowCarCode": {
+     "type": "string",
+     "description": "该校门是否允许开车进校，1-允许"
+    }
+   }
+  },
+  "V1MetadataMeetingMeetingRoomItem": {
+   "type": "object",
+   "description": "Record fields for Meeting room reference list.",
+   "properties": {
+    "meetingRoomCode": {
+     "type": "string",
+     "description": "会议室代码"
+    },
+    "meetingRoomName": {
+     "type": "string",
+     "description": "会议室名称"
+    }
+   }
+  },
+  "V1MetadataTeacherSendUserTypesItem": {
+   "type": "object",
+   "description": "Record fields for Dispatched-staff category code list.",
+   "properties": {
+    "sendUserTypeCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "sendUserTypeName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataTeacherStatusItem": {
+   "type": "object",
+   "description": "Record fields for Faculty and staff employment status code list.",
+   "properties": {
+    "currentStatusCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "currentStatusName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataTeacherTechJobCodeItem": {
+   "type": "object",
+   "description": "Record fields for Professional-technical post category code list.",
+   "properties": {
+    "isUseCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "techJobCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "techJobName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "updateTime": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataTeacherTechJobLevelCodeItem": {
+   "type": "object",
+   "description": "Record fields for Professional-technical post level code list.",
+   "properties": {
+    "isUseCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "techJobLevelCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "techJobLevelName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataTeacherTechLevelOfWorkersCodeItem": {
+   "type": "object",
+   "description": "Record fields for Worker technical grade code list.",
+   "properties": {
+    "isUseCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "techLevelOfWorkersCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "techLevelOfWorkersName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataTeacherTitleCodeItem": {
+   "type": "object",
+   "description": "Record fields for Appointed professional-technical title code list.",
+   "properties": {
+    "isUseCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "titleCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "titleName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataTeacherTypesItem": {
+   "type": "object",
+   "description": "Record fields for Faculty and staff personnel category code list.",
+   "properties": {
+    "userTypeCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "userTypeName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataUserPersonIdcardTypeItem": {
+   "type": "object",
+   "description": "Record fields for Identity-document type code list.",
+   "properties": {
+    "cardCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "cardType": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1MetadataUserSexCodeItem": {
+   "type": "object",
+   "description": "Record fields for Gender code list.",
+   "properties": {
+    "sexCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "sexName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V1RtLibLibAccessItem": {
+   "type": "object",
+   "description": "Record fields for Library gate access records (real time).",
+   "properties": {
+    "visitNo": {
+     "type": "string",
+     "description": "流水号"
+    },
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "type": {
+     "type": "string",
+     "description": "类型"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "院系"
+    },
+    "visitTime": {
+     "type": "string",
+     "description": "刷卡时间"
+    },
+    "gateNo": {
+     "type": "string",
+     "description": "闸机号"
+    },
+    "direction": {
+     "type": "string",
+     "description": "进出模式，1-进，2-出"
+    },
+    "dataEvent": {
+     "type": "string",
+     "description": "入出门"
+    },
+    "door": {
+     "type": "string",
+     "description": "所属区域"
+    },
+    "libPlace": {
+     "type": "string",
+     "description": "所属校区"
+    }
+   }
+  },
+  "V1RtPurchaseContractInfoByNumberItem": {
+   "type": "object",
+   "description": "Record fields for Contract record by contract number.",
+   "properties": {
+    "contractNumber": {
+     "type": "string",
+     "description": "合同编号"
+    },
+    "contractAmount": {
+     "type": "string",
+     "description": "合同金额"
+    },
+    "contractName": {
+     "type": "string",
+     "description": "合同名称"
+    },
+    "contractSignDate": {
+     "type": "string",
+     "description": "合同签订日期"
+    },
+    "supplierAccount": {
+     "type": "string",
+     "description": "供应商收款账号"
+    },
+    "supplierName": {
+     "type": "string",
+     "description": "供应商名称"
+    }
+   }
+  },
+  "V1RtPurchaseContractInfoByOrgSupplierItem": {
+   "type": "object",
+   "description": "Record fields for Contract records by organization code or supplier name.",
+   "properties": {
+    "contractNumber": {
+     "type": "string",
+     "description": "合同编号"
+    },
+    "contractAmount": {
+     "type": "string",
+     "description": "合同金额"
+    },
+    "contractName": {
+     "type": "string",
+     "description": "合同名称"
+    },
+    "contractSignDate": {
+     "type": "string",
+     "description": "合同签订日期"
+    },
+    "organizationCode": {
+     "type": "string",
+     "description": "供应商组织机构代码"
+    },
+    "supplierName": {
+     "type": "string",
+     "description": "供应商名称"
+    }
+   }
+  },
+  "V1RtResearchPatentItem": {
+   "type": "object",
+   "description": "Record fields for Research patent records (real time).",
+   "properties": {
+    "allInventorUserId": {
+     "type": "string",
+     "description": "所有发明人学工号"
+    },
+    "allInventorName": {
+     "type": "string",
+     "description": "所有发明人姓名"
+    },
+    "appNo": {
+     "type": "string",
+     "description": "申请号(专利号)"
+    },
+    "patentTitle": {
+     "type": "string",
+     "description": "专利名称"
+    },
+    "patentDeptCode": {
+     "type": "string",
+     "description": "专利所属学院代码"
+    },
+    "patentDeptName": {
+     "type": "string",
+     "description": "专利所属学院名称"
+    },
+    "appTypeCode": {
+     "type": "string",
+     "description": "申请类型代码"
+    },
+    "appTypeName": {
+     "type": "string",
+     "description": "申请类型名称"
+    },
+    "statusCode": {
+     "type": "string",
+     "description": "案件状态代码"
+    },
+    "statusName": {
+     "type": "string",
+     "description": "案件状态名称"
+    },
+    "appDate": {
+     "type": "string",
+     "format": "date-time",
+     "description": "申请日"
+    },
+    "inventorCount": {
+     "type": "integer",
+     "description": "发明人总数"
+    },
+    "countryName": {
+     "type": "string",
+     "description": "是否国际专利"
+    },
+    "regPublishDate": {
+     "type": "string",
+     "format": "date-time",
+     "description": "授权公告日"
+    }
+   }
+  },
+  "V1RtResearchSoftwareWorksItem": {
+   "type": "object",
+   "description": "Record fields for Software copyright registration records (real time).",
+   "properties": {
+    "softwareName": {
+     "type": "string",
+     "description": "软件名称"
+    },
+    "rightsMethod": {
+     "type": "string",
+     "description": "权利取得方式"
+    },
+    "rightsScope": {
+     "type": "string",
+     "description": "权利范围"
+    },
+    "developer": {
+     "type": "string",
+     "description": "开发者"
+    },
+    "userId": {
+     "type": "string",
+     "description": "开发者工号"
+    },
+    "version": {
+     "type": "string",
+     "description": "版本号"
+    },
+    "completionTime": {
+     "type": "string",
+     "description": "开发完成时间"
+    },
+    "recordDate": {
+     "type": "string",
+     "description": "登记日"
+    },
+    "recordNo": {
+     "type": "string",
+     "description": "登记号"
+    }
+   }
+  },
+  "V2DcAssetEquipmentInfoItem": {
+   "type": "object",
+   "description": "Record fields for Equipment asset records.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "id"
+    },
+    "userId": {
+     "type": "string",
+     "description": "保管人/使用管理人学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "保管人/使用管理人姓名"
+    },
+    "acctUnitCode": {
+     "type": "string",
+     "description": "建账单位"
+    },
+    "acctUnitName": {
+     "type": "string",
+     "description": "建账单位名称"
+    },
+    "purcReqWriteUserId": {
+     "type": "string",
+     "description": "申购单填写人学工号"
+    },
+    "purcReqWriteName": {
+     "type": "string",
+     "description": "申购单填写人姓名"
+    },
+    "equipmentNo": {
+     "type": "string",
+     "description": "设备编号"
+    },
+    "equipmentName": {
+     "type": "string",
+     "description": "设备名称"
+    },
+    "model": {
+     "type": "string",
+     "description": "设备型号"
+    },
+    "purchaseDate": {
+     "type": "string",
+     "description": "购置日期"
+    },
+    "purcReqNo": {
+     "type": "string",
+     "description": "申购单号"
+    },
+    "quantity": {
+     "type": "string",
+     "description": "数量"
+    },
+    "totalPrice": {
+     "type": "string",
+     "description": "总价"
+    },
+    "storageLocation": {
+     "type": "string",
+     "description": "存放地点"
+    },
+    "trialProductionName": {
+     "type": "string",
+     "description": "是否试制"
+    },
+    "accrualDate": {
+     "type": "string",
+     "description": "计提起始日"
+    },
+    "statusName": {
+     "type": "string",
+     "description": "状态名称"
+    },
+    "statusCode": {
+     "type": "string",
+     "description": "状态代码   状态：0 正常 、1 已注销、 2 待入库"
+    },
+    "contactNumber": {
+     "type": "string",
+     "description": "联系电话"
+    },
+    "ManagementNotes": {
+     "type": "string",
+     "description": "管理备注"
+    },
+    "note": {
+     "type": "string",
+     "description": "备注"
+    },
+    "assetAttributeNo": {
+     "type": "string",
+     "description": "资产属性编号"
+    },
+    "assetAttributeName": {
+     "type": "string",
+     "description": "资产属性名称"
+    },
+    "assetTypeNo": {
+     "type": "string",
+     "description": "资产类型编号"
+    },
+    "assetTypeName": {
+     "type": "string",
+     "description": "资产类型名称"
+    },
+    "cardId": {
+     "type": "string",
+     "description": "卡片ID"
+    },
+    "wid": {
+     "type": "string",
+     "description": "主键"
+    },
+    "del": {
+     "type": "string",
+     "description": "删除标识，D标识删除"
+    }
+   }
+  },
+  "V2DcAssetPurchaseRequisitionInfoItem": {
+   "type": "object",
+   "description": "Record fields for Purchase requisition records.",
+   "properties": {
+    "purcReqId": {
+     "type": "string",
+     "description": "申购单ID"
+    },
+    "userId": {
+     "type": "string",
+     "description": "申请人/填写人学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "申请人/填写人姓名"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "部门代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "部门名称"
+    },
+    "deptTypeCode": {
+     "type": "string",
+     "description": "一级部门代码"
+    },
+    "deptTypeName": {
+     "type": "string",
+     "description": "一级部门名称"
+    },
+    "directorUserId": {
+     "type": "string",
+     "description": "项目负责人学工号"
+    },
+    "directorName": {
+     "type": "string",
+     "description": "项目负责人姓名"
+    },
+    "assetTypeCode": {
+     "type": "string",
+     "description": "资产类型代码"
+    },
+    "assetTypeName": {
+     "type": "string",
+     "description": "资产类型名称"
+    },
+    "purcReqNo": {
+     "type": "string",
+     "description": "申购单号"
+    },
+    "writeDate": {
+     "type": "string",
+     "description": "申请日期"
+    },
+    "equipmentName": {
+     "type": "string",
+     "description": "设备名称"
+    },
+    "equipmentTypeCode": {
+     "type": "string",
+     "description": "设备类型代码"
+    },
+    "equipmentTypeName": {
+     "type": "string",
+     "description": "设备类型名称"
+    },
+    "isContractSigningName": {
+     "type": "string",
+     "description": "是否签订合同"
+    },
+    "isInviteTendersName": {
+     "type": "string",
+     "description": "是否招标"
+    },
+    "isTaxFreeName": {
+     "type": "string",
+     "description": "是否免税"
+    },
+    "ownershipSchoolName": {
+     "type": "string",
+     "description": "产权是否归属学校"
+    },
+    "purchaseModeName": {
+     "type": "string",
+     "description": "采购方式名称"
+    },
+    "manufacturer": {
+     "type": "string",
+     "description": "生产厂家"
+    },
+    "model": {
+     "type": "string",
+     "description": "型号"
+    },
+    "quantity": {
+     "type": "string",
+     "description": "数量"
+    },
+    "supplier": {
+     "type": "string",
+     "description": "供货商"
+    },
+    "totalPrice": {
+     "type": "string",
+     "description": "总价"
+    },
+    "statusName": {
+     "type": "string",
+     "description": "状态名称"
+    },
+    "wid": {
+     "type": "string",
+     "description": "主键"
+    },
+    "del": {
+     "type": "string",
+     "description": "删除标识，D标识删除"
+    }
+   }
+  },
+  "V2DcLibLendInfoAllItem": {
+   "type": "object",
+   "description": "Record fields for Library loan detail records.",
+   "properties": {
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "单位代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "单位名称"
+    },
+    "title": {
+     "type": "string",
+     "description": "题名(书名)"
+    },
+    "langCode": {
+     "type": "string",
+     "description": "书籍语种代码"
+    },
+    "langName": {
+     "type": "string",
+     "description": "书籍语种"
+    },
+    "countryCode": {
+     "type": "string",
+     "description": "书籍国别代码"
+    },
+    "countryName": {
+     "type": "string",
+     "description": "书籍国别"
+    },
+    "docTypeCode": {
+     "type": "string",
+     "description": "文献类型代码"
+    },
+    "docTypeName": {
+     "type": "string",
+     "description": "文献类型"
+    },
+    "isJournal": {
+     "type": "string",
+     "description": "暂无描述"
+    },
+    "author": {
+     "type": "string",
+     "description": "责任者(作者)"
+    },
+    "publisher": {
+     "type": "string",
+     "description": "出版社"
+    },
+    "pubYear": {
+     "type": "string",
+     "description": "出版年"
+    },
+    "isbn": {
+     "type": "string",
+     "description": "ISBN编号"
+    },
+    "asbackDate": {
+     "type": "string",
+     "description": "催还日期"
+    },
+    "lendDate": {
+     "type": "string",
+     "description": "借出日期"
+    },
+    "renewDate": {
+     "type": "string",
+     "description": "续借日期"
+    },
+    "renewTimes": {
+     "type": "string",
+     "description": "续借次数",
+     "x-documented-type": "numeric"
+    },
+    "locationCode": {
+     "type": "string",
+     "description": "馆藏地代码"
+    },
+    "locationName": {
+     "type": "string",
+     "description": "名称"
+    },
+    "propNo": {
+     "type": "string",
+     "description": "财产号"
+    },
+    "totalLendQty": {
+     "type": "string",
+     "description": "累计借书次数",
+     "x-documented-type": "numeric"
+    },
+    "voltFlag": {
+     "type": "string",
+     "description": "违章状态标识"
+    },
+    "debtFlag": {
+     "type": "string",
+     "description": "欠款状态标识",
+     "x-documented-type": "numeric"
+    },
+    "asbackTimes": {
+     "type": "string",
+     "description": "催还次数",
+     "x-documented-type": "numeric"
+    },
+    "retDate": {
+     "type": "string",
+     "description": "实际还书时间",
+     "x-documented-type": "numeric"
+    },
+    "callNo": {
+     "type": "string",
+     "description": "图书类别代码",
+     "x-documented-type": "numeric"
+    },
+    "callNoName": {
+     "type": "string",
+     "description": "图书类别名称",
+     "x-documented-type": "numeric"
+    }
+   }
+  },
+  "V2DcResearchLongitudinalProjectForPdItem": {
+   "type": "object",
+   "description": "Record fields for Research project records.",
+   "properties": {
+    "count": {
+     "type": "string",
+     "x-documented-type": "number"
+    },
+    "list": {
+     "type": "array"
+    },
+    "projSecondLevelName": {
+     "type": "string",
+     "description": "纵向项目二级类别名称"
+    },
+    "name": {
+     "type": "string",
+     "description": "项目负责人姓名"
+    },
+    "projClassifyName": {
+     "type": "string",
+     "description": "项目分类名称"
+    },
+    "projEstablishmentDate": {
+     "type": "string",
+     "description": "立项日期"
+    },
+    "projEndDate": {
+     "type": "string",
+     "description": "结束日期"
+    },
+    "closingDate": {
+     "type": "string",
+     "description": "完成日期"
+    },
+    "projSecondLevelCode": {
+     "type": "string",
+     "description": "纵向项目二级类别代码"
+    },
+    "userId": {
+     "type": "string",
+     "description": "项目负责人工号"
+    },
+    "projFirstLevelCode": {
+     "type": "string",
+     "description": "纵向项目类别代码"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "人员所属学院代码"
+    },
+    "id": {
+     "type": "string",
+     "description": "主键"
+    },
+    "appropriationCompany": {
+     "type": "string",
+     "description": "资助单位名称"
+    },
+    "participationModeName": {
+     "type": "string",
+     "description": "项目性质名称"
+    },
+    "projName": {
+     "type": "string",
+     "description": "项目名称"
+    },
+    "projNo": {
+     "type": "string",
+     "description": "项目编号"
+    },
+    "projFirstLevelName": {
+     "type": "string",
+     "description": "纵向项目类别名称"
+    },
+    "contractAmount": {
+     "type": "string",
+     "description": "合同经费"
+    },
+    "projId": {
+     "type": "string",
+     "description": "项目id"
+    },
+    "projClassifyCode": {
+     "type": "string",
+     "description": "项目分类代码"
+    },
+    "projStartDate": {
+     "type": "string",
+     "description": "开始日期"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "人员所属学院名称"
+    },
+    "updateTime": {
+     "type": "string"
+    },
+    "projStatusName": {
+     "type": "string",
+     "description": "项目状态名称"
+    },
+    "participationModeCode": {
+     "type": "string",
+     "description": "项目性质代码"
+    },
+    "sinceId": {
+     "type": "string"
+    }
+   }
+  },
+  "V2DcResearchLongitudinalProjectFundItem": {
+   "type": "object",
+   "description": "Record fields for Research project funds-received records.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "主键"
+    },
+    "projId": {
+     "type": "string",
+     "description": "项目id"
+    },
+    "name": {
+     "type": "string",
+     "description": "项目负责人姓名"
+    },
+    "userId": {
+     "type": "string",
+     "description": "项目负责人工号"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "人员所属学院代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "人员所属学院名称"
+    },
+    "projClassifyCode": {
+     "type": "string",
+     "description": "项目分类"
+    },
+    "projClassifyName": {
+     "type": "string",
+     "description": "项目分类名称"
+    },
+    "projFirstLevelCode": {
+     "type": "string",
+     "description": "项目类别"
+    },
+    "projFirstLevelName": {
+     "type": "string",
+     "description": "项目类别名称"
+    },
+    "fundCardNo": {
+     "type": "string",
+     "description": "经费卡卡号"
+    },
+    "partOneName": {
+     "type": "string",
+     "description": "资助单位"
+    },
+    "initiationDate": {
+     "type": "string",
+     "format": "date-time",
+     "description": "立项日期"
+    },
+    "billArrivalDate": {
+     "type": "string",
+     "format": "date-time",
+     "description": "到账日期"
+    },
+    "projectName": {
+     "type": "string",
+     "description": "项目名称"
+    },
+    "billAmount": {
+     "type": "string",
+     "description": "到帐金额",
+     "x-documented-type": "numeric"
+    },
+    "outsourceAmount": {
+     "type": "string",
+     "description": "外包经费",
+     "x-documented-type": "numeric"
+    },
+    "actualTotalAmount": {
+     "type": "string",
+     "description": "实际到账金额累计",
+     "x-documented-type": "numeric"
+    }
+   }
+  },
+  "V2DcResearchPatentItem": {
+   "type": "object",
+   "description": "Record fields for Research patent records.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "主键"
+    },
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "人员所属学院代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "人员所属学院名称"
+    },
+    "seqNo": {
+     "type": "string",
+     "description": "排名",
+     "x-documented-type": "integer"
+    },
+    "allinventorUserId": {
+     "type": "string",
+     "description": "所有发明人学工号"
+    },
+    "allinventorName": {
+     "type": "string",
+     "description": "所有发明人姓名"
+    },
+    "appNo": {
+     "type": "string",
+     "description": "申请号"
+    },
+    "patentId": {
+     "type": "string",
+     "description": "专利id"
+    },
+    "patentTitle": {
+     "type": "string",
+     "description": "专利名称"
+    },
+    "patentDeptCode": {
+     "type": "string",
+     "description": "专利所属学院代码"
+    },
+    "patentDeptName": {
+     "type": "string",
+     "description": "专利所属学院名称"
+    },
+    "appTypeCode": {
+     "type": "string",
+     "description": "申请类型代码"
+    },
+    "appTypeName": {
+     "type": "string",
+     "description": "申请类型名称"
+    },
+    "statusCode": {
+     "type": "string",
+     "description": "案件状态代码"
+    },
+    "statusName": {
+     "type": "string",
+     "description": "案件状态名称"
+    },
+    "appDate": {
+     "type": "string",
+     "format": "date-time",
+     "description": "申请日"
+    },
+    "countryName": {
+     "type": "string",
+     "description": "是否国际专利"
+    },
+    "regpublishDate": {
+     "type": "string",
+     "format": "date-time",
+     "description": "授权公告日"
+    },
+    "tongJiIsFirstCode": {
+     "type": "string",
+     "description": "是否同济排名第一代码"
+    },
+    "tongJiIsFirstName": {
+     "type": "string",
+     "description": "是否同济排名第一名称"
+    }
+   }
+  },
+  "V2DcResearchRewardItem": {
+   "type": "object",
+   "description": "Record fields for Research award records.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "主键"
+    },
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "人员所属学院代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "人员所属学院名称"
+    },
+    "seqNo": {
+     "type": "string",
+     "description": "作者排名",
+     "x-documented-type": "numeric"
+    },
+    "achievementName": {
+     "type": "string",
+     "description": "成果名称"
+    },
+    "awardGradeCode": {
+     "type": "string",
+     "description": "获奖等级代码"
+    },
+    "awardGradeName": {
+     "type": "string",
+     "description": "获奖等级名称"
+    },
+    "awardLevelCode": {
+     "type": "string",
+     "description": "获奖级别代码"
+    },
+    "awardLevelName": {
+     "type": "string",
+     "description": "获奖级别名称"
+    },
+    "awardingUnit": {
+     "type": "string",
+     "description": "授奖单位"
+    },
+    "awardName": {
+     "type": "string",
+     "description": "奖励名称"
+    },
+    "awardYear": {
+     "type": "string",
+     "description": "获奖日期"
+    },
+    "completersNum": {
+     "type": "string",
+     "description": "成员总数",
+     "x-documented-type": "numeric"
+    }
+   }
+  },
+  "V2DcResearchScientificPaperDataItem": {
+   "type": "object",
+   "description": "Record fields for Research publication records.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "id"
+    },
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "trueName": {
+     "type": "string",
+     "description": "作者姓名"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "人员所属学院代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "人员所属学院名称"
+    },
+    "title": {
+     "type": "string",
+     "description": "标题"
+    },
+    "formattingDocumentType": {
+     "type": "string",
+     "description": "成果类型"
+    },
+    "formatYear": {
+     "type": "string",
+     "description": "出版年"
+    },
+    "publishDate": {
+     "type": "string",
+     "description": "发表时间"
+    },
+    "earlyAccessDate": {
+     "type": "string",
+     "description": "提前发表时间"
+    },
+    "issn": {
+     "type": "string",
+     "description": "ISSN"
+    },
+    "volume": {
+     "type": "string",
+     "description": "卷"
+    },
+    "issue": {
+     "type": "string",
+     "description": "期"
+    },
+    "page": {
+     "type": "string",
+     "description": "页码范围"
+    },
+    "source": {
+     "type": "string",
+     "description": "来源出版物"
+    },
+    "articleUpdateTime": {
+     "type": "string",
+     "description": "论文更新时间"
+    },
+    "index": {
+     "type": "string",
+     "description": "作者排序"
+    },
+    "orgIndex": {
+     "type": "string",
+     "description": "同济大学署名次序"
+    },
+    "authorUpdatedTime": {
+     "type": "string",
+     "description": "作者更新时间"
+    },
+    "nameOriginal": {
+     "type": "string",
+     "description": "作者原始署名"
+    },
+    "authors": {
+     "type": "string",
+     "description": "原始作者署名列表"
+    },
+    "isHighlyCited": {
+     "type": "string",
+     "description": "是否高被引"
+    },
+    "wosCitedNumber": {
+     "type": "string",
+     "description": "wos核心合集被引次数"
+    },
+    "includedDb": {
+     "type": "string",
+     "description": "期刊收录数据库名称+收录号"
+    },
+    "language": {
+     "type": "string",
+     "description": "语言"
+    },
+    "conferenceLocation": {
+     "type": "string",
+     "description": "会议地点"
+    },
+    "publisher": {
+     "type": "string",
+     "description": "出版商"
+    },
+    "publisherAddress": {
+     "type": "string",
+     "description": "出版商地址"
+    },
+    "country": {
+     "type": "string",
+     "description": "国家及地区"
+    },
+    "supplement": {
+     "type": "string",
+     "description": "是否增刊"
+    },
+    "insideStatus": {
+     "type": "string",
+     "description": "是否校内"
+    },
+    "dataSource": {
+     "type": "string",
+     "description": "回溯或提交"
+    },
+    "matchStatus": {
+     "type": "string",
+     "description": "匹配状态"
+    },
+    "jcrCurrentPart": {
+     "type": "string",
+     "description": "JCR当年分区"
+    },
+    "jcrCurrentFactor": {
+     "type": "string",
+     "description": "JCR当年影响因子"
+    },
+    "jcrNewestPart": {
+     "type": "string",
+     "description": "JCR最新分区"
+    },
+    "jcrNewestFactor": {
+     "type": "string",
+     "description": "JCR最新年影响因子"
+    },
+    "jcrPreviousPart": {
+     "type": "string",
+     "description": "JCR前一年分区"
+    },
+    "jcrPreviousFactor": {
+     "type": "string",
+     "description": "JCR前一年影响因子"
+    },
+    "zkyCurrentPart": {
+     "type": "string",
+     "description": "中科院基础版当年分区"
+    },
+    "zkyNewestPart": {
+     "type": "string",
+     "description": "中科院最新分区"
+    },
+    "zkyPreviousPart": {
+     "type": "string",
+     "description": "中科院基础版前一年分区"
+    },
+    "zky2CurrentPart": {
+     "type": "string",
+     "description": "中科院升级版当年分区"
+    },
+    "zky2NewestPart": {
+     "type": "string",
+     "description": "中科院升级版最新年分区"
+    },
+    "zky2PreviousPart": {
+     "type": "string",
+     "description": "中科院升级版前一年分区"
+    },
+    "auditStatus": {
+     "type": "string",
+     "description": "人工提交成果审核状态(职能部门待审=学院审核通过,职能部门-通过)"
+    },
+    "submitor": {
+     "type": "string",
+     "description": "提交人员"
+    },
+    "importantAchievement": {
+     "type": "string",
+     "description": "重要成果"
+    },
+    "isFirstAuthor": {
+     "type": "string",
+     "description": "是否第⼀作者"
+    },
+    "reprint": {
+     "type": "string",
+     "description": "是否通讯作者"
+    },
+    "isCoFirstAuthor": {
+     "type": "string",
+     "description": "是否共同第⼀作者"
+    },
+    "isCoCorrespondingAuthor": {
+     "type": "string",
+     "description": "是否共同通讯作者"
+    }
+   }
+  },
+  "V2DcResearchWorkItem": {
+   "type": "object",
+   "description": "Record fields for Research monograph records.",
+   "properties": {
+    "id": {
+     "type": "string",
+     "description": "主键"
+    },
+    "userId": {
+     "type": "string",
+     "description": "学工号"
+    },
+    "name": {
+     "type": "string",
+     "description": "姓名"
+    },
+    "deptCode": {
+     "type": "string",
+     "description": "人员所属学院代码"
+    },
+    "deptName": {
+     "type": "string",
+     "description": "人员所属学院名称"
+    },
+    "seqNo": {
+     "type": "string",
+     "description": "作者排名",
+     "x-documented-type": "numeric"
+    },
+    "bookName": {
+     "type": "string",
+     "description": "著作名称"
+    },
+    "bookCategoryCode": {
+     "type": "string",
+     "description": "著作类别代码"
+    },
+    "bookCategoryName": {
+     "type": "string",
+     "description": "著作类别名称"
+    },
+    "publicationYear": {
+     "type": "string",
+     "description": "出版时间"
+    },
+    "publishHouseName": {
+     "type": "string",
+     "description": "出版社名称"
+    },
+    "totalWords": {
+     "type": "string",
+     "description": "总字数（万）",
+     "x-documented-type": "numeric"
+    }
+   }
+  },
+  "V2MetadataStudentAccomBuildingCodeItem": {
+   "type": "object",
+   "description": "Record fields for Dormitory building code list.",
+   "properties": {
+    "accomBuildingCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "accomBuildingName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "accomRegionCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "accomRegionName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "createTime": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "updateTime": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V2MetadataStudentAccomRegionCodeItem": {
+   "type": "object",
+   "description": "Record fields for Dormitory region code list.",
+   "properties": {
+    "accomRegionCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "accomRegionName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "createTime": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseCode": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "isUseName": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    },
+    "updateTime": {
+     "type": "string",
+     "description": "Field observed in the live response on 2026-09-01; not described in the published documentation."
+    }
+   }
+  },
+  "V2RtBookLibraryCurrentBorrowItem": {
+   "type": "object",
+   "description": "Record fields for Current library borrowing summary (real time).",
+   "properties": {
+    "userId": {
+     "type": "string",
+     "description": "工号"
+    },
+    "currentBorrow": {
+     "type": "number",
+     "description": "当前借阅"
+    },
+    "overdueBooks": {
+     "type": "number",
+     "description": "超期图书"
+    },
+    "entrustBooks": {
+     "type": "number",
+     "description": "委托到书"
+    },
+    "orderBooks": {
+     "type": "number",
+     "description": "预约到书"
+    }
+   }
+  }
+ }
+}

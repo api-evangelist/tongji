@@ -1,0 +1,443 @@
+openapi: 3.2.0
+info:
+  title: Tongji University Open Platform Library API
+  version: '2026-09-01'
+  summary: Institution-operated campus data and capability API platform run by the Tongji University Information Office.
+  description: The Tongji University Open Platform (同济大学开放平台) is operated by the university itself at api.tongji.edu.cn, on China Education and Research Network (CERNET) address space, and exposes campus data and shared capability interfaces to faculty, students and campus applications.
+  contact:
+    name: Tongji University Information Office — Open Platform
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://api.tongji.edu.cn/docs — 43 published interface documentation pages fetched 2026-09-01 (HTTP 200), plus live probes of the 13 anonymous interfaces.
+    x-operator: institution
+servers:
+- url: https://api.tongji.edu.cn
+  description: Tongji University Open Platform production host (CERNET, 202.120.182.237).
+security:
+- openPlatformOAuth: []
+tags:
+- name: Library
+  description: Library gate-access and loan records from the Tongji University Library systems.
+paths:
+  /v1/dc/lib/lib_access_control:
+    get:
+      operationId: v1_dc_lib_lib_access_control
+      summary: Library gate access records
+      description: '根据学工号查询在某一段时间内进出图书馆闸机门禁信息 Original documented title: 图书馆闸机门禁信息. Authorization modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时55分09秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v1_dc_lib_lib_access_control
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号
+        schema:
+          type: string
+      - name: direction
+        in: query
+        required: false
+        description: 进出模式，1-进，2-出,不传值代表全部
+        schema:
+          type: string
+      - name: visitStartTime
+        in: query
+        required: false
+        description: 开始时间
+        schema:
+          type: string
+      - name: visitEndTime
+        in: query
+        required: false
+        description: 结束时间
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1DcLibLibAccessControlItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/lib/lib_access:
+    get:
+      operationId: v1_rt_lib_lib_access
+      summary: Library gate access records (real time)
+      description: '查询某一时间段内某一个人或全部人的图书馆闸机门禁信息 Original documented title: 图书馆闸机门禁信息-实时. Authorization modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时08分07秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v1_rt_lib_lib_access
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: direction
+        in: query
+        required: false
+        description: 进出模式，1-入门，2-出门,不传值代表全部
+        schema:
+          type: string
+      - name: dataStartTime
+        in: query
+        required: false
+        description: 开始时间
+        schema:
+          type: string
+      - name: dataEndTime
+        in: query
+        required: false
+        description: 结束时间
+        schema:
+          type: string
+      - name: sinceVisitNo
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1RtLibLibAccessItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/lib/lend_info_all:
+    get:
+      operationId: v2_dc_lib_lend_info_all
+      summary: Library loan detail records
+      description: '根据学工号查询具体的图书借阅相关信息，包含所有借阅记录 Original documented title: 图书借阅信息详情. Upstream system of record declared by the platform: SYS20230132(汇文文献信息服务系统软件). Authorization modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v2_dc_lib_lend_info_all
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcLibLendInfoAllItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/rt/book/library_current_borrow:
+    get:
+      operationId: v2_rt_book_library_current_borrow
+      summary: Current library borrowing summary (real time)
+      description: '根据学工号实时查询人员在图书馆借阅最新汇总的情况 Original documented title: 图书当前借阅汇总信息-实时. Upstream system of record declared by the platform: SYS20230132(汇文文献信息服务系统软件). Authorization modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v2_rt_book_library_current_borrow
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号，可批量传参，用英文逗号隔开
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V2RtBookLibraryCurrentBorrowItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+components:
+  schemas:
+    V2RtBookLibraryCurrentBorrowItem:
+      type: object
+      description: Record fields for Current library borrowing summary (real time).
+      properties:
+        userId:
+          type: string
+          description: 工号
+        currentBorrow:
+          type: number
+          description: 当前借阅
+        overdueBooks:
+          type: number
+          description: 超期图书
+        entrustBooks:
+          type: number
+          description: 委托到书
+        orderBooks:
+          type: number
+          description: 预约到书
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1DcLibLibAccessControlItem:
+      type: object
+      description: Record fields for Library gate access records.
+      properties:
+        visitno:
+          type: string
+          description: 流水号
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        type:
+          type: string
+          description: 类型
+        deptName:
+          type: string
+          description: 院系
+        visitTime:
+          type: string
+          description: 刷卡时间
+        gateNo:
+          type: string
+          description: 闸机号
+        direction:
+          type: string
+          description: 进出模式，1-进，2-出
+        door:
+          type: string
+          description: 所属区域
+        libPlace:
+          type: string
+          description: 所属校区
+    V2DcLibLendInfoAllItem:
+      type: object
+      description: Record fields for Library loan detail records.
+      properties:
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        deptCode:
+          type: string
+          description: 单位代码
+        deptName:
+          type: string
+          description: 单位名称
+        title:
+          type: string
+          description: 题名(书名)
+        langCode:
+          type: string
+          description: 书籍语种代码
+        langName:
+          type: string
+          description: 书籍语种
+        countryCode:
+          type: string
+          description: 书籍国别代码
+        countryName:
+          type: string
+          description: 书籍国别
+        docTypeCode:
+          type: string
+          description: 文献类型代码
+        docTypeName:
+          type: string
+          description: 文献类型
+        isJournal:
+          type: string
+          description: 暂无描述
+        author:
+          type: string
+          description: 责任者(作者)
+        publisher:
+          type: string
+          description: 出版社
+        pubYear:
+          type: string
+          description: 出版年
+        isbn:
+          type: string
+          description: ISBN编号
+        asbackDate:
+          type: string
+          description: 催还日期
+        lendDate:
+          type: string
+          description: 借出日期
+        renewDate:
+          type: string
+          description: 续借日期
+        renewTimes:
+          type: string
+          description: 续借次数
+          x-documented-type: numeric
+        locationCode:
+          type: string
+          description: 馆藏地代码
+        locationName:
+          type: string
+          description: 名称
+        propNo:
+          type: string
+          description: 财产号
+        totalLendQty:
+          type: string
+          description: 累计借书次数
+          x-documented-type: numeric
+        voltFlag:
+          type: string
+          description: 违章状态标识
+        debtFlag:
+          type: string
+          description: 欠款状态标识
+          x-documented-type: numeric
+        asbackTimes:
+          type: string
+          description: 催还次数
+          x-documented-type: numeric
+        retDate:
+          type: string
+          description: 实际还书时间
+          x-documented-type: numeric
+        callNo:
+          type: string
+          description: 图书类别代码
+          x-documented-type: numeric
+        callNoName:
+          type: string
+          description: 图书类别名称
+          x-documented-type: numeric
+    V1RtLibLibAccessItem:
+      type: object
+      description: Record fields for Library gate access records (real time).
+      properties:
+        visitNo:
+          type: string
+          description: 流水号
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        type:
+          type: string
+          description: 类型
+        deptName:
+          type: string
+          description: 院系
+        visitTime:
+          type: string
+          description: 刷卡时间
+        gateNo:
+          type: string
+          description: 闸机号
+        direction:
+          type: string
+          description: 进出模式，1-进，2-出
+        dataEvent:
+          type: string
+          description: 入出门
+        door:
+          type: string
+          description: 所属区域
+        libPlace:
+          type: string
+          description: 所属校区
+  securitySchemes:
+    openPlatformOAuth:
+      type: oauth2
+      description: 'OAuth 2.0 / OpenID Connect issued by the Open Platform Keycloak realm. Discovery document: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration (HTTP 200, verified 2026-09-01). Access tokens default to 7200 seconds and are sent as Authorization: Bearer <access_token>.'
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes:
+            openid: OpenID Connect subject identity.
+            offline_access: Refresh-token issuance.
+            profile: Profile claims.
+            email: Email claim.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The access_token obtained from the Keycloak realm, presented as Authorization: Bearer <access_token>.'
+externalDocs:
+  description: Tongji University Open Platform documentation
+  url: https://api.tongji.edu.cn/docs

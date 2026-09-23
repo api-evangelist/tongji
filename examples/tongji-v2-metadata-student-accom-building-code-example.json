@@ -1,0 +1,123 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v2/metadata/student/accom_building_code",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 100 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v2/metadata/student/accom_building_code",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 100,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "accomBuildingCode": "a0b05c9d98594cc5a435d304ffd9f832",
+     "accomBuildingName": "友园9号楼",
+     "accomRegionCode": "7",
+     "accomRegionName": "嘉定校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2025-10-13T00:00:00"
+    },
+    {
+     "accomBuildingCode": "a0b05c9d98594cc5a435d304ffd9f852",
+     "accomBuildingName": "桃李村13号",
+     "accomRegionCode": "2",
+     "accomRegionName": "沪西校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2025-10-13T00:00:00"
+    },
+    {
+     "accomBuildingCode": "a0b05c9d98594cc5a435d304ffd9f879",
+     "accomBuildingName": "生乐A区6号",
+     "accomRegionCode": "2",
+     "accomRegionName": "沪西校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2025-10-13T00:00:00"
+    },
+    {
+     "accomBuildingCode": "a0b05c9d98594cc5a435d304ffd9f863",
+     "accomBuildingName": "友园15号楼",
+     "accomRegionCode": "7",
+     "accomRegionName": "嘉定校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2025-10-13T00:00:00"
+    },
+    {
+     "accomBuildingCode": "a0b05c9d98594cc5a435d304ffd9f867",
+     "accomBuildingName": "西南三楼",
+     "accomRegionCode": "3",
+     "accomRegionName": "四平路校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2025-10-13T00:00:00"
+    },
+    {
+     "accomBuildingCode": "ee0efa151d3849c49913f8dd4145e6a9",
+     "accomBuildingName": "生乐B区23号",
+     "accomRegionCode": "2",
+     "accomRegionName": "沪西校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2025-12-22T00:00:00"
+    },
+    {
+     "accomBuildingCode": "ab4d0ffe721c43dfad12cfc0ed1a2272",
+     "accomBuildingName": "朋园6号楼",
+     "accomRegionCode": "7",
+     "accomRegionName": "嘉定校区",
+     "createTime": "2026-06-13T03:12:27",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-06-12T00:00:00"
+    },
+    {
+     "accomBuildingCode": "a0b05c9d98594cc5a435d304ffd9f822",
+     "accomBuildingName": "生乐B区16号",
+     "accomRegionCode": "2",
+     "accomRegionName": "沪西校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2025-11-12T00:00:00"
+    },
+    {
+     "accomBuildingCode": "a0b05c9d98594cc5a435d304ffd9f823",
+     "accomBuildingName": "朋园1号楼",
+     "accomRegionCode": "7",
+     "accomRegionName": "嘉定校区",
+     "createTime": "2025-10-28T12:25:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-08-21T00:00:00"
+    },
+    {
+     "accomBuildingCode": "3cfeae0db946403faa938d370e5a52cc",
+     "accomBuildingName": "朋园8号楼",
+     "accomRegionCode": "7",
+     "accomRegionName": "嘉定校区",
+     "createTime": "2026-06-13T03:12:27",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-06-12T00:00:00"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

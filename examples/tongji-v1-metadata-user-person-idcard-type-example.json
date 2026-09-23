@@ -1,0 +1,63 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/user/person_idcard_type",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 21 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/user/person_idcard_type",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 21,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "cardCode": "01",
+     "cardType": "居民身份证"
+    },
+    {
+     "cardCode": "02",
+     "cardType": "护照"
+    },
+    {
+     "cardCode": "03",
+     "cardType": "军官证"
+    },
+    {
+     "cardCode": "04",
+     "cardType": "士兵证"
+    },
+    {
+     "cardCode": "05",
+     "cardType": "回乡证"
+    },
+    {
+     "cardCode": "06",
+     "cardType": "旅行证"
+    },
+    {
+     "cardCode": "07",
+     "cardType": "港澳台身份证"
+    },
+    {
+     "cardCode": "08",
+     "cardType": "文职干部证"
+    },
+    {
+     "cardCode": "09",
+     "cardType": "警官证"
+    },
+    {
+     "cardCode": "10",
+     "cardType": "部队离退休证"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

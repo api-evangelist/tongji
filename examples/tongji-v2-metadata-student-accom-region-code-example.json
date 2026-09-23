@@ -1,0 +1,103 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v2/metadata/student/accom_region_code",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 10 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v2/metadata/student/accom_region_code",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 10,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "accomRegionCode": "8",
+     "accomRegionName": "彰武路校区",
+     "createTime": null,
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "2",
+     "accomRegionName": "沪西校区",
+     "createTime": null,
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "11",
+     "accomRegionName": "东校区",
+     "createTime": "2026-08-05T05:07:41",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-08-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "7",
+     "accomRegionName": "嘉定校区",
+     "createTime": null,
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "9",
+     "accomRegionName": "口腔医院",
+     "createTime": null,
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "4",
+     "accomRegionName": "南校区",
+     "createTime": "2026-01-05T09:50:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "10",
+     "accomRegionName": "张江校区",
+     "createTime": "2026-01-05T09:50:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "5",
+     "accomRegionName": "沪北校区",
+     "createTime": null,
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "3",
+     "accomRegionName": "四平路校区",
+     "createTime": null,
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    },
+    {
+     "accomRegionCode": "1",
+     "accomRegionName": "沪东校区",
+     "createTime": "2026-01-05T09:50:57",
+     "isUseCode": "1",
+     "isUseName": "是",
+     "updateTime": "2026-01-04T00:00:00"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

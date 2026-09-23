@@ -1,0 +1,116 @@
+---
+specification: API Evangelist Identity Federation
+specificationVersion: '0.1'
+provider: Tongji University
+providerId: tongji
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live fetch on 2026-09-01 of https://idp2.tongji.edu.cn/idp/shibboleth (HTTP 200,
+  application/xml, 14,592 bytes) and of the eduGAIN technical database
+  https://technical.edugain.org/api.php?action=list_entities (HTTP 200, 7.8 MB, 10,615 entity
+  rows) and .../action=list_feds (HTTP 200), filtered for tongji. DNS and RIR ownership of the
+  IdP host were resolved with dig and whois.
+x-operator: federation
+operator_basis: >-
+  A federation is shared by definition and the identity provider behind it is the institution's.
+  idp2.tongji.edu.cn is under Tongji University's own registrable domain and resolves to
+  202.120.188.209 in CERNET-CN, the China Education and Research Network — the national academic
+  network, not a commercial hosting vendor. No vendor CNAME sits in front of it. This is a
+  Tongji-operated Shibboleth deployment registered into a national federation by CARSI, and it is
+  the single strongest institution-operated machine-readable surface in this repo after the Open
+  Platform itself.
+description: >-
+  Tongji University runs its own Shibboleth SAML 2.0 identity provider and is a registered member
+  of CARSI (CERNET Authentication and Resource Sharing Infrastructure), China's national research
+  and education identity federation, which has been an eduGAIN member since 2019-05-24 and in
+  production interfederation since 2019-06-18. Tongji's entity has been visible in the eduGAIN
+  metadata aggregate since 2020-02-22.
+
+  One honest caveat, which is a finding rather than a defect in the record: the metadata document
+  served at the IdP's own canonical /idp/shibboleth location is the Shibboleth software's
+  self-generated example metadata — it carries the stock "This is example metadata only" comment,
+  an unfilled mdui:UIInfo block, and a validUntil of 2020-02-21 that has long since passed. That
+  file is a Shibboleth installation artifact, not the university's published federation metadata.
+  The authoritative, signed, current metadata for this entity is the copy CARSI publishes into the
+  eduGAIN aggregate, where the display names, scope and role descriptors are all populated. Read
+  the local file as evidence that Tongji operates the IdP, and the eduGAIN record as evidence of
+  what it federates.
+federation:
+  name: CERNET Authentication and Resource Sharing Infrastructure
+  abbreviation: CARSI
+  country: CN
+  registration_authority: https://www.carsi.edu.cn
+  contact: carsi@pku.edu.cn
+  interfederation: eduGAIN
+  edugain_membership_date: '2019-05-24'
+  edugain_production_date: '2019-06-18'
+  evidence:
+  - url: https://technical.edugain.org/api.php?action=list_feds&format=json
+    status: 200
+    detail: CARSI record returned with status 6 (production) and the membership dates above.
+  - url: https://www.carsi.edu.cn/
+    status: 200
+identity_provider:
+  entityID: https://idp2.tongji.edu.cn/idp/shibboleth
+  x-operator: institution
+  software: Shibboleth Identity Provider
+  scope: tongji.edu.cn
+  display_name_en: Tongji University
+  display_name_zh: 同济大学(Tongji University)
+  registration_authority: https://www.carsi.edu.cn
+  first_seen_in_edugain: '2020-02-22'
+  roles:
+  - IDPSSODescriptor
+  - AttributeAuthorityDescriptor
+  protocols_supported:
+  - urn:oasis:names:tc:SAML:2.0:protocol
+  - urn:oasis:names:tc:SAML:1.1:protocol
+  - urn:mace:shibboleth:1.0
+  bindings_supported:
+  - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+  - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+  - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+  - urn:oasis:names:tc:SAML:2.0:bindings:SOAP
+  - urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding
+  - urn:mace:shibboleth:1.0:profiles:AuthnRequest
+  endpoints:
+    sso_redirect: https://idp2.tongji.edu.cn/idp/profile/SAML2/Redirect/SSO
+    sso_post: https://idp2.tongji.edu.cn/idp/profile/SAML2/POST/SSO
+    sso_shibboleth: https://idp2.tongji.edu.cn/idp/profile/Shibboleth/SSO
+    slo_redirect: https://idp2.tongji.edu.cn/idp/profile/SAML2/Redirect/SLO
+    slo_soap: https://idp2.tongji.edu.cn:8443/idp/profile/SAML2/SOAP/SLO
+    attribute_query: https://idp2.tongji.edu.cn:8443/idp/profile/SAML2/SOAP/AttributeQuery
+    artifact_resolution: https://idp2.tongji.edu.cn:8443/idp/profile/SAML2/SOAP/ArtifactResolution
+  infrastructure:
+    resolves_to: 202.120.188.209
+    network: CERNET-CN — China Education and Research Network
+    vendor_cname: none
+  entity_categories: none declared
+  sirtfi: not asserted
+  research_and_scholarship: not asserted
+  local_metadata:
+    url: https://idp2.tongji.edu.cn/idp/shibboleth
+    status: 200
+    content_type: application/xml;charset=utf-8
+    bytes: 14592
+    valid_until: '2020-02-21T13:13:23.450Z'
+    caveat: >-
+      Shibboleth's stock self-generated example metadata, expired and with placeholder UIInfo. It
+      proves the IdP exists and is Tongji-operated; it is not the federation's published metadata.
+  federation_metadata:
+    source: eduGAIN metadata aggregate, registered by CARSI
+    explorer: https://technical.edugain.org/entities
+    status: 200
+    detail: >-
+      Both role descriptors present, display names populated in English and Chinese, shibmd:Scope
+      set to tongji.edu.cn.
+service_providers:
+  count: 0
+  detail: >-
+    No Tongji-operated SAML service provider was found in the eduGAIN aggregate. The only Tongji
+    entity registered is the identity provider — consistent with the CARSI model, where member
+    institutions federate outward to consume licensed resources rather than publish SPs.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

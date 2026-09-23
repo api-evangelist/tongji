@@ -4,32 +4,67 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Tongji University
 providerId: tongji
 created: '2026-06-03'
-modified: '2026-06-03'
-reconciled: false
+modified: '2026-09-01'
+generated: '2026-09-01'
+method: searched
+source: >-
+  https://api.tongji.edu.cn/docs/intro/develop/limit (HTTP 200, fetched 2026-09-01), the Open
+  Platform's own published rate-limit policy. Replaces the 2026-06-03 file, which stated that Tongji
+  "does not publish a unified public rate-limit table" and described throttling on OAI-PMH and IIIF
+  harvesting endpoints. Tongji does publish a unified table, and operates no OAI-PMH or IIIF surface
+  this pipeline could find — that text was unfounded and has been removed.
+reconciled: true
+x-operator: institution
 tags:
 - Education
 - Higher Education
 - University
 - Rate Limiting
 description: >-
-  Tongji University does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
-notes: Confirm per-service limits with each API's documentation; harvest responsibly.
+  The Tongji University Open Platform publishes one rate-limit policy that applies uniformly across
+  its interfaces: a token-bucket limiter at 50 requests per second, counted per application, per IP
+  and per concurrent request. Anonymous interfaces are limited on IP alone at the same rate. Some
+  interfaces carry their own tighter limit, stated in that interface's own documentation page.
+notes: >-
+  Applications needing a higher ceiling are told to contact the Information Office directly; there is
+  no self-service quota increase. The platform also asks callers to cache the access_token rather
+  than re-requesting it, warning that frequent token requests can themselves trigger rate limiting or
+  a temporary block.
 sources:
-- https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/apis.yml
+- https://api.tongji.edu.cn/docs/intro/develop/limit
+- https://api.tongji.edu.cn/docs/intro/develop/authentication
+algorithm: token-bucket
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: client
-  metric: requests-per-minute
-  limit: see service documentation
-  notes: No published global limit; large harvests may be rate-limited.
+- name: Default (authenticated)
+  scope: application+ip
+  metric: requests-per-second
+  limit: 50
+  notes: 50 次/每秒/每应用/每IP/并发 — per application, per IP, concurrent.
+- name: Anonymous
+  scope: ip
+  metric: requests-per-second
+  limit: 50
+  notes: >-
+    Applies to the thirteen interfaces documented as 无需授权可直接访问, which need no credential and
+    are therefore limited on source IP alone.
+- name: Per-interface override
+  scope: interface
+  metric: requests-per-second
+  limit: see interface documentation
+  notes: >-
+    Individual interfaces may declare a tighter limit in the 备注 section of their own documentation
+    page; the platform states these override the default.
 policies:
+- name: Token caching
+  description: >-
+    Cache the access_token for its 7200-second lifetime on the application side. Re-requesting a
+    token per call risks rate limiting or a temporary block.
+- name: Quota increase
+  description: Contact the Tongji University Information Office; higher limits are granted case by case, not self-service.
 - name: Backoff Strategy
-  description: Exponential backoff with jitter; honor Retry-After; harvest during off-peak hours.
+  description: Exponential backoff with jitter on 429.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

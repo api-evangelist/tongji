@@ -1,0 +1,42 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/json-schema/tongji-reference-metadata-code-table.json",
+ "title": "Tongji University Open Platform Reference Metadata Code Table",
+ "description": "The shape shared by the thirteen anonymously callable reference-metadata interfaces: the envelope with `data` as an array of code-table rows. Every row pairs a code field with a name field; several also carry isUseCode/isUseName active flags and update timestamps. Derived from the thirteen live responses captured 2026-09-01.",
+ "x-provenance": {
+  "generated": "2026-09-01",
+  "method": "derived",
+  "source": "Thirteen live unauthenticated responses from https://api.tongji.edu.cn/v1/metadata/ and /v2/metadata/, captured 2026-09-01",
+  "x-operator": "institution"
+ },
+ "type": "object",
+ "required": [
+  "code",
+  "data",
+  "msg"
+ ],
+ "properties": {
+  "code": {
+   "const": "A00000"
+  },
+  "msg": {
+   "type": "string"
+  },
+  "data": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "minProperties": 2,
+    "description": "One code-table row. Field names are interface-specific (sexCode/sexName, techJobCode/techJobName, accomBuildingCode/accomBuildingName, …).",
+    "additionalProperties": {
+     "type": [
+      "string",
+      "integer",
+      "boolean",
+      "null"
+     ]
+    }
+   }
+  }
+ }
+}

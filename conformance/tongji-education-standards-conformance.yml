@@ -1,0 +1,161 @@
+---
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live probes on 2026-09-01 of Tongji-operated hosts (api.tongji.edu.cn, idp2.tongji.edu.cn,
+  www.lib.tongji.edu.cn), of the eduGAIN technical database, and of the Crossref, DataCite and ROR
+  registry APIs. Every hit below names the exact URL that returned the evidence; no conformance is
+  recorded from a prose claim.
+provider: Tongji University
+providerId: tongji
+regime: education
+description: >-
+  Conformance of Tongji University's own machine-readable surfaces against the Kin Score `education`
+  regime standards (scim, lti, oneroster, ed-fi, caliper, qti, oai-pmh, shibboleth, saml, orcid,
+  datacite, crossref). Reward-only: an absence below means "not found on a public surface on
+  2026-09-01", not "not in use internally". Tongji publishes its documentation in Chinese, so every
+  negative was checked against the Chinese-language surface as well as the English one.
+standards:
+- id: shibboleth
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://idp2.tongji.edu.cn/idp/shibboleth
+    status: 200
+    content_type: application/xml;charset=utf-8
+    detail: >-
+      Tongji runs a Shibboleth Identity Provider at its canonical /idp/shibboleth location on its own
+      registrable domain, resolving to 202.120.188.209 in CERNET-CN, the national education network.
+      The document returned is a SAML 2.0 EntityDescriptor with
+      entityID="https://idp2.tongji.edu.cn/idp/shibboleth" and shibmd:Scope tongji.edu.cn. Caveat
+      recorded in identity-federation/tongji-identity-federation.yml — the locally served copy is
+      Shibboleth's stock example metadata and its validUntil expired in 2020; the current signed copy
+      is the one CARSI registers into eduGAIN.
+- id: saml
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://technical.edugain.org/api.php?action=list_entities&format=json
+    status: 200
+    detail: >-
+      Tongji's IdP is a registered eduGAIN entity (id 671755) with both IDPSSODescriptor and
+      AttributeAuthorityDescriptor roles, registered by CARSI (https://www.carsi.edu.cn), display
+      names "Tongji University" / "同济大学(Tongji University)", scope tongji.edu.cn, first seen in the
+      aggregate 2020-02-22. The entity advertises SAML 2.0 and SAML 1.1 protocol support across
+      HTTP-Redirect, HTTP-POST, HTTP-POST-SimpleSign and SOAP bindings. Federation membership is an
+      institution-operated fact by definition.
+- id: oai-pmh
+  status: not-found
+  evidence:
+    url: https://www.lib.tongji.edu.cn/oai
+    status: 404
+    detail: >-
+      No OAI-PMH endpoint responded on the library host. www.lib.tongji.edu.cn itself answers 200 but
+      exposes no harvesting verb, and no institutional-repository host (ir./repository./dspace. under
+      tongji.edu.cn) resolves in DNS.
+- id: orcid
+  status: not-found
+  evidence:
+    detail: >-
+      No ORCID consortium or member integration was found on a Tongji-operated public surface. The
+      Open Platform's research interfaces (patents, papers, projects, awards) key on the internal
+      staff/student number (userId), not on ORCID iDs; no ORCID field appears in any of the eight
+      documented research response tables.
+- id: datacite
+  status: not-found
+  evidence:
+    url: https://api.datacite.org/clients?query=tongji
+    status: 200
+    detail: >-
+      Zero DataCite providers and zero DataCite repositories match "tongji". Tongji University is not
+      a DataCite member and mints no DOIs through it under its own name.
+- id: crossref
+  status: not-found
+  evidence:
+    url: https://api.crossref.org/members?query=tongji
+    status: 200
+    detail: Zero Crossref members match "tongji". No Crossref membership or DOI prefix under the university's name.
+- id: scim
+  status: not-found
+  evidence:
+    detail: >-
+      The Open Platform runs a Keycloak realm and exposes 491 OAuth scopes, but publishes no SCIM
+      /Users or /Groups provisioning endpoint. Identity data is served through bespoke interfaces
+      (/v1/rt/user/, /v1/infra/iam/) rather than a SCIM contract. /v1/infra/iam/ routes exist in the
+      scope list but no SCIM schema or ServiceProviderConfig is published.
+- id: lti
+  status: not-found
+  evidence:
+    detail: >-
+      No LTI tool or platform registration surface was found. The Open Platform's teaching interfaces
+      (56 documented under teaching_management_data) are bespoke REST, not LTI.
+- id: oneroster
+  status: not-found
+  evidence:
+    detail: >-
+      No OneRoster endpoint. Roster data is served through the platform's own
+      /v1/rt/teaching_info/ and /v1/dc/teaching_info/ interfaces against school and national data
+      standards published at https://api.tongji.edu.cn/docs/data_standards.
+- id: ed-fi
+  status: not-found
+  evidence:
+    detail: Ed-Fi is a United States K-12 data standard with no adoption in Chinese higher education; not expected and not found.
+- id: caliper
+  status: not-found
+  evidence:
+    detail: No Caliper Analytics event surface found. The platform's teaching-evaluation interfaces return records, not learning events.
+- id: qti
+  status: not-found
+  evidence:
+    detail: No QTI assessment-interchange surface found on any Tongji-operated host.
+adjacent_standards_found:
+- id: openid-connect
+  status: conformant
+  operator: institution
+  note: >-
+    Not an `education` regime standard, recorded because it is the strongest machine-readable contract
+    the institution publishes.
+  evidence:
+    url: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    detail: >-
+      A complete OIDC discovery document at a well-known location on the institution's own host,
+      advertising seven grant types, PKCE S256, PAR, CIBA, device code, introspection, revocation and
+      491 published scopes.
+- id: oauth2
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://api.tongji.edu.cn/docs/intro/develop/authentication
+    status: 200
+    detail: >-
+      Authorization-code and client-credentials flows documented in full, with bearer-token
+      presentation, 7200-second default token lifetime and refresh-token handling.
+- id: ror
+  status: registered
+  operator: registry
+  note: >-
+    A registry membership, not a contract the institution publishes. Recorded because it is a fact
+    about the institution and must never be deleted as a "shared host".
+  evidence:
+    url: https://api.ror.org/v2/organizations/03rc6as71
+    status: 200
+    detail: >-
+      ROR ID https://ror.org/03rc6as71 — "Tongji University" / "同济大学", China. Four related Tongji
+      entities are separately registered (Shanghai East Hospital, Tongji Hospital, Yangpu Hospital,
+      Tongji Zhejiang College) and are distinct organizations, not this one.
+summary:
+  regime_standards_probed: 12
+  conformant: 2
+  not_found: 10
+  detail: >-
+    Two of twelve education-regime standards are met, both on the identity axis: Tongji operates its
+    own Shibboleth IdP and federates it through CARSI into eduGAIN. The scholarly-identifier axis
+    (orcid, datacite, crossref) is empty, and the learning-interoperability axis (lti, oneroster,
+    caliper, qti, ed-fi) is empty — the latter unsurprising for a Chinese institution, since those
+    standards are anchored in the North American and European ed-tech markets. What Tongji has
+    instead of those is a large institution-operated data platform of its own design.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

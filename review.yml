@@ -3,41 +3,123 @@ name: Tongji University
 description: Tongji University public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 reviews:
-  - date: '2026-06-03'
-    rating: 2
-    summary: >-
-      Tongji University operates a real, official institutional Open Platform at
-      api.tongji.edu.cn/docs whose documentation home resolves live (HTTP 200).
-      The platform documents a broad set of campus APIs (personnel, teaching,
-      library, one-card, research, notifications) but is gated behind a faculty/
-      student application and approval flow using authorization-code/token auth
-      with scope-based permissions and rate limiting, so no openly callable
-      public endpoints were confirmed. Deep-linked SPA doc routes returned 404
-      to plain HTTP probes (client-side routed). Official .edu.cn websites and
-      the institutional LinkedIn school page were verified. No official Tongji
-      University GitHub organization was confirmed, so none is claimed. No
-      endpoints or properties were fabricated.
-    endpoints:
-      - url: https://api.tongji.edu.cn/docs
-        status: 200
-        note: Official Open Platform API documentation home; resolves live.
-      - url: https://api.tongji.edu.cn/docs/intro/other
-        status: 200
-        note: Platform intro / data-resource overview page; resolves live.
-      - url: https://api.tongji.edu.cn/docs/interface/other_research/v1_rt_research_patent
-        status: 404
-        note: Deep doc route 404 to plain HTTP probe; SPA client-side routed under /docs.
-      - url: https://www.tongji.edu.cn/
-        status: 200
-        note: Official Chinese-language university website.
-      - url: https://en.tongji.edu.cn/
-        status: 200
-        note: Official English-language university website.
-      - url: https://www.lib.tongji.edu.cn/
-        status: 200
-        note: Tongji University Library; no public OAI-PMH/REST API endpoint confirmed.
-      - url: https://www.linkedin.com/school/tongji-university/
-        status: 200
-        note: Official institutional LinkedIn school page.
+- date: '2026-09-01'
+  rating: 4
+  summary: 'Re-profiled under the API Evangelist university pipeline. The 2026-06-03 review understated
+    this institution materially and is corrected here rather than confirmed. Tongji University operates
+    a real, institution-engineered API platform at api.tongji.edu.cn — its own registrable domain, resolving
+    into CERNET-CN (China Education and Research Network) address space, fronted by a KrakenD 2.4.2 gateway
+    with its own Keycloak authorization server. Three corrections. First, openly callable public endpoints
+    DO exist: thirteen reference-metadata interfaces are documented as 无需授权可直接访问 and every one of them
+    returned HTTP 200 application/json to an unauthenticated GET on 2026-09-01, 730 code-table rows in
+    total. Second, the platform publishes a live OpenID Connect discovery document listing 491 named OAuth
+    scopes, roughly one per interface — the most granular published scope design seen in this cohort.
+    Third, the university runs its own Shibboleth SAML 2.0 identity provider, registered into eduGAIN
+    by CARSI since 2020-02-22, which the June profile missed entirely. Forty-three interface documentation
+    pages were fetched and 42 modelled into a derived OpenAPI with per-tag splits. The deep-doc 404s the
+    June review recorded were an artefact of guessing SPA routes; the real routes recovered from the rendered
+    navigation all resolve 200. Genuine gaps remain and are recorded: no published spec of any kind, no
+    sitemap, no robots.txt, no llms.txt, no changelog, no deprecation policy, no rate-limit response headers,
+    an empty zero-length body on 401, no OAI-PMH, no institutional repository, no open-data portal, and
+    no DataCite or Crossref membership. github.com/Tongji-University exists but is empty and unnamed,
+    so no GitHub organization is claimed. Documentation is Chinese-only. Nothing was fabricated and every
+    artifact carries its method and source.'
+  endpoints:
+  - url: https://api.tongji.edu.cn/docs
+    status: 200
+    note: Open Platform documentation home; 269 internal doc routes recovered from the rendered navigation.
+  - url: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration
+    status: 200
+    note: Live OIDC discovery document, 19,727 bytes, 491 scopes_supported, PKCE S256, PAR, CIBA, device
+      code.
+  - url: https://api.tongji.edu.cn/v1/metadata/user/sex_code
+    status: 200
+    note: Anonymously callable — returned four gender code rows with no Authorization header.
+  - url: https://api.tongji.edu.cn/v1/metadata/asset/campus_gate
+    status: 200
+    note: Anonymously callable — 23 campus and campus-gate reference rows.
+  - url: https://api.tongji.edu.cn/v2/metadata/student/accom_building_code
+    status: 200
+    note: Anonymously callable — 100 dormitory building rows.
+  - url: https://api.tongji.edu.cn/v1/rt/research/patent
+    status: 401
+    note: Protected interface. 401 with a zero-length body and no envelope — the platform-s largest error-semantics
+      gap.
+  - url: https://api.tongji.edu.cn/v1/token
+    status: 405
+    note: Legacy token route live; documented method is POST.
+  - url: https://api.tongji.edu.cn/v1/metadata/user/sex_code_nope
+    status: 404
+    note: Unrouted path returns plain text from the gateway and discloses X-Krakend Version 2.4.2.
+  - url: https://idp2.tongji.edu.cn/idp/shibboleth
+    status: 200
+    note: Tongji-operated Shibboleth IdP, application/xml. Serves the stock example metadata with an expired
+      2020 validUntil; the signed copy lives in the eduGAIN aggregate.
+  - url: https://technical.edugain.org/api.php?action=list_entities&format=json
+    status: 200
+    note: eduGAIN entity 671755, entityID https://idp2.tongji.edu.cn/idp/shibboleth, registered by CARSI,
+      scope tongji.edu.cn, first seen 2020-02-22.
+  - url: https://api.ror.org/v2/organizations/03rc6as71
+    status: 200
+    note: ROR registration for Tongji University. Registry membership, not a Tongji contract.
+  - url: https://api.datacite.org/clients?query=tongji
+    status: 200
+    note: Zero matches — no DataCite membership.
+  - url: https://api.crossref.org/members?query=tongji
+    status: 200
+    note: Zero matches — no Crossref membership.
+  - url: https://www.lib.tongji.edu.cn/
+    status: 200
+    note: Library website; no catalog API or OAI-PMH verb exposed.
+  - url: https://www.lib.tongji.edu.cn/oai
+    status: 404
+    note: No OAI-PMH endpoint.
+  - url: https://api.tongji.edu.cn/swagger.json
+    status: 404
+    note: No published machine-readable contract. /v3/api-docs and /.well-known/openapi.json also 404.
+  - url: https://api.tongji.edu.cn/sitemap.xml
+    status: 404
+    note: No sitemap; /robots.txt and /llms.txt also 404.
+  - url: https://www.tongji.edu.cn/
+    status: 200
+    note: Official Chinese-language university website.
+  - url: https://en.tongji.edu.cn/
+    status: 200
+    note: Official English-language university website.
+  - url: https://www.linkedin.com/school/tongji-university/
+    status: 999
+    note: LinkedIn bot challenge. 999 is a live-but-blocked signal, not a dead pointer.
+- date: '2026-06-03'
+  rating: 2
+  summary: Tongji University operates a real, official institutional Open Platform at api.tongji.edu.cn/docs
+    whose documentation home resolves live (HTTP 200). The platform documents a broad set of campus APIs
+    (personnel, teaching, library, one-card, research, notifications) but is gated behind a faculty/ student
+    application and approval flow using authorization-code/token auth with scope-based permissions and
+    rate limiting, so no openly callable public endpoints were confirmed. Deep-linked SPA doc routes returned
+    404 to plain HTTP probes (client-side routed). Official .edu.cn websites and the institutional LinkedIn
+    school page were verified. No official Tongji University GitHub organization was confirmed, so none
+    is claimed. No endpoints or properties were fabricated.
+  endpoints:
+  - url: https://api.tongji.edu.cn/docs
+    status: 200
+    note: Official Open Platform API documentation home; resolves live.
+  - url: https://api.tongji.edu.cn/docs/intro/other
+    status: 200
+    note: Platform intro / data-resource overview page; resolves live.
+  - url: https://api.tongji.edu.cn/docs/interface/other_research/v1_rt_research_patent
+    status: 404
+    note: Deep doc route 404 to plain HTTP probe; SPA client-side routed under /docs.
+  - url: https://www.tongji.edu.cn/
+    status: 200
+    note: Official Chinese-language university website.
+  - url: https://en.tongji.edu.cn/
+    status: 200
+    note: Official English-language university website.
+  - url: https://www.lib.tongji.edu.cn/
+    status: 200
+    note: Tongji University Library; no public OAI-PMH/REST API endpoint confirmed.
+  - url: https://www.linkedin.com/school/tongji-university/
+    status: 200
+    note: Official institutional LinkedIn school page.

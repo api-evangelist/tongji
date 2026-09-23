@@ -1,0 +1,63 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/teacher/status",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 29 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/teacher/status",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 29,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "currentStatusCode": "99",
+     "currentStatusName": "其他"
+    },
+    {
+     "currentStatusCode": "16",
+     "currentStatusName": "停薪"
+    },
+    {
+     "currentStatusCode": "07",
+     "currentStatusName": "离职"
+    },
+    {
+     "currentStatusCode": "12",
+     "currentStatusName": "延聘"
+    },
+    {
+     "currentStatusCode": "071",
+     "currentStatusName": "离校循环"
+    },
+    {
+     "currentStatusCode": "01",
+     "currentStatusName": "退休"
+    },
+    {
+     "currentStatusCode": "02",
+     "currentStatusName": "离休"
+    },
+    {
+     "currentStatusCode": "20",
+     "currentStatusName": "自主创业"
+    },
+    {
+     "currentStatusCode": "15",
+     "currentStatusName": "因公出国"
+    },
+    {
+     "currentStatusCode": "18",
+     "currentStatusName": "待审批"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

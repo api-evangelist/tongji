@@ -1,0 +1,83 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/teacher/title_code",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 311 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/teacher/title_code",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 311,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "482",
+     "titleName": "一级飞行通信员"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "403",
+     "titleName": "三级公证员"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "154",
+     "titleName": "助理编辑"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "052",
+     "titleName": "高级教师（中学）"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "622",
+     "titleName": "副研究员（社会科学）"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "095",
+     "titleName": "农业技术员"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "264",
+     "titleName": "技师"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "034",
+     "titleName": "助理讲师（技校）"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "293",
+     "titleName": "三级演奏员"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "titleCode": "140",
+     "titleName": "统计专业人员"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

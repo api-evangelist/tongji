@@ -64,7 +64,9 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Tongji University is a leading public research university in Shanghai, China (Mainland), ranked #192 in the QS World University Rankings 2025. This repository catalogs the university's public developer/API footprint as an [APIs.json](https://apis.json.org) provider profile. Tongji operates an official institutional Open Platform at `api.tongji.edu.cn` that documents a broad set of campus data and capability APIs, gated to authorized faculty and students.
+Tongji University (同济大学) is a public research university in Shanghai, China, in the national Double First-Class programme and ranked around #192 in the QS World University Rankings. This repository catalogs the university's public developer/API footprint as an [APIs.json](https://apis.json.org) provider profile.
+
+Unlike most of the university cohort, Tongji's programmable footprint is real and it is the university's own engineering, not a vendor's. The Tongji University Information Office operates an institutional Open Platform at `api.tongji.edu.cn` — on China Education and Research Network (CERNET) address space, behind a KrakenD gateway with its own Keycloak authorization server — documenting roughly 234 interfaces across fifteen families. Thirteen reference-metadata interfaces are documented as requiring no authorization and were confirmed anonymously callable on 2026-09-01. The university also runs its own Shibboleth SAML 2.0 identity provider, federated through CARSI into eduGAIN.
 
 APIs.json: https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/apis.yml
 
@@ -72,52 +74,57 @@ Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm
 
 ## Type
 
+- University (Public Research University)
 - Index
 - Consumer
 - 3rd-Party
 
 ## Tags
 
-Education, Higher Education, University, China, Shanghai, Open Platform, Campus Data
+University, Higher Education, Education, China, Shanghai, Double First-Class, Open Platform, Campus Data, Identity Federation, Research Data, Library, Course Catalog, Reference Data
 
-## APIs
+## Surfaces, by operator
 
-- **Tongji University Open Platform** — Official institutional data and capability API platform (personnel, teaching, library, one-card, research, notifications). Application/approval-gated with authorization-code/token auth, scopes, and rate limiting. Docs: https://api.tongji.edu.cn/docs
+| Surface | Operator | What it is |
+|---|---|---|
+| [Tongji University Open Platform](https://api.tongji.edu.cn/docs) | `institution` | The university's own campus data and capability API platform. OAuth 2.0 / OIDC via a self-run Keycloak realm, 491 published scopes, 50 req/s token-bucket rate limit, thirteen anonymously callable reference-metadata interfaces. |
+| [Shibboleth Identity Provider](https://idp2.tongji.edu.cn/idp/shibboleth) | `federation` | Tongji's own SAML 2.0 IdP, registered into eduGAIN by CARSI since 2020-02-22. |
+| [ROR registration](https://ror.org/03rc6as71) | `registry` | Registry membership. The ROR API is ROR's; only the membership is Tongji's. |
 
-## Plans
+No `tenant` and no `vendor` surfaces were found — there is no Figshare, Pure, Ex Libris, Dataverse or Symplectic contract running under this institution's name.
 
-- [plans/tongji-plans-pricing.yml](plans/tongji-plans-pricing.yml)
+## Artifacts
 
-## Rate Limits
-
-- [rate-limits/tongji-rate-limits.yml](rate-limits/tongji-rate-limits.yml)
-
-## FinOps
-
-- [finops/tongji-finops.yml](finops/tongji-finops.yml)
+- OpenAPI (derived from Tongji's own documentation, split per tag): [openapi/](openapi/) — master in [openapi/_original/](openapi/_original/)
+- Authentication: [authentication/tongji-open-platform-authentication.yml](authentication/tongji-open-platform-authentication.yml)
+- Scopes (491, from the live OIDC discovery document): [scopes/](scopes/)
+- Errors: [errors/tongji-open-platform-errors.yml](errors/tongji-open-platform-errors.yml)
+- Vocabulary (13 live code tables, 730 rows): [vocabulary/tongji-open-platform-reference-metadata.yml](vocabulary/tongji-open-platform-reference-metadata.yml)
+- Examples (live, unauthenticated captures): [examples/](examples/)
+- JSON Schema: [json-schema/](json-schema/)
+- Rules: [rules/tongji-open-platform-rules.yml](rules/tongji-open-platform-rules.yml)
+- Lifecycle: [lifecycle/tongji-open-platform-lifecycle.yml](lifecycle/tongji-open-platform-lifecycle.yml)
+- Conformance (education regime): [conformance/tongji-education-standards-conformance.yml](conformance/tongji-education-standards-conformance.yml)
+- Identity federation: [identity-federation/](identity-federation/)
+- Plans: [plans/tongji-plans-pricing.yml](plans/tongji-plans-pricing.yml)
+- Rate limits: [rate-limits/tongji-rate-limits.yml](rate-limits/tongji-rate-limits.yml)
+- FinOps: [finops/tongji-finops.yml](finops/tongji-finops.yml)
 
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
-
-## Common Properties
-
-- Website: https://www.tongji.edu.cn/
-- Website (English): https://en.tongji.edu.cn/
-- Developer Portal: https://api.tongji.edu.cn/docs
-- LinkedIn: https://www.linkedin.com/school/tongji-university/
-- Plans: plans/tongji-plans-pricing.yml
-- Rate Limits: rate-limits/tongji-rate-limits.yml
-- FinOps: finops/tongji-finops.yml
-- Review: review.yml
+- Modified: 2026-09-01
 
 ## Notes
 
-- The Open Platform documentation home (`api.tongji.edu.cn/docs`) resolves live (HTTP 200), but the APIs themselves are gated behind a faculty/student application and approval flow; no openly callable public endpoints were confirmed.
-- Deep-linked documentation routes are client-side (SPA) routed and return 404 to plain HTTP probes; the `/docs` root is the canonical entry point.
-- No official Tongji University GitHub organization was confirmed; none is claimed in this profile.
-- No endpoints, properties, or URLs were fabricated — only resources verified during review are listed.
+- **Correction, 2026-09-01.** The 2026-06-03 profile stated that "no openly callable public endpoints were confirmed". That was wrong. Thirteen interfaces under `/v1/metadata/` and `/v2/metadata/` are documented as 无需授权可直接访问 and every one returned HTTP 200 `application/json` to an unauthenticated GET. The June profile also missed the live OpenID Connect discovery document and the university's eduGAIN-registered Shibboleth IdP entirely.
+- The deep-documentation 404s the June review recorded were an artefact of guessing SPA routes. The real routes, recovered from the rendered navigation, all resolve 200.
+- Every OpenAPI in this repo is **API Evangelist's derivation** from Tongji's own published Chinese-language documentation. Tongji publishes no OpenAPI, Swagger or Postman collection of its own — `/swagger.json`, `/v3/api-docs` and `/.well-known/openapi.json` all return 404, as do `/sitemap.xml`, `/robots.txt` and `/llms.txt`.
+- No institutional repository, OAI-PMH endpoint or open-data portal was found. Tongji is not a DataCite member and not a Crossref member.
+- `github.com/Tongji-University` exists but is empty, unnamed and undescribed, so no GitHub organization is claimed.
+- `api.tongji.edu.cn/docs/intro/other/policies` is a privacy-policy **template** the Information Office hands to campus developers, not the university's own privacy policy, and is deliberately not recorded as one.
+- All documentation is Chinese-only.
+- No endpoints, properties or URLs were fabricated. Every artifact carries its `method` and `source`.
 
 ## Maintainers
 

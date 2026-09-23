@@ -1,0 +1,93 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/teacher/tech_job_code",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 18 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/teacher/tech_job_code",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 18,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "20001",
+     "techJobName": "教学科研型",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "22001",
+     "techJobName": "思政系列",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobCode": "10",
+     "techJobName": "管理类",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "21001",
+     "techJobName": "图书情报系列",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "21004",
+     "techJobName": "会计系列",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "21007",
+     "techJobName": "工程系列",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "21005",
+     "techJobName": "经济系列",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "20002",
+     "techJobName": "科学研究型",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobCode": "20005",
+     "techJobName": "专业基础课教学型",
+     "updateTime": "2022-05-24 00:00:00"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobCode": "20",
+     "techJobName": "专业技术类教师系列",
+     "updateTime": "2022-05-24 00:00:00"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

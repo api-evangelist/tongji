@@ -1,0 +1,37 @@
+{
+  "provider": "tongji",
+  "sources": [
+    "_original/tongji-open-platform-openapi.yml"
+  ],
+  "outputs": [
+    "tongji-ai-services-api-openapi.yml",
+    "tongji-assets-and-procurement-api-openapi.yml",
+    "tongji-education-data-verification-api-openapi.yml",
+    "tongji-library-api-openapi.yml",
+    "tongji-reference-metadata-api-openapi.yml",
+    "tongji-research-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "6 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tongji-open-platform-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/tongji-research-openapi.yml: archived document superseded by a larger archived document",
+    "_original/tongji-reference-metadata-openapi.yml: archived document superseded by a larger archived document",
+    "_original/tongji-library-openapi.yml: archived document superseded by a larger archived document",
+    "_original/tongji-education-data-verification-openapi.yml: archived document superseded by a larger archived document",
+    "_original/tongji-assets-and-procurement-openapi.yml: archived document superseded by a larger archived document",
+    "_original/tongji-ai-services-openapi.yml: archived document superseded by a larger archived document",
+    "tongji-ai-services-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tongji-assets-and-procurement-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tongji-education-data-verification-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tongji-library-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tongji-reference-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tongji-research-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

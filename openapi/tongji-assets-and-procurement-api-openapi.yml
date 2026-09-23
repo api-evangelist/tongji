@@ -1,0 +1,647 @@
+openapi: 3.2.0
+info:
+  title: Tongji University Open Platform Assets and Procurement API
+  version: '2026-09-01'
+  summary: Institution-operated campus data and capability API platform run by the Tongji University Information Office.
+  description: The Tongji University Open Platform (同济大学开放平台) is operated by the university itself at api.tongji.edu.cn, on China Education and Research Network (CERNET) address space, and exposes campus data and shared capability interfaces to faculty, students and campus applications.
+  contact:
+    name: Tongji University Information Office — Open Platform
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://api.tongji.edu.cn/docs — 43 published interface documentation pages fetched 2026-09-01 (HTTP 200), plus live probes of the 13 anonymous interfaces.
+    x-operator: institution
+servers:
+- url: https://api.tongji.edu.cn
+  description: Tongji University Open Platform production host (CERNET, 202.120.182.237).
+security:
+- openPlatformOAuth: []
+tags:
+- name: Assets and Procurement
+  description: Contract, equipment-asset and purchase-requisition records drawn from the university procurement and asset-management systems.
+paths:
+  /v1/dc/contract_info/contract:
+    get:
+      operationId: v1_dc_contract_info_contract
+      summary: Internal contract records
+      description: '根据项目负责人工号查询其所负责的所有合同项目相关信息 Original documented title: 校内合同信息. Upstream system of record declared by the platform: SYS20230012(同济大学采购管理系统（含移动端）),SYS20230150(同济大学协同办公系统). Authorization modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/contact_info/v1_dc_contract_info_contract
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号
+        schema:
+          type: string
+      - name: sinceNum
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1DcContractInfoContractItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/purchase/contract_info_by_number:
+    get:
+      operationId: v1_rt_purchase_contract_info_by_number
+      summary: Contract record by contract number
+      description: '通过合同编号获取合同信息 Original documented title: 通过合同编号获取合同信息. Upstream system of record declared by the platform: SYS20230012(同济大学采购管理系统（含移动端）). Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时00分45秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/contact_info/v1_rt_purchase_contract_info_by_number
+      parameters:
+      - name: contractNumber
+        in: query
+        required: true
+        description: 合同编号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1RtPurchaseContractInfoByNumberItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/purchase/contract_info_by_org_supplier:
+    get:
+      operationId: v1_rt_purchase_contract_info_by_org_supplier
+      summary: Contract records by organization code or supplier name
+      description: '通过组织机构代码或供应商名称获取合同信息 Original documented title: 通过组织机构代码或供应商名称获取合同信息. Upstream system of record declared by the platform: SYS20230012(同济大学采购管理系统（含移动端）). Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/contact_info/v1_rt_purchase_contract_info_by_org_supplier
+      parameters:
+      - name: organizationCode
+        in: query
+        required: false
+        description: 供应商组织机构代码
+        schema:
+          type: string
+      - name: supplierName
+        in: query
+        required: false
+        description: 供应商名称
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1RtPurchaseContractInfoByOrgSupplierItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/asset/equipment_info:
+    get:
+      operationId: v2_dc_asset_equipment_info
+      summary: Equipment asset records
+      description: '根据保管人学工号查询设备信息 Original documented title: 设备信息. Upstream system of record declared by the platform: SYS20230166(设备管理系统). Authorization modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时37分25秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/purchase_equipment_info/v2_dc_asset_equipment_info
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 保管人/使用管理人学工号
+        schema:
+          type: string
+      - name: acctUnitCode
+        in: query
+        required: false
+        description: 建账单位
+        schema:
+          type: string
+      - name: statusCode
+        in: query
+        required: false
+        description: 状态代码，0 正常 1 已注销 2 待入库，-1代表全部，不传参数默认为0
+        schema:
+          type: string
+      - name: assetAttributeNo
+        in: query
+        required: false
+        description: 资产属性编号，-1代表全部，不传参数默认为01（学校资产）
+        schema:
+          type: string
+      - name: assetTypeNo
+        in: query
+        required: false
+        description: 资产类型编号，-1代表全部，不传参数默认为ZJ,CLP,JJ
+        schema:
+          type: string
+      - name: cardId
+        in: query
+        required: false
+        description: 卡片ID，-1代表全部，不传参数默认为0，为0代表过滤报废、报失、提前报废的已审批未变动申请单中的资产卡片
+        schema:
+          type: string
+      - name: sinceWid
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcAssetEquipmentInfoItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/asset/purchase_requisition_info:
+    get:
+      operationId: v2_dc_asset_purchase_requisition_info
+      summary: Purchase requisition records
+      description: '根据保管人学工号查询申购信息 Original documented title: 申购信息. Upstream system of record declared by the platform: SYS20230012(同济大学采购管理系统（含移动端）). Authorization modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时37分25秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/purchase_equipment_info/v2_dc_asset_purchase_requisition_info
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 申请人/填写人学工号
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      - name: sinceWid
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcAssetPurchaseRequisitionInfoItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+components:
+  schemas:
+    V1DcContractInfoContractItem:
+      type: object
+      description: Record fields for Internal contract records.
+      properties:
+        recordDate:
+          type: string
+          description: 登记日期
+        contractNo:
+          type: string
+          description: 合同编号
+        contractName:
+          type: string
+          description: 名称
+        firstParty:
+          type: string
+          description: 甲方
+        secondParty:
+          type: string
+          description: 乙方
+        thirdParty:
+          type: string
+          description: 丙方
+        contractAmt:
+          type: string
+          description: 金额
+          x-documented-type: number
+        currenctName:
+          type: string
+          description: 币种名称
+        rmbAmt:
+          type: string
+          description: 人民币金额
+        conAscriptionDept:
+          type: string
+          description: 合同归属单位
+        userId:
+          type: string
+          description: 项目负责人工号
+        projectLeaderName:
+          type: string
+          description: 项目负责人姓名
+        operatorNo:
+          type: string
+          description: 经办人工号
+        operatorName:
+          type: string
+          description: 经办人姓名
+        conStartDate:
+          type: string
+          description: 起始日期
+        conEndDate:
+          type: string
+          description: 终止日期
+        conSignDeptNo:
+          type: string
+          description: 合同签署管理部门代码
+        conSignDeptName:
+          type: string
+          description: 合同签署管理部门
+        auditRecords:
+          type: string
+          description: 审核记录
+        sealType:
+          type: string
+          description: 盖章种类
+        conImplDeptNo:
+          type: string
+          description: 合同实施管理部门代码
+        conImplDeptName:
+          type: string
+          description: 合同实施管理部门
+        conPereDeptNo:
+          type: string
+          description: 履约部门代码
+        conPereDeptName:
+          type: string
+          description: 履约部门
+        conPereRepNo:
+          type: string
+          description: 履约代表工号
+        conPereRepName:
+          type: string
+          description: 履约代表姓名
+        executionRecord:
+          type: string
+          description: 执行记录
+        conStatus:
+          type: string
+          description: 合同状态
+        fillingDeptNo:
+          type: string
+          description: 归档部门代码
+        fillingDeptName:
+          type: string
+          description: 归档部门
+        fillingOperatorNo:
+          type: string
+          description: 归档联系人工号
+        fillingOperatorName:
+          type: string
+          description: 归档联系人姓名
+        conType:
+          type: string
+          description: 合同类型
+        num:
+          type: string
+          description: 游标
+          x-documented-type: number
+    V2DcAssetPurchaseRequisitionInfoItem:
+      type: object
+      description: Record fields for Purchase requisition records.
+      properties:
+        purcReqId:
+          type: string
+          description: 申购单ID
+        userId:
+          type: string
+          description: 申请人/填写人学工号
+        name:
+          type: string
+          description: 申请人/填写人姓名
+        deptCode:
+          type: string
+          description: 部门代码
+        deptName:
+          type: string
+          description: 部门名称
+        deptTypeCode:
+          type: string
+          description: 一级部门代码
+        deptTypeName:
+          type: string
+          description: 一级部门名称
+        directorUserId:
+          type: string
+          description: 项目负责人学工号
+        directorName:
+          type: string
+          description: 项目负责人姓名
+        assetTypeCode:
+          type: string
+          description: 资产类型代码
+        assetTypeName:
+          type: string
+          description: 资产类型名称
+        purcReqNo:
+          type: string
+          description: 申购单号
+        writeDate:
+          type: string
+          description: 申请日期
+        equipmentName:
+          type: string
+          description: 设备名称
+        equipmentTypeCode:
+          type: string
+          description: 设备类型代码
+        equipmentTypeName:
+          type: string
+          description: 设备类型名称
+        isContractSigningName:
+          type: string
+          description: 是否签订合同
+        isInviteTendersName:
+          type: string
+          description: 是否招标
+        isTaxFreeName:
+          type: string
+          description: 是否免税
+        ownershipSchoolName:
+          type: string
+          description: 产权是否归属学校
+        purchaseModeName:
+          type: string
+          description: 采购方式名称
+        manufacturer:
+          type: string
+          description: 生产厂家
+        model:
+          type: string
+          description: 型号
+        quantity:
+          type: string
+          description: 数量
+        supplier:
+          type: string
+          description: 供货商
+        totalPrice:
+          type: string
+          description: 总价
+        statusName:
+          type: string
+          description: 状态名称
+        wid:
+          type: string
+          description: 主键
+        del:
+          type: string
+          description: 删除标识，D标识删除
+    V1RtPurchaseContractInfoByOrgSupplierItem:
+      type: object
+      description: Record fields for Contract records by organization code or supplier name.
+      properties:
+        contractNumber:
+          type: string
+          description: 合同编号
+        contractAmount:
+          type: string
+          description: 合同金额
+        contractName:
+          type: string
+          description: 合同名称
+        contractSignDate:
+          type: string
+          description: 合同签订日期
+        organizationCode:
+          type: string
+          description: 供应商组织机构代码
+        supplierName:
+          type: string
+          description: 供应商名称
+    V2DcAssetEquipmentInfoItem:
+      type: object
+      description: Record fields for Equipment asset records.
+      properties:
+        id:
+          type: string
+          description: id
+        userId:
+          type: string
+          description: 保管人/使用管理人学工号
+        name:
+          type: string
+          description: 保管人/使用管理人姓名
+        acctUnitCode:
+          type: string
+          description: 建账单位
+        acctUnitName:
+          type: string
+          description: 建账单位名称
+        purcReqWriteUserId:
+          type: string
+          description: 申购单填写人学工号
+        purcReqWriteName:
+          type: string
+          description: 申购单填写人姓名
+        equipmentNo:
+          type: string
+          description: 设备编号
+        equipmentName:
+          type: string
+          description: 设备名称
+        model:
+          type: string
+          description: 设备型号
+        purchaseDate:
+          type: string
+          description: 购置日期
+        purcReqNo:
+          type: string
+          description: 申购单号
+        quantity:
+          type: string
+          description: 数量
+        totalPrice:
+          type: string
+          description: 总价
+        storageLocation:
+          type: string
+          description: 存放地点
+        trialProductionName:
+          type: string
+          description: 是否试制
+        accrualDate:
+          type: string
+          description: 计提起始日
+        statusName:
+          type: string
+          description: 状态名称
+        statusCode:
+          type: string
+          description: 状态代码   状态：0 正常 、1 已注销、 2 待入库
+        contactNumber:
+          type: string
+          description: 联系电话
+        ManagementNotes:
+          type: string
+          description: 管理备注
+        note:
+          type: string
+          description: 备注
+        assetAttributeNo:
+          type: string
+          description: 资产属性编号
+        assetAttributeName:
+          type: string
+          description: 资产属性名称
+        assetTypeNo:
+          type: string
+          description: 资产类型编号
+        assetTypeName:
+          type: string
+          description: 资产类型名称
+        cardId:
+          type: string
+          description: 卡片ID
+        wid:
+          type: string
+          description: 主键
+        del:
+          type: string
+          description: 删除标识，D标识删除
+    V1RtPurchaseContractInfoByNumberItem:
+      type: object
+      description: Record fields for Contract record by contract number.
+      properties:
+        contractNumber:
+          type: string
+          description: 合同编号
+        contractAmount:
+          type: string
+          description: 合同金额
+        contractName:
+          type: string
+          description: 合同名称
+        contractSignDate:
+          type: string
+          description: 合同签订日期
+        supplierAccount:
+          type: string
+          description: 供应商收款账号
+        supplierName:
+          type: string
+          description: 供应商名称
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+  securitySchemes:
+    openPlatformOAuth:
+      type: oauth2
+      description: 'OAuth 2.0 / OpenID Connect issued by the Open Platform Keycloak realm. Discovery document: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration (HTTP 200, verified 2026-09-01). Access tokens default to 7200 seconds and are sent as Authorization: Bearer <access_token>.'
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes:
+            openid: OpenID Connect subject identity.
+            offline_access: Refresh-token issuance.
+            profile: Profile claims.
+            email: Email claim.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The access_token obtained from the Keycloak realm, presented as Authorization: Bearer <access_token>.'
+externalDocs:
+  description: Tongji University Open Platform documentation
+  url: https://api.tongji.edu.cn/docs

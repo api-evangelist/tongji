@@ -1,0 +1,457 @@
+generated: '2026-09-01'
+method: probed
+source: Unauthenticated live GETs on 2026-09-01 against the thirteen Tongji Open Platform interfaces the
+  platform documents as 无需授权可直接访问 (directly accessible, no authorization). Every row count and field name
+  below came back from the endpoint named beside it; nothing here is transcribed from documentation.
+provider: Tongji University
+providerId: tongji
+x-operator: institution
+vocabulary:
+  name: Tongji University Open Platform Reference Metadata
+  description: 'The Open Platform publishes its own controlled vocabularies as callable code tables under
+    /v1/metadata/ and /v2/metadata/, with no credential required. These are the code sets every other
+    interface on the platform encodes against — gender, identity-document type, staff category and status,
+    professional title and post grade, dormitory building and region, campus gate, meeting room. Publishing
+    the code tables openly while gating the records they describe is a deliberate and unusually good piece
+    of design for a university platform: an integrator can build and validate against the vocabulary before
+    an access request is approved. The nine personnel code lists are drawn from the university human-resources
+    system (SYS20230025) per the platform documentation.'
+  version: '0.1'
+  code_lists: 13
+  rows_retrieved: 730
+  terms:
+  - term: Campus and campus-gate reference list
+    term_zh: 校区校门
+    endpoint: https://api.tongji.edu.cn/v1/metadata/asset/campus_gate
+    operator: institution
+    access: anonymous
+    row_count: 23
+    fields:
+    - allowCarCode
+    - campus
+    - campusDesc
+    - isUseCode
+    - lctnDesc
+    - lctnId
+    - lctnName
+    - parentId
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - allowCarCode: '1'
+      campus: A02
+      campusDesc: 四平路校区
+      isUseCode: '1'
+      lctnDesc: 校区
+      lctnId: '196'
+      lctnName: 四平路校区
+      parentId: '127'
+    - allowCarCode: '1'
+      campus: A08
+      campusDesc: 嘉定校区
+      isUseCode: '1'
+      lctnDesc: 校区
+      lctnId: '168'
+      lctnName: 嘉定校区
+      parentId: '127'
+    - allowCarCode: '1'
+      campus: A06
+      campusDesc: 南校区
+      isUseCode: '1'
+      lctnDesc: 校园大门
+      lctnId: '131'
+      lctnName: 赤峰路67号
+      parentId: '203'
+    - allowCarCode: '1'
+      campus: A05
+      campusDesc: 东校区
+      isUseCode: '1'
+      lctnDesc: 校园大门
+      lctnId: '185'
+      lctnName: 阜新路281号
+      parentId: '209'
+    - allowCarCode: '1'
+      campus: A03
+      campusDesc: 彰武路校区
+      isUseCode: '1'
+      lctnDesc: 校园大门
+      lctnId: '10000'
+      lctnName: 江浦路2239号
+      parentId: '204'
+  - term: Meeting room reference list
+    term_zh: 会议室信息
+    endpoint: https://api.tongji.edu.cn/v1/metadata/meeting/meeting_room
+    operator: institution
+    access: anonymous
+    row_count: 137
+    fields:
+    - meetingRoomCode
+    - meetingRoomName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - meetingRoomCode: 98b6ea21a54c4c919fdcb89a50921869
+      meetingRoomName: 济人楼312
+    - meetingRoomCode: 98b6ea21a54c4c919fdcb89a50921857
+      meetingRoomName: 济人楼202
+    - meetingRoomCode: d2f89e1407054085b9c2afca55acf790
+      meetingRoomName: “驾驶舱”会议厅
+    - meetingRoomCode: ac7762ec778f44e08c2af7a29636d923
+      meetingRoomName: 测试不需审核
+    - meetingRoomCode: 8d72a296d4f947b0805cc8da443b6e3d
+      meetingRoomName: 开物馆A101报告厅
+  - term: Dispatched-staff category code list
+    term_zh: 派遣人员类别
+    endpoint: https://api.tongji.edu.cn/v1/metadata/teacher/send_user_types
+    operator: institution
+    access: anonymous
+    row_count: 4
+    fields:
+    - sendUserTypeCode
+    - sendUserTypeName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - sendUserTypeCode: '3'
+      sendUserTypeName: 双轨制
+    - sendUserTypeCode: '31'
+      sendUserTypeName: 双轨制(新)
+    - sendUserTypeCode: '2'
+      sendUserTypeName: 劳务派遣
+    - sendUserTypeCode: '1'
+      sendUserTypeName: 人才派遣
+  - term: Faculty and staff employment status code list
+    term_zh: 教职工在校状态
+    endpoint: https://api.tongji.edu.cn/v1/metadata/teacher/status
+    operator: institution
+    access: anonymous
+    row_count: 29
+    fields:
+    - currentStatusCode
+    - currentStatusName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - currentStatusCode: '99'
+      currentStatusName: 其他
+    - currentStatusCode: '16'
+      currentStatusName: 停薪
+    - currentStatusCode: '07'
+      currentStatusName: 离职
+    - currentStatusCode: '12'
+      currentStatusName: 延聘
+    - currentStatusCode: '071'
+      currentStatusName: 离校循环
+  - term: Professional-technical post category code list
+    term_zh: 专业技术岗位类别
+    endpoint: https://api.tongji.edu.cn/v1/metadata/teacher/tech_job_code
+    operator: institution
+    access: anonymous
+    row_count: 18
+    fields:
+    - isUseCode
+    - isUseName
+    - techJobCode
+    - techJobName
+    - updateTime
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - isUseCode: '0'
+      isUseName: 否
+      techJobCode: '20001'
+      techJobName: 教学科研型
+      updateTime: '2022-05-24 00:00:00'
+    - isUseCode: '0'
+      isUseName: 否
+      techJobCode: '22001'
+      techJobName: 思政系列
+      updateTime: '2022-05-24 00:00:00'
+    - isUseCode: '1'
+      isUseName: 是
+      techJobCode: '10'
+      techJobName: 管理类
+      updateTime: '2022-05-24 00:00:00'
+    - isUseCode: '0'
+      isUseName: 否
+      techJobCode: '21001'
+      techJobName: 图书情报系列
+      updateTime: '2022-05-24 00:00:00'
+    - isUseCode: '0'
+      isUseName: 否
+      techJobCode: '21004'
+      techJobName: 会计系列
+      updateTime: '2022-05-24 00:00:00'
+  - term: Professional-technical post level code list
+    term_zh: 专业技术职务级别
+    endpoint: https://api.tongji.edu.cn/v1/metadata/teacher/tech_job_level_code
+    operator: institution
+    access: anonymous
+    row_count: 54
+    fields:
+    - isUseCode
+    - isUseName
+    - techJobLevelCode
+    - techJobLevelName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - isUseCode: '1'
+      isUseName: 是
+      techJobLevelCode: '99'
+      techJobLevelName: 其他
+    - isUseCode: '1'
+      isUseName: 是
+      techJobLevelCode: '10'
+      techJobLevelName: 副科级
+    - isUseCode: '0'
+      isUseName: 否
+      techJobLevelCode: '123'
+      techJobLevelName: 正厅级
+    - isUseCode: '1'
+      isUseName: 是
+      techJobLevelCode: '07'
+      techJobLevelName: 县、处级
+    - isUseCode: '1'
+      isUseName: 是
+      techJobLevelCode: '435'
+      techJobLevelName: 员级
+  - term: Worker technical grade code list
+    term_zh: 工人技术等级
+    endpoint: https://api.tongji.edu.cn/v1/metadata/teacher/tech_level_of_workers_code
+    operator: institution
+    access: anonymous
+    row_count: 5
+    fields:
+    - isUseCode
+    - isUseName
+    - techLevelOfWorkersCode
+    - techLevelOfWorkersName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - isUseCode: '1'
+      isUseName: 是
+      techLevelOfWorkersCode: '4'
+      techLevelOfWorkersName: 职业资格四级(中级)
+    - isUseCode: '1'
+      isUseName: 是
+      techLevelOfWorkersCode: '5'
+      techLevelOfWorkersName: 职业资格五级(初级)
+    - isUseCode: '1'
+      isUseName: 是
+      techLevelOfWorkersCode: '3'
+      techLevelOfWorkersName: 职业资格三级(高级)
+    - isUseCode: '1'
+      isUseName: 是
+      techLevelOfWorkersCode: '2'
+      techLevelOfWorkersName: 职业资格二级(技师)
+    - isUseCode: '1'
+      isUseName: 是
+      techLevelOfWorkersCode: '1'
+      techLevelOfWorkersName: 职业资格一级(高级技师)
+  - term: Appointed professional-technical title code list
+    term_zh: 聘任专业技术职务
+    endpoint: https://api.tongji.edu.cn/v1/metadata/teacher/title_code
+    operator: institution
+    access: anonymous
+    row_count: 311
+    fields:
+    - isUseCode
+    - isUseName
+    - titleCode
+    - titleName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - isUseCode: '1'
+      isUseName: 是
+      titleCode: '482'
+      titleName: 一级飞行通信员
+    - isUseCode: '1'
+      isUseName: 是
+      titleCode: '403'
+      titleName: 三级公证员
+    - isUseCode: '1'
+      isUseName: 是
+      titleCode: '154'
+      titleName: 助理编辑
+    - isUseCode: '1'
+      isUseName: 是
+      titleCode: '052'
+      titleName: 高级教师（中学）
+    - isUseCode: '1'
+      isUseName: 是
+      titleCode: '622'
+      titleName: 副研究员（社会科学）
+  - term: Faculty and staff personnel category code list
+    term_zh: 教职工人员类别
+    endpoint: https://api.tongji.edu.cn/v1/metadata/teacher/types
+    operator: institution
+    access: anonymous
+    row_count: 14
+    fields:
+    - userTypeCode
+    - userTypeName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - userTypeCode: '10'
+      userTypeName: 编制类人员
+    - userTypeCode: '90'
+      userTypeName: 专职科研人员
+    - userTypeCode: '5'
+      userTypeName: 访问学者
+    - userTypeCode: '13'
+      userTypeName: 劳动合同制人员
+    - userTypeCode: '6'
+      userTypeName: 博士后人员
+  - term: Identity-document type code list
+    term_zh: 人员证件类型
+    endpoint: https://api.tongji.edu.cn/v1/metadata/user/person_idcard_type
+    operator: institution
+    access: anonymous
+    row_count: 21
+    fields:
+    - cardCode
+    - cardType
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - cardCode: '01'
+      cardType: 居民身份证
+    - cardCode: '02'
+      cardType: 护照
+    - cardCode: '03'
+      cardType: 军官证
+    - cardCode: '04'
+      cardType: 士兵证
+    - cardCode: '05'
+      cardType: 回乡证
+  - term: Gender code list
+    term_zh: 性别
+    endpoint: https://api.tongji.edu.cn/v1/metadata/user/sex_code
+    operator: institution
+    access: anonymous
+    row_count: 4
+    fields:
+    - sexCode
+    - sexName
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - sexCode: '0'
+      sexName: 未知的性别
+    - sexCode: '9'
+      sexName: 未说明的性别
+    - sexCode: '2'
+      sexName: 女
+    - sexCode: '1'
+      sexName: 男
+  - term: Dormitory building code list
+    term_zh: 宿舍楼信息
+    endpoint: https://api.tongji.edu.cn/v2/metadata/student/accom_building_code
+    operator: institution
+    access: anonymous
+    row_count: 100
+    fields:
+    - accomBuildingCode
+    - accomBuildingName
+    - accomRegionCode
+    - accomRegionName
+    - createTime
+    - isUseCode
+    - isUseName
+    - updateTime
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f832
+      accomBuildingName: 友园9号楼
+      accomRegionCode: '7'
+      accomRegionName: 嘉定校区
+      createTime: '2025-10-28T12:25:57'
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2025-10-13T00:00:00'
+    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f852
+      accomBuildingName: 桃李村13号
+      accomRegionCode: '2'
+      accomRegionName: 沪西校区
+      createTime: '2025-10-28T12:25:57'
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2025-10-13T00:00:00'
+    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f879
+      accomBuildingName: 生乐A区6号
+      accomRegionCode: '2'
+      accomRegionName: 沪西校区
+      createTime: '2025-10-28T12:25:57'
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2025-10-13T00:00:00'
+    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f863
+      accomBuildingName: 友园15号楼
+      accomRegionCode: '7'
+      accomRegionName: 嘉定校区
+      createTime: '2025-10-28T12:25:57'
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2025-10-13T00:00:00'
+    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f867
+      accomBuildingName: 西南三楼
+      accomRegionCode: '3'
+      accomRegionName: 四平路校区
+      createTime: '2025-10-28T12:25:57'
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2025-10-13T00:00:00'
+  - term: Dormitory region code list
+    term_zh: 宿舍区信息
+    endpoint: https://api.tongji.edu.cn/v2/metadata/student/accom_region_code
+    operator: institution
+    access: anonymous
+    row_count: 10
+    fields:
+    - accomRegionCode
+    - accomRegionName
+    - createTime
+    - isUseCode
+    - isUseName
+    - updateTime
+    probed: '2026-09-01'
+    status: 200
+    sample:
+    - accomRegionCode: '8'
+      accomRegionName: 彰武路校区
+      createTime: null
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2026-01-04T00:00:00'
+    - accomRegionCode: '2'
+      accomRegionName: 沪西校区
+      createTime: null
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2026-01-04T00:00:00'
+    - accomRegionCode: '11'
+      accomRegionName: 东校区
+      createTime: '2026-08-05T05:07:41'
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2026-08-04T00:00:00'
+    - accomRegionCode: '7'
+      accomRegionName: 嘉定校区
+      createTime: null
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2026-01-04T00:00:00'
+    - accomRegionCode: '9'
+      accomRegionName: 口腔医院
+      createTime: null
+      isUseCode: '1'
+      isUseName: 是
+      updateTime: '2026-01-04T00:00:00'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

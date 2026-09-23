@@ -1,0 +1,123 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/asset/campus_gate",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 23 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/asset/campus_gate",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 23,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "allowCarCode": "1",
+     "campus": "A02",
+     "campusDesc": "四平路校区",
+     "isUseCode": "1",
+     "lctnDesc": "校区",
+     "lctnId": "196",
+     "lctnName": "四平路校区",
+     "parentId": "127"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A08",
+     "campusDesc": "嘉定校区",
+     "isUseCode": "1",
+     "lctnDesc": "校区",
+     "lctnId": "168",
+     "lctnName": "嘉定校区",
+     "parentId": "127"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A06",
+     "campusDesc": "南校区",
+     "isUseCode": "1",
+     "lctnDesc": "校园大门",
+     "lctnId": "131",
+     "lctnName": "赤峰路67号",
+     "parentId": "203"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A05",
+     "campusDesc": "东校区",
+     "isUseCode": "1",
+     "lctnDesc": "校园大门",
+     "lctnId": "185",
+     "lctnName": "阜新路281号",
+     "parentId": "209"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A03",
+     "campusDesc": "彰武路校区",
+     "isUseCode": "1",
+     "lctnDesc": "校园大门",
+     "lctnId": "10000",
+     "lctnName": "江浦路2239号",
+     "parentId": "204"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A06",
+     "campusDesc": "南校区",
+     "isUseCode": "1",
+     "lctnDesc": "校区",
+     "lctnId": "203",
+     "lctnName": "南校区",
+     "parentId": "127"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A10",
+     "campusDesc": "沪北校区",
+     "isUseCode": "1",
+     "lctnDesc": "校园大门",
+     "lctnId": "1",
+     "lctnName": "共和新路1238号",
+     "parentId": "207"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A09",
+     "campusDesc": "沪西校区",
+     "isUseCode": "1",
+     "lctnDesc": "校区",
+     "lctnId": "206",
+     "lctnName": "沪西校区",
+     "parentId": "127"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A03",
+     "campusDesc": "彰武路校区",
+     "isUseCode": "1",
+     "lctnDesc": "校园大门",
+     "lctnId": "166",
+     "lctnName": "彰武路100号",
+     "parentId": "204"
+    },
+    {
+     "allowCarCode": "1",
+     "campus": "A10",
+     "campusDesc": "沪北校区",
+     "isUseCode": "1",
+     "lctnDesc": "校区",
+     "lctnId": "207",
+     "lctnName": "沪北校区",
+     "parentId": "127"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/teacher/tech_job_level_code",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 54 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/teacher/tech_job_level_code",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 54,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobLevelCode": "99",
+     "techJobLevelName": "其他"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobLevelCode": "10",
+     "techJobLevelName": "副科级"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobLevelCode": "123",
+     "techJobLevelName": "正厅级"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobLevelCode": "07",
+     "techJobLevelName": "县、处级"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobLevelCode": "435",
+     "techJobLevelName": "员级"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobLevelCode": "12",
+     "techJobLevelName": "办事员级"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobLevelCode": "430",
+     "techJobLevelName": "初级"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobLevelCode": "160",
+     "techJobLevelName": "办事员级"
+    },
+    {
+     "isUseCode": "1",
+     "isUseName": "是",
+     "techJobLevelCode": "420",
+     "techJobLevelName": "中级"
+    },
+    {
+     "isUseCode": "0",
+     "isUseName": "否",
+     "techJobLevelCode": "101",
+     "techJobLevelName": "国家级正职"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

@@ -4,52 +4,57 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Tongji University
 providerId: tongji
 created: '2026-06-03'
-modified: '2026-06-03'
-reconciled: false
+modified: '2026-09-01'
+reconciled: true
 tags:
 - Education
 - Higher Education
 - University
 - Plans
-description: >-
-  Tongji University is a non-commercial higher-education institution; its APIs are not sold
-  as a commercial product. Public APIs (library, repository, course, and open-metadata
-  interfaces) are offered free of charge, typically for non-commercial use. Most
-  administrative and identity APIs are not openly self-service and require institutional
-  affiliation, credentials, or federation membership rather than a paid plan.
-notes: >-
-  No published per-seat or per-call commercial pricing. "Free / Open" reflects open
-  public endpoints; "Affiliation / Credentialed" reflects access gated by institutional
-  identity rather than payment.
+description: 'Tongji University is a non-commercial higher-education institution and its Open Platform
+  is not sold. There is no price on any tier and no commercial plan of any kind. Access is granted by
+  institutional standing, not by payment: thirteen reference-metadata interfaces are open to anyone with
+  no credential and no registration, and every other interface requires a faculty or student application
+  to the Information Office, approved per application, which issues a client_id, a client_secret and a
+  fixed set of OAuth scopes.'
+notes: No per-seat, per-call or tiered commercial pricing exists. "Free / Open" reflects the thirteen
+  anonymously callable interfaces confirmed live on 2026-09-01. "Institutional application" reflects everything
+  else, which is gated on affiliation and approval rather than on money. Higher rate limits are also granted
+  by request rather than purchase.
 sources:
-- https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/apis.yml
+- https://api.tongji.edu.cn/docs/intro/apply/teacher_apply
+- https://api.tongji.edu.cn/docs/intro/apply/student_apply
+- https://api.tongji.edu.cn/docs/intro/develop/limit
 plans:
 - id: tongji-free-open
   name: Free / Open
   type: free
-  description: Public open APIs (metadata, library, repository, course data) offered at no charge, generally for non-commercial use.
+  description: The thirteen reference-metadata interfaces documented as 无需授权可直接访问. No credential, no registration,
+    no charge. Confirmed callable 2026-09-01.
   entries:
-  - label: Open API Access
-    name: open_api_access
+  - label: Anonymous Reference Metadata
+    name: anonymous_reference_metadata
     type: free
     metric: requests
-    limit: -1
-    timeFrame: usage
+    limit: 50
+    timeFrame: second
     geo: global
     unit: 1
     price: '0.00'
     userMultiplied: false
-- id: tongji-affiliation
-  name: Affiliation / Credentialed
+- id: tongji-institutional-application
+  name: Institutional Application
   type: free
-  description: Administrative and identity APIs gated behind institutional SSO, client certificates, or federation membership rather than payment.
+  description: Every other interface. Requires a faculty or student application to the Tongji University
+    Information Office; approval issues a client_id, client_secret and a scoped grant. Free of charge,
+    gated on affiliation.
   entries:
-  - label: Credentialed Access
-    name: credentialed_access
+  - label: Approved Application Access
+    name: approved_application_access
     type: free
     metric: requests
-    limit: -1
-    timeFrame: usage
+    limit: 50
+    timeFrame: second
     geo: global
     unit: 1
     price: '0.00'
@@ -57,3 +62,11 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+generated: '2026-09-01'
+method: searched
+source: https://api.tongji.edu.cn/docs/intro/apply/teacher_apply and .../student_apply (HTTP 200, 2026-09-01),
+  plus live confirmation that thirteen reference-metadata interfaces answer without a credential. Replaces
+  the 2026-06-03 text, which described free access to "library, repository, course, and open-metadata
+  interfaces" — no library, repository or course API is publicly callable, and no institutional repository
+  exists.
+x-operator: institution

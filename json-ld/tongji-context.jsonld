@@ -24,13 +24,28 @@
     "baseURL": {
       "@id": "schema:EntryPoint",
       "@type": "@id"
+    },
+    "ror": "schema:identifier",
+    "identityProvider": {
+      "@id": "schema:identifier",
+      "@type": "@id"
     }
   },
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "apis.yml (this repo), regenerated 2026-09-01 from the corrected profile; every URL below was probed live on that date.",
+    "x-operator": "institution"
+  },
   "@type": "Organization",
-  "@id": "https://www.tongji.edu.cn/",
+  "@id": "https://ror.org/03rc6as71",
   "name": "Tongji University",
+  "schema:alternateName": "同济大学",
   "url": "https://www.tongji.edu.cn/",
-  "description": "Tongji University is a leading public research university in Shanghai, China, operating an official institutional Open Platform at api.tongji.edu.cn that exposes campus data and capability APIs to authorized faculty and students.",
+  "description": "Tongji University is a public research university in Shanghai, China. Its Information Office operates an institution-owned Open Platform at api.tongji.edu.cn documenting roughly 234 campus data and capability interfaces, of which thirteen reference-metadata interfaces are anonymously callable; the rest are gated behind an OAuth 2.0 Keycloak realm and an institutional application-and-approval process. The university also operates its own Shibboleth SAML 2.0 identity provider, federated through CARSI into eduGAIN.",
+  "schema:identifier": [
+    "https://ror.org/03rc6as71"
+  ],
   "address": {
     "@type": "schema:PostalAddress",
     "schema:addressLocality": "Shanghai",
@@ -38,7 +53,8 @@
   },
   "sameAs": [
     "https://en.tongji.edu.cn/",
-    "https://www.linkedin.com/school/tongji-university/"
+    "https://www.linkedin.com/school/tongji-university/",
+    "https://ror.org/03rc6as71"
   ],
   "developerPortal": "https://api.tongji.edu.cn/docs",
   "api": {
@@ -47,5 +63,6 @@
     "url": "https://api.tongji.edu.cn/docs",
     "documentation": "https://api.tongji.edu.cn/docs",
     "baseURL": "https://api.tongji.edu.cn"
-  }
+  },
+  "identityProvider": "https://idp2.tongji.edu.cn/idp/shibboleth"
 }

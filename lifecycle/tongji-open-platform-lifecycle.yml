@@ -1,0 +1,72 @@
+---
+generated: '2026-09-01'
+method: derived
+source: >-
+  openapi/_original/tongji-open-platform-openapi.yml, derived in turn from 43 interface
+  documentation pages at https://api.tongji.edu.cn/docs fetched 2026-09-01, plus the per-page
+  "最近更新时间" (last updated) stamps the platform renders on every interface.
+provider: Tongji University
+providerId: tongji
+x-operator: institution
+description: >-
+  How the Tongji University Open Platform versions and evolves its interfaces, read from the routes
+  and the documentation site rather than from a stated policy — the platform publishes no changelog,
+  deprecation policy or sunset schedule that this pipeline could find.
+versioning:
+  style: uri-path
+  detail: >-
+    The major version is the first path segment: https://api.tongji.edu.cn/v1/... and
+    https://api.tongji.edu.cn/v2/.... Both are live simultaneously and neither is marked deprecated.
+  versions_observed:
+  - version: v1
+    operations_modelled: 30
+  - version: v2
+    operations_modelled: 12
+  coexistence: >-
+    v1 and v2 are not a wholesale migration. Several resources exist at both versions with different
+    shapes — /v1/rt/research/patent (real-time, 14 response fields) and /v2/dc/research/patent
+    (batch, 22 response fields) are the clearest pair. The version segment tracks the generation of
+    the backing integration, not a global API revision.
+route_conventions:
+  rt: >-
+    Real-time interfaces that query the upstream system of record on each call. Named in the second
+    path segment, e.g. /v1/rt/research/patent, and mirrored in the scope name rt_research_patent.
+  dc: >-
+    Data-centre interfaces served from the university data warehouse, typically wider (more response
+    fields) and refreshed on a batch schedule. e.g. /v2/dc/research/patent.
+  infra: Shared campus capability services — notification, calendar, meeting, signature, task centre, education-data verification.
+  metadata: Reference code tables. The only prefix that is anonymously callable.
+  ai: Asynchronous AI services, which use a submit-task / fetch-result pair rather than a single call.
+change_signals:
+- signal: per-interface last-updated stamp
+  detail: >-
+    Every interface documentation page renders 最近更新时间 with a to-the-second timestamp. Across the
+    43 pages harvested, the stamps cluster on 2026-06-09, indicating a platform-wide documentation
+    refresh rather than per-interface drift.
+  machine_readable: false
+- signal: isUseCode / isUseName flags in reference metadata
+  detail: >-
+    Several code tables carry an active flag per row (isUseCode 1/0) and an updateTime, so retired
+    codes stay in the table rather than disappearing. This is the platform's one genuinely
+    machine-readable deprecation signal, and it applies to vocabulary rather than to interfaces.
+  machine_readable: true
+gaps:
+- id: no-changelog
+  detail: No changelog, release-notes page or feed was found under https://api.tongji.edu.cn/docs.
+- id: no-deprecation-policy
+  detail: >-
+    Neither the documentation nor any response header declares a deprecation or sunset policy. No
+    Deprecation or Sunset header was observed on the thirteen live responses captured 2026-09-01.
+- id: no-published-spec
+  detail: >-
+    The platform publishes no OpenAPI, Swagger or Postman collection of its own — /swagger.json,
+    /v3/api-docs and /.well-known/openapi.json all return 404. The contract in openapi/ is API
+    Evangelist's derivation from the documentation, not the university's own artifact.
+- id: no-sitemap
+  detail: >-
+    https://api.tongji.edu.cn/sitemap.xml, /robots.txt and /llms.txt all return 404, so the
+    documentation site is not machine-enumerable; the 234 interface routes were recovered from the
+    rendered navigation.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

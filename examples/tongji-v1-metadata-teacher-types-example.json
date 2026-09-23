@@ -1,0 +1,63 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/teacher/types",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 14 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/teacher/types",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 14,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "userTypeCode": "10",
+     "userTypeName": "编制类人员"
+    },
+    {
+     "userTypeCode": "90",
+     "userTypeName": "专职科研人员"
+    },
+    {
+     "userTypeCode": "5",
+     "userTypeName": "访问学者"
+    },
+    {
+     "userTypeCode": "13",
+     "userTypeName": "劳动合同制人员"
+    },
+    {
+     "userTypeCode": "6",
+     "userTypeName": "博士后人员"
+    },
+    {
+     "userTypeCode": "3",
+     "userTypeName": "附属医院人员"
+    },
+    {
+     "userTypeCode": "7",
+     "userTypeName": "校外兼职人员"
+    },
+    {
+     "userTypeCode": "4",
+     "userTypeName": "柔性引进人员"
+    },
+    {
+     "userTypeCode": "9",
+     "userTypeName": "高等研究院人员"
+    },
+    {
+     "userTypeCode": "8",
+     "userTypeName": "其他学校聘用人员"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

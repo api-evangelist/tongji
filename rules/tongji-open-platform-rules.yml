@@ -1,0 +1,87 @@
+---
+generated: '2026-09-01'
+method: derived
+source: >-
+  Derived from the Tongji University Open Platform's own published conventions —
+  https://api.tongji.edu.cn/docs/intro/develop/authentication, .../scopes, .../limit (all HTTP 200,
+  2026-09-01) — and from the 42 interfaces modelled in
+  openapi/_original/tongji-open-platform-openapi.yml. These are the platform's conventions written
+  down as checkable rules; they are API Evangelist's articulation, not a ruleset Tongji publishes.
+provider: Tongji University
+providerId: tongji
+x-operator: institution
+description: >-
+  A governance ruleset for the Tongji Open Platform, written against the platform's own observed and
+  documented behaviour. Useful two ways: as a conformance check for a new interface added to the
+  platform, and as a gap list — three of the rules below the platform currently fails on its own
+  error paths.
+rules:
+- id: response-envelope
+  severity: error
+  status: observed-conformant
+  given: Any interface returning HTTP 200
+  then: >-
+    The body must be a JSON object with `code`, `data` and `msg`. `code` must be A00000 on success.
+    Confirmed on all thirteen live responses captured 2026-09-01.
+- id: envelope-on-failure
+  severity: error
+  status: observed-nonconformant
+  given: Any interface returning 401, 404 or 405
+  then: >-
+    The body should carry the same envelope with a business code explaining the failure. It does not:
+    401 returns a zero-length body, 404 and 405 return plain text from the gateway. See
+    errors/tongji-open-platform-errors.yml.
+- id: bearer-token-transport
+  severity: error
+  status: observed-conformant
+  given: Any interface not marked 无需授权可直接访问
+  then: >-
+    The access_token must be presented in an `Authorization` header using the Bearer scheme; a
+    token must never be accepted in the query string.
+- id: scope-per-interface
+  severity: warn
+  status: observed-conformant
+  given: Any interface
+  then: >-
+    A named scope should exist for it in the realm's scopes_supported, following the route naming
+    convention (rt_research_patent for /v1/rt/research/patent). 491 scopes are published.
+- id: anonymous-only-for-reference-data
+  severity: error
+  status: observed-conformant
+  given: An interface documented as 无需授权可直接访问
+  then: >-
+    It must return reference/code-table data only, never person-level records. All thirteen anonymous
+    interfaces return code tables; none returns personal data.
+- id: rate-limit-declared
+  severity: warn
+  status: observed-conformant
+  given: Any interface
+  then: >-
+    The default 50 requests/second limit applies unless the interface's own page declares a tighter
+    one; 429 is the throttle code.
+- id: rate-limit-headers
+  severity: warn
+  status: observed-nonconformant
+  given: Any interface response
+  then: >-
+    A rate-limit signal should be returned in headers (RateLimit / RateLimit-Policy or
+    X-RateLimit-*). None was present on any of the thirteen live responses captured 2026-09-01 — the
+    limit is documented in prose only.
+- id: upstream-system-declared
+  severity: info
+  status: observed-conformant
+  given: Any data interface
+  then: >-
+    The documentation should name the upstream system of record (数据来源, e.g. SYS20230146 专利管理系统).
+    38 of 42 modelled interfaces declare one. This is a provenance practice most university platforms
+    do not have and it is worth crediting.
+- id: no-gateway-version-disclosure
+  severity: warn
+  status: observed-nonconformant
+  given: Any gateway-level error response
+  then: >-
+    The gateway product and version should not be advertised. `X-Krakend: Version 2.4.2` is returned
+    on 404 and 405.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,39 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/user/sex_code",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 4 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/user/sex_code",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 4,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "sexCode": "0",
+     "sexName": "未知的性别"
+    },
+    {
+     "sexCode": "9",
+     "sexName": "未说明的性别"
+    },
+    {
+     "sexCode": "2",
+     "sexName": "女"
+    },
+    {
+     "sexCode": "1",
+     "sexName": "男"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

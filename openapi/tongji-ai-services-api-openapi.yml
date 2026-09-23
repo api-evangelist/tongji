@@ -1,0 +1,238 @@
+openapi: 3.2.0
+info:
+  title: Tongji University Open Platform AI Services API
+  version: '2026-09-01'
+  summary: Institution-operated campus data and capability API platform run by the Tongji University Information Office.
+  description: The Tongji University Open Platform (同济大学开放平台) is operated by the university itself at api.tongji.edu.cn, on China Education and Research Network (CERNET) address space, and exposes campus data and shared capability interfaces to faculty, students and campus applications.
+  contact:
+    name: Tongji University Information Office — Open Platform
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://api.tongji.edu.cn/docs — 43 published interface documentation pages fetched 2026-09-01 (HTTP 200), plus live probes of the 13 anonymous interfaces.
+    x-operator: institution
+servers:
+- url: https://api.tongji.edu.cn
+  description: Tongji University Open Platform production host (CERNET, 202.120.182.237).
+security:
+- openPlatformOAuth: []
+tags:
+- name: AI Services
+  description: Asynchronous speech-recognition and document-OCR services offered to campus applications by the Tongji University Information Office.
+paths:
+  /v1/ai/audio/transcriptions/result:
+    get:
+      operationId: v1_ai_audio_transcriptions_result
+      summary: Speech recognition — fetch task result
+      description: '语音识别异步接口-结果 Original documented title: 语音识别-获取结果. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_audio_transcriptions_result
+      parameters:
+      - name: task_id
+        in: query
+        required: true
+        description: 任务id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1AiAudioTranscriptionsResultItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/ai/audio/transcriptions/task:
+    post:
+      operationId: v1_ai_audio_transcriptions_task
+      summary: Speech recognition — submit task
+      description: '语音识别异步接口-发起任务 Original documented title: 语音识别-发起任务. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_audio_transcriptions_task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: 是
+                model:
+                  type: string
+                  description: 是
+              required:
+              - url
+              - model
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1AiAudioTranscriptionsTaskItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/ai/tools/file2md/result:
+    get:
+      operationId: v1_ai_tools_file2md_result
+      summary: Document OCR / file-to-Markdown — fetch task result
+      description: 'OCR异步接口-获取结果 Original documented title: OCR-获取结果. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_tools_file2md_result
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      description: Payload shape not stated in the published documentation for this interface.
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/ai/tools/file2md/task:
+    post:
+      operationId: v1_ai_tools_file2md_task
+      summary: Document OCR / file-to-Markdown — submit task
+      description: 'OCR-异步接口-任务提交 Original documented title: OCR-任务提交. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_tools_file2md_task
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file_url:
+                  type: string
+                  description: 是
+                is_object_store:
+                  type: string
+                  description: 否
+              required:
+              - file_url
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      description: Payload shape not stated in the published documentation for this interface.
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+components:
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1AiAudioTranscriptionsTaskItem:
+      type: object
+      description: Record fields for Speech recognition — submit task.
+      properties:
+        created_time:
+          type: string
+          description: 创建时间
+        state:
+          type: string
+          description: 任务状态
+        task_id:
+          type: string
+          description: 任务id
+    V1AiAudioTranscriptionsResultItem:
+      type: object
+      description: Record fields for Speech recognition — fetch task result.
+      properties:
+        text:
+          type: string
+          description: 识别文字
+  securitySchemes:
+    openPlatformOAuth:
+      type: oauth2
+      description: 'OAuth 2.0 / OpenID Connect issued by the Open Platform Keycloak realm. Discovery document: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration (HTTP 200, verified 2026-09-01). Access tokens default to 7200 seconds and are sent as Authorization: Bearer <access_token>.'
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes:
+            openid: OpenID Connect subject identity.
+            offline_access: Refresh-token issuance.
+            profile: Profile claims.
+            email: Email claim.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The access_token obtained from the Keycloak realm, presented as Authorization: Bearer <access_token>.'
+externalDocs:
+  description: Tongji University Open Platform documentation
+  url: https://api.tongji.edu.cn/docs

@@ -1,0 +1,651 @@
+openapi: 3.2.0
+info:
+  title: Tongji University Open Platform Education Data Verification…
+  version: '2026-09-01'
+  summary: Institution-operated campus data and capability API platform run by the Tongji University Information Office.
+  description: The Tongji University Open Platform (同济大学开放平台) is operated by the university itself at api.tongji.edu.cn, on China Education and Research Network (CERNET) address space, and exposes campus data and shared capability interfaces to faculty, students and campus applications.
+  contact:
+    name: Tongji University Information Office — Open Platform
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://api.tongji.edu.cn/docs — 43 published interface documentation pages fetched 2026-09-01 (HTTP 200), plus live probes of the 13 anonymous interfaces.
+    x-operator: institution
+servers:
+- url: https://api.tongji.edu.cn
+  description: Tongji University Open Platform production host (CERNET, 202.120.182.237).
+security:
+- openPlatformOAuth: []
+tags:
+- name: Education Data Verification
+  description: Identity, qualification, degree, enrolment and insurance verification services backed by national and Shanghai municipal education data sources.
+paths:
+  /v1/infra/education_data/degree:
+    get:
+      operationId: v1_infra_education_data_degree
+      summary: Degree award lookup
+      description: '获取教育部高校学位信息。 Original documented title: 学位信息查询. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_degree
+      parameters:
+      - name: xm
+        in: query
+        required: true
+        description: 学位获得者姓名
+        schema:
+          type: string
+      - name: xwzsbh
+        in: query
+        required: true
+        description: 学位证书编号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataDegreeItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/education:
+    get:
+      operationId: v1_infra_education_data_education
+      summary: Academic qualification lookup
+      description: '获取教育部高校学历信息。 Original documented title: 学历信息查询. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时08分07秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_education
+      parameters:
+      - name: xm
+        in: query
+        required: false
+        description: 姓名
+        schema:
+          type: string
+      - name: zjhm
+        in: query
+        required: false
+        description: 证件号码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataEducationItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/employee_insurance:
+    get:
+      operationId: v1_infra_education_data_employee_insurance
+      summary: Employee social-insurance enrolment
+      description: '上海市人力资源和社会保障局-机构人员信息-职工参保情况。 Original documented title: 职工参保情况. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_employee_insurance
+      parameters:
+      - name: xm
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: zjhm
+        in: query
+        required: true
+        description: 公民身份号码
+        schema:
+          type: string
+      - name: tyxym
+        in: query
+        required: true
+        description: 统一社会信用代码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataEmployeeInsuranceItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/face_check:
+    post:
+      operationId: v1_infra_education_data_face_check
+      summary: Face verification against national ID record
+      description: 'Original documented title: 人脸验证. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_face_check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: 是
+                gmsfzhm:
+                  type: string
+                  description: 是
+                xm:
+                  type: string
+                  description: 是
+              required:
+              - image
+              - gmsfzhm
+              - xm
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1InfraEducationDataFaceCheckItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/id_card_info_check:
+    get:
+      operationId: v1_infra_education_data_id_card_info_check
+      summary: National ID record verification
+      description: '对校验过的请求，会缓存24小时，默认不会每次都去校验。如果需要强制源头校验，可以设置参数qzytjy=1。 Original documented title: 身份证信息校验. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_benchmark_info_check
+      parameters:
+      - name: name
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: idCardNo
+        in: query
+        required: true
+        description: 身份证号码
+        schema:
+          type: string
+      - name: qzytjy
+        in: query
+        required: false
+        description: 是否强制源头校验：0=否；1=是；默认是0
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      description: Payload shape not stated in the published documentation for this interface.
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/id_card_info_query:
+    get:
+      operationId: v1_infra_education_data_id_card_info_query
+      summary: National ID record lookup
+      description: '对查询过的请求，会缓存24小时 Original documented title: 身份证信息查询. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 08时37分25秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_benchmark_info
+      parameters:
+      - name: name
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: idCardNo
+        in: query
+        required: true
+        description: 身份证号码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1InfraEducationDataIdCardInfoQueryItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/school_roll:
+    get:
+      operationId: v1_infra_education_data_school_roll
+      summary: Student enrolment (school roll) lookup
+      description: '获取教育部高校学籍信息。 Original documented title: 学籍信息查询. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_school_roll
+      parameters:
+      - name: xm
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: zjhm
+        in: query
+        required: true
+        description: 证件号码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataSchoolRollItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/sh_qrcode_query:
+    get:
+      operationId: v1_infra_education_data_sh_qrcode_query
+      summary: Shanghai Suishenma health-code lookup
+      description: '获取随申码对应的用户信息 Original documented title: 随申码查询. Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_sh_qrcode_query
+      parameters:
+      - name: data
+        in: query
+        required: true
+        description: 随申码解析后的地址,格式为:https://s.sh.gov.cn/527034ea4224ad93136806e9cc20081737090007304
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1InfraEducationDataShQrcodeQueryItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+components:
+  schemas:
+    V1InfraEducationDataFaceCheckItem:
+      type: object
+      description: Record fields for Face verification against national ID record.
+      properties:
+        score:
+          type: string
+          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
+        match:
+          type: boolean
+          description: 是否匹配：true匹配，false不匹配
+        description:
+          type: string
+          description: 认证描述
+    V1InfraEducationDataShQrcodeQueryItem:
+      type: object
+      description: Record fields for Shanghai Suishenma health-code lookup.
+      properties:
+        name:
+          type: string
+          description: 姓名
+        cardNo:
+          type: string
+          description: 身份证号
+    V1InfraEducationDataSchoolRollItem:
+      type: object
+      description: Record fields for Student enrolment (school roll) lookup.
+      properties:
+        xm:
+          type: string
+          description: 姓名
+        zjhm:
+          type: string
+          description: 证件号码
+        yxmc:
+          type: string
+          description: 毕业学校名称
+        rxrq:
+          type: string
+          description: 入学日期
+        xz:
+          type: string
+          description: 学制
+        xjzt:
+          type: string
+          description: 学籍状态
+    V1InfraEducationDataDegreeItem:
+      type: object
+      description: Record fields for Degree award lookup.
+      properties:
+        xm:
+          type: string
+          description: 姓名
+        xb:
+          type: string
+          description: 性别
+        csrq:
+          type: string
+          description: 出生日期
+        xwsydw:
+          type: string
+          description: 学位授予单位
+        xkzy:
+          type: string
+          description: 学科专业
+        xxgdlx:
+          type: string
+          description: 学习或攻读类型
+        xwlb:
+          type: string
+          description: 获学位名称
+        xwzsbh:
+          type: string
+          description: 学位证书编号
+        hxwrq:
+          type: string
+          description: 获学位日期
+        zppath:
+          type: string
+          description: 未知
+    V1InfraEducationDataIdCardInfoQueryItem:
+      type: object
+      description: Record fields for National ID record lookup.
+      properties:
+        idCardNo:
+          type: string
+          description: 公民身份号码（非空项）
+        name:
+          type: string
+          description: 姓名
+        sex:
+          type: string
+          description: 性别
+        nationName:
+          type: string
+          description: 民族
+        birthDate:
+          type: string
+          description: 出生日期
+        country:
+          type: string
+          description: 出生地-国家（地区）
+        nativePlaceName:
+          type: string
+          description: 出生地-省市县（区）
+        idCardMatchScore:
+          type: string
+          description: 公民身份号码-匹配度代码
+        nameMatchScore:
+          type: string
+          description: 姓名-匹配度代码
+        deathFlag:
+          type: string
+          description: 死亡标识（0有效人口，1死亡人口）
+        dataSource:
+          type: string
+          description: 数据来源（1同济大学数据库， 2国家公安部）
+          x-documented-type: number
+        isTJUser:
+          type: boolean
+          description: 是否为同济大学人员
+        tjUserList:
+          type: string
+          description: 同济大学人员学工信息
+          x-documented-type: array[object]
+        deptCode:
+          type: string
+          description: 部门/学院代码
+        deptName:
+          type: string
+          description: 部门/学院名称
+        userId:
+          type: string
+          description: 学工号
+        userTypeCode:
+          type: string
+          description: 人员类型代码
+        userTypeName:
+          type: string
+          description: 人员类型名称
+    V1InfraEducationDataEmployeeInsuranceItem:
+      type: object
+      description: Record fields for Employee social-insurance enrolment.
+      properties:
+        tyxym:
+          type: string
+          description: 统一信用码
+        dsjzxTaskid:
+          type: string
+          description: 批次号
+        jhptUpdateTime:
+          type: string
+          description: 平台更新时间
+        sfzwss:
+          type: string
+          description: 是否转外省市1：是，0：否
+        jnsj:
+          type: string
+          description: 缴纳时间
+        jndwmc:
+          type: string
+          description: 缴纳单位名称
+        rtsfjn:
+          type: string
+          description: 养老保险是否缴纳1：是，0：否
+        uesfjn:
+          type: string
+          description: 失业保险是否缴纳1：是，0：否
+        gjId:
+          type: string
+          description: 含国籍代码使用中文表述而不使用代码
+        ywUpdateTime:
+          type: string
+          description: 字段描述：业务更新时间
+        sfbj:
+          type: string
+          description: 是否补缴1：是，0：否
+        zjlx:
+          type: string
+          description: 证件类型
+        mdsfjn:
+          type: string
+          description: 医疗保险是否缴纳1：是，0：否
+        jhptUpdateFlag:
+          type: string
+          description: 更新标志
+        jhptDelete:
+          type: string
+          description: 删除标志
+        zjhm:
+          type: string
+          description: 证件号码
+        zhztId:
+          type: string
+          description: 账户状态
+        misfjn:
+          type: string
+          description: 生育保险是否缴纳
+        iwisfjn:
+          type: string
+          description: 工伤保险是否缴纳
+        xm:
+          type: string
+          description: 姓名
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1InfraEducationDataEducationItem:
+      type: object
+      description: Record fields for Academic qualification lookup.
+      properties:
+        xm:
+          type: string
+          description: 姓名
+        zjhm:
+          type: string
+          description: 证件号码
+        yxmc:
+          type: string
+          description: 毕业学校名称
+        zymc:
+          type: string
+          description: 专业名称
+        cc:
+          type: string
+          description: 层次
+        rxrq:
+          type: string
+          description: 入学日期
+        byrq:
+          type: string
+          description: 毕业日期
+        xxxs:
+          type: string
+          description: 学习形式
+        zsbh:
+          type: string
+          description: 学历证书编号
+  securitySchemes:
+    openPlatformOAuth:
+      type: oauth2
+      description: 'OAuth 2.0 / OpenID Connect issued by the Open Platform Keycloak realm. Discovery document: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration (HTTP 200, verified 2026-09-01). Access tokens default to 7200 seconds and are sent as Authorization: Bearer <access_token>.'
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes:
+            openid: OpenID Connect subject identity.
+            offline_access: Refresh-token issuance.
+            profile: Profile claims.
+            email: Email claim.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The access_token obtained from the Keycloak realm, presented as Authorization: Bearer <access_token>.'
+externalDocs:
+  description: Tongji University Open Platform documentation
+  url: https://api.tongji.edu.cn/docs

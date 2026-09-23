@@ -1,0 +1,39 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/teacher/send_user_types",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 4 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/teacher/send_user_types",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 4,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "sendUserTypeCode": "3",
+     "sendUserTypeName": "双轨制"
+    },
+    {
+     "sendUserTypeCode": "31",
+     "sendUserTypeName": "双轨制(新)"
+    },
+    {
+     "sendUserTypeCode": "2",
+     "sendUserTypeName": "劳务派遣"
+    },
+    {
+     "sendUserTypeCode": "1",
+     "sendUserTypeName": "人才派遣"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

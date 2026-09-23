@@ -1,0 +1,113 @@
+---
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live error probes of https://api.tongji.edu.cn on 2026-09-01, read together with the platform's
+  own published guidance at https://api.tongji.edu.cn/docs/intro/develop/authentication (HTTP 200),
+  https://api.tongji.edu.cn/docs/intro/develop/limit (HTTP 200) and
+  https://api.tongji.edu.cn/docs/intro/develop/scopes (HTTP 200). Every entry below is either an
+  observed response or a rule the platform states in writing; nothing is inferred.
+provider: Tongji University
+providerId: tongji
+x-operator: institution
+apis:
+- aid: tongji:open-platform
+  operator: institution
+  envelope:
+    shape: '{"code":"<business code>","data":<payload>,"msg":"<human message>"}'
+    content_type: application/json; charset=utf-8
+    success_code: A00000
+    note: >-
+      Successful responses are wrapped in a three-field envelope with a business status code that is
+      independent of the HTTP status. A00000 is success; the platform's business-status-code reference
+      page (https://api.tongji.edu.cn/docs/intro/develop/service_status_code) is client-rendered and
+      loads its table from an authenticated console API, so the full code table is not readable from a
+      plain HTTP fetch. Only A00000 could be evidenced.
+  errors:
+  - status: 401
+    trigger: >-
+      A protected interface called with no Authorization header, or with an expired, malformed or
+      unauthorized bearer token.
+    body: empty
+    content_length: 0
+    detail: >-
+      The gateway answers 401 with a zero-length body and no envelope. This is the platform's single
+      largest error-semantics gap: a client cannot distinguish "no token", "expired token" and
+      "revoked client" from the response, and the JSON envelope discipline that holds on success does
+      not hold on this failure. The platform's own documentation asks clients to treat 401 as the
+      signal to re-request a token.
+    evidence:
+    - url: https://api.tongji.edu.cn/v1/rt/research/patent
+      status: 401
+      detail: Called with no Authorization header.
+    - url: https://api.tongji.edu.cn/v1/rt/research/patent
+      status: 401
+      detail: >-
+        Called with an `Authorization` header carrying an invalid bearer token. Identical
+        zero-length response.
+  - status: 403
+    trigger: >-
+      A valid access token whose scope set does not cover the called interface. Documented on the
+      scopes page; not reproducible from outside because it requires an issued client credential.
+    detail: >-
+      The platform states plainly that a correct client_id with the wrong scope returns 403, not 401 —
+      the two failures are separated at the authorization layer even though 401 carries no body.
+    evidence:
+    - url: https://api.tongji.edu.cn/docs/intro/develop/scopes
+      status: 200
+      detail: '"如果权限不足，接口调用将返回 403 Forbidden 错误" — insufficient permission returns 403.'
+  - status: 404
+    trigger: An unrouted path under a live API prefix.
+    body: 404 page not found
+    content_type: text/plain
+    detail: >-
+      Unrouted paths fall through to the API gateway's plain-text default rather than the JSON
+      envelope. The response also carries `X-Krakend: Version 2.4.2`, disclosing both the gateway
+      software and its exact version on every non-routed request.
+    evidence:
+    - url: https://api.tongji.edu.cn/v1/metadata/user/sex_code_nope
+      status: 404
+      content_type: text/plain
+  - status: 405
+    trigger: A documented route called with an HTTP method it does not expose.
+    body: 405 method not allowed
+    content_type: text/plain
+    detail: >-
+      Method restrictions are enforced at the gateway and are useful for liveness probing without a
+      credential: POST to the GET-only /v1/metadata/user/sex_code returns 405, and GET to the
+      documented POST-only /v1/token returns 405, which is how that legacy token route was confirmed
+      live.
+    evidence:
+    - url: https://api.tongji.edu.cn/v1/metadata/user/sex_code
+      status: 405
+      detail: Probed with POST.
+    - url: https://api.tongji.edu.cn/v1/token
+      status: 405
+      detail: Probed with GET; the documented method is POST.
+  - status: 429
+    trigger: >-
+      More than 50 requests per second from one application and IP, or from one IP for the anonymous
+      interfaces.
+    detail: >-
+      Documented as "429 Too Many Requests" under a token-bucket limiter. Not deliberately triggered
+      by this pipeline — probing a university's production gateway to exhaustion is not a measurement
+      worth taking.
+    evidence:
+    - url: https://api.tongji.edu.cn/docs/intro/develop/limit
+      status: 200
+      detail: '"超出限制的请求将返回错误码 429 Too Many Requests".'
+observations:
+- id: no-error-envelope-on-401
+  severity: high
+  detail: >-
+    Success responses are enveloped JSON; the 401, 404 and 405 failures are not. A client integrating
+    this platform must branch on HTTP status before attempting to parse a body, and gets no machine
+    readable reason for an auth failure at all.
+- id: gateway-version-disclosure
+  severity: low
+  detail: >-
+    `X-Krakend: Version 2.4.2` and `X-Krakend-Completed: false` are returned on gateway-level errors,
+    naming the API gateway product and pinning its version.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

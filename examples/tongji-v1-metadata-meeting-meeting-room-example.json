@@ -1,0 +1,63 @@
+{
+ "generated": "2026-09-01",
+ "method": "probed",
+ "source": "https://api.tongji.edu.cn/v1/metadata/meeting/meeting_room",
+ "x-operator": "institution",
+ "note": "Unauthenticated GET, HTTP 200, application/json; charset=utf-8, captured 2026-09-01. The live response carried 137 records; the first ten are retained here. No credential was used and no personal data is present — these are code tables.",
+ "request": {
+  "method": "GET",
+  "url": "https://api.tongji.edu.cn/v1/metadata/meeting/meeting_room",
+  "headers": {}
+ },
+ "response": {
+  "status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "record_count": 137,
+  "body": {
+   "code": "A00000",
+   "data": [
+    {
+     "meetingRoomCode": "98b6ea21a54c4c919fdcb89a50921869",
+     "meetingRoomName": "济人楼312"
+    },
+    {
+     "meetingRoomCode": "98b6ea21a54c4c919fdcb89a50921857",
+     "meetingRoomName": "济人楼202"
+    },
+    {
+     "meetingRoomCode": "d2f89e1407054085b9c2afca55acf790",
+     "meetingRoomName": "“驾驶舱”会议厅"
+    },
+    {
+     "meetingRoomCode": "ac7762ec778f44e08c2af7a29636d923",
+     "meetingRoomName": "测试不需审核"
+    },
+    {
+     "meetingRoomCode": "8d72a296d4f947b0805cc8da443b6e3d",
+     "meetingRoomName": "开物馆A101报告厅"
+    },
+    {
+     "meetingRoomCode": "e5bfe6967aac488c929292d4b659eee1",
+     "meetingRoomName": "开物馆A415"
+    },
+    {
+     "meetingRoomCode": "4333d07224a14c62a8d83a74ae3f48d0",
+     "meetingRoomName": "开物馆D307"
+    },
+    {
+     "meetingRoomCode": "62d72093d82e4fc684fb87da39aa4d99",
+     "meetingRoomName": "行政北楼N215"
+    },
+    {
+     "meetingRoomCode": "8fe79532f645410f820806d24b0976e2",
+     "meetingRoomName": "行政楼233B"
+    },
+    {
+     "meetingRoomCode": "84223d478bbb45a0a63ce9fc4a3e01e4",
+     "meetingRoomName": "行政楼233C"
+    }
+   ],
+   "msg": "操作成功"
+  }
+ }
+}

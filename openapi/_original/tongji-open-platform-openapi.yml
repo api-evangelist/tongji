@@ -1,0 +1,3717 @@
+openapi: 3.1.0
+info:
+  title: Tongji University Open Platform
+  version: '2026-09-01'
+  summary: Institution-operated campus data and capability API platform run by the Tongji University Information
+    Office.
+  description: 'The Tongji University Open Platform (同济大学开放平台) is operated by the university itself at
+    api.tongji.edu.cn, on China Education and Research Network (CERNET) address space, and exposes campus
+    data and shared capability interfaces to faculty, students and campus applications.
+
+
+    This document was DERIVED by API Evangelist from the platform''s own published Chinese-language interface
+    documentation at https://api.tongji.edu.cn/docs — one operation per documented interface, with parameters,
+    response fields, HTTP method and authorization mode taken from the published tables. It is not published
+    by Tongji University and is not authoritative; the documentation site is.
+
+
+    It covers a representative subset of the platform: AI services, assets and procurement, education-data
+    verification, library, reference metadata and research. The full platform documents roughly 234 interfaces
+    across fifteen groups, including personnel, student, teaching, campus-card and notification families
+    that are not modelled here.
+
+
+    Thirteen of the operations below are documented as 无需授权可直接访问 (directly accessible, no authorization)
+    and were confirmed anonymously callable on 2026-09-01, returning HTTP 200 application/json. Every
+    other operation requires an OAuth 2.0 access token issued by the platform''s Keycloak realm and a
+    scope granted through the platform''s application-and-approval process.'
+  contact:
+    name: Tongji University Information Office — Open Platform
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://api.tongji.edu.cn/docs — 43 published interface documentation pages fetched 2026-09-01
+      (HTTP 200), plus live probes of the 13 anonymous interfaces.
+    x-operator: institution
+servers:
+- url: https://api.tongji.edu.cn
+  description: Tongji University Open Platform production host (CERNET, 202.120.182.237).
+externalDocs:
+  description: Tongji University Open Platform documentation
+  url: https://api.tongji.edu.cn/docs
+tags:
+- name: AI Services
+  description: Asynchronous speech-recognition and document-OCR services offered to campus applications
+    by the Tongji University Information Office.
+- name: Assets and Procurement
+  description: Contract, equipment-asset and purchase-requisition records drawn from the university procurement
+    and asset-management systems.
+- name: Library
+  description: Library gate-access and loan records from the Tongji University Library systems.
+- name: Education Data Verification
+  description: Identity, qualification, degree, enrolment and insurance verification services backed by
+    national and Shanghai municipal education data sources.
+- name: Reference Metadata
+  description: Openly callable code tables (metadata dictionaries) that define the controlled vocabularies
+    used across every other Open Platform interface.
+- name: Research
+  description: Patent, software-copyright, project, funding, award, publication and monograph records
+    from the university research-management systems.
+security:
+- openPlatformOAuth: []
+paths:
+  /v1/ai/audio/transcriptions/result:
+    get:
+      operationId: v1_ai_audio_transcriptions_result
+      summary: Speech recognition — fetch task result
+      description: '语音识别异步接口-结果 Original documented title: 语音识别-获取结果. Authorization modes declared by
+        the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_audio_transcriptions_result
+      parameters:
+      - name: task_id
+        in: query
+        required: true
+        description: 任务id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1AiAudioTranscriptionsResultItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/ai/audio/transcriptions/task:
+    post:
+      operationId: v1_ai_audio_transcriptions_task
+      summary: Speech recognition — submit task
+      description: '语音识别异步接口-发起任务 Original documented title: 语音识别-发起任务. Authorization modes declared by
+        the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_audio_transcriptions_task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: 是
+                model:
+                  type: string
+                  description: 是
+              required:
+              - url
+              - model
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1AiAudioTranscriptionsTaskItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/ai/tools/file2md/result:
+    get:
+      operationId: v1_ai_tools_file2md_result
+      summary: Document OCR / file-to-Markdown — fetch task result
+      description: 'OCR异步接口-获取结果 Original documented title: OCR-获取结果. Authorization modes declared by
+        the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_tools_file2md_result
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      description: Payload shape not stated in the published documentation for this interface.
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/ai/tools/file2md/task:
+    post:
+      operationId: v1_ai_tools_file2md_task
+      summary: Document OCR / file-to-Markdown — submit task
+      description: 'OCR-异步接口-任务提交 Original documented title: OCR-任务提交. Authorization modes declared by
+        the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - AI Services
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/ai/v1_ai_tools_file2md_task
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file_url:
+                  type: string
+                  description: 是
+                is_object_store:
+                  type: string
+                  description: 否
+              required:
+              - file_url
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      description: Payload shape not stated in the published documentation for this interface.
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/dc/contract_info/contract:
+    get:
+      operationId: v1_dc_contract_info_contract
+      summary: Internal contract records
+      description: '根据项目负责人工号查询其所负责的所有合同项目相关信息 Original documented title: 校内合同信息. Upstream system of record
+        declared by the platform: SYS20230012(同济大学采购管理系统（含移动端）),SYS20230150(同济大学协同办公系统). Authorization
+        modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/contact_info/v1_dc_contract_info_contract
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号
+        schema:
+          type: string
+      - name: sinceNum
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1DcContractInfoContractItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/dc/lib/lib_access_control:
+    get:
+      operationId: v1_dc_lib_lib_access_control
+      summary: Library gate access records
+      description: '根据学工号查询在某一段时间内进出图书馆闸机门禁信息 Original documented title: 图书馆闸机门禁信息. Authorization modes
+        declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时55分09秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v1_dc_lib_lib_access_control
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号
+        schema:
+          type: string
+      - name: direction
+        in: query
+        required: false
+        description: 进出模式，1-进，2-出,不传值代表全部
+        schema:
+          type: string
+      - name: visitStartTime
+        in: query
+        required: false
+        description: 开始时间
+        schema:
+          type: string
+      - name: visitEndTime
+        in: query
+        required: false
+        description: 结束时间
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1DcLibLibAccessControlItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/degree:
+    get:
+      operationId: v1_infra_education_data_degree
+      summary: Degree award lookup
+      description: '获取教育部高校学位信息。 Original documented title: 学位信息查询. Authorization modes declared by the
+        platform: 客户端模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_degree
+      parameters:
+      - name: xm
+        in: query
+        required: true
+        description: 学位获得者姓名
+        schema:
+          type: string
+      - name: xwzsbh
+        in: query
+        required: true
+        description: 学位证书编号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataDegreeItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/education:
+    get:
+      operationId: v1_infra_education_data_education
+      summary: Academic qualification lookup
+      description: '获取教育部高校学历信息。 Original documented title: 学历信息查询. Authorization modes declared by the
+        platform: 客户端模式. Documentation last updated: 2026年06月09日 09时08分07秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_education
+      parameters:
+      - name: xm
+        in: query
+        required: false
+        description: 姓名
+        schema:
+          type: string
+      - name: zjhm
+        in: query
+        required: false
+        description: 证件号码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataEducationItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/employee_insurance:
+    get:
+      operationId: v1_infra_education_data_employee_insurance
+      summary: Employee social-insurance enrolment
+      description: '上海市人力资源和社会保障局-机构人员信息-职工参保情况。 Original documented title: 职工参保情况. Authorization modes
+        declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_employee_insurance
+      parameters:
+      - name: xm
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: zjhm
+        in: query
+        required: true
+        description: 公民身份号码
+        schema:
+          type: string
+      - name: tyxym
+        in: query
+        required: true
+        description: 统一社会信用代码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataEmployeeInsuranceItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/face_check:
+    post:
+      operationId: v1_infra_education_data_face_check
+      summary: Face verification against national ID record
+      description: 'Original documented title: 人脸验证. Authorization modes declared by the platform: 客户端模式.
+        Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_face_check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: 是
+                gmsfzhm:
+                  type: string
+                  description: 是
+                xm:
+                  type: string
+                  description: 是
+              required:
+              - image
+              - gmsfzhm
+              - xm
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1InfraEducationDataFaceCheckItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/id_card_info_check:
+    get:
+      operationId: v1_infra_education_data_id_card_info_check
+      summary: National ID record verification
+      description: '对校验过的请求，会缓存24小时，默认不会每次都去校验。如果需要强制源头校验，可以设置参数qzytjy=1。 Original documented title: 身份证信息校验.
+        Authorization modes declared by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_benchmark_info_check
+      parameters:
+      - name: name
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: idCardNo
+        in: query
+        required: true
+        description: 身份证号码
+        schema:
+          type: string
+      - name: qzytjy
+        in: query
+        required: false
+        description: 是否强制源头校验：0=否；1=是；默认是0
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      description: Payload shape not stated in the published documentation for this interface.
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/id_card_info_query:
+    get:
+      operationId: v1_infra_education_data_id_card_info_query
+      summary: National ID record lookup
+      description: '对查询过的请求，会缓存24小时 Original documented title: 身份证信息查询. Authorization modes declared by
+        the platform: 客户端模式. Documentation last updated: 2026年06月09日 08时37分25秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_benchmark_info
+      parameters:
+      - name: name
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: idCardNo
+        in: query
+        required: true
+        description: 身份证号码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1InfraEducationDataIdCardInfoQueryItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/school_roll:
+    get:
+      operationId: v1_infra_education_data_school_roll
+      summary: Student enrolment (school roll) lookup
+      description: '获取教育部高校学籍信息。 Original documented title: 学籍信息查询. Authorization modes declared by the
+        platform: 客户端模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_school_roll
+      parameters:
+      - name: xm
+        in: query
+        required: true
+        description: 姓名
+        schema:
+          type: string
+      - name: zjhm
+        in: query
+        required: true
+        description: 证件号码
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1InfraEducationDataSchoolRollItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/infra/education_data/sh_qrcode_query:
+    get:
+      operationId: v1_infra_education_data_sh_qrcode_query
+      summary: Shanghai Suishenma health-code lookup
+      description: '获取随申码对应的用户信息 Original documented title: 随申码查询. Authorization modes declared by the
+        platform: 客户端模式. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Education Data Verification
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/education_data/v1_infra_education_data_sh_qrcode_query
+      parameters:
+      - name: data
+        in: query
+        required: true
+        description: 随申码解析后的地址,格式为:https://s.sh.gov.cn/527034ea4224ad93136806e9cc20081737090007304
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1InfraEducationDataShQrcodeQueryItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/asset/campus_gate:
+    get:
+      operationId: v1_metadata_asset_campus_gate
+      summary: Campus and campus-gate reference list
+      description: '校区和校门信息 Original documented title: 校区校门. Authorization modes declared by the platform:
+        无需授权可直接访问. Documentation last updated: 2026年06月09日 09时08分07秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/v1_metadata_asset_campus_gate
+      security: []
+      x-anonymous-access: true
+      parameters:
+      - name: isUseCode
+        in: query
+        required: false
+        description: 默认不传查看当前生效数据  传0可以查看全量数据，包含生效和失效的所有记录
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataAssetCampusGateItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - allowCarCode: '1'
+                      campus: A02
+                      campusDesc: 四平路校区
+                      isUseCode: '1'
+                      lctnDesc: 校区
+                      lctnId: '196'
+                      lctnName: 四平路校区
+                      parentId: '127'
+                    - allowCarCode: '1'
+                      campus: A08
+                      campusDesc: 嘉定校区
+                      isUseCode: '1'
+                      lctnDesc: 校区
+                      lctnId: '168'
+                      lctnName: 嘉定校区
+                      parentId: '127'
+                    - allowCarCode: '1'
+                      campus: A06
+                      campusDesc: 南校区
+                      isUseCode: '1'
+                      lctnDesc: 校园大门
+                      lctnId: '131'
+                      lctnName: 赤峰路67号
+                      parentId: '203'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/meeting/meeting_room:
+    get:
+      operationId: v1_metadata_meeting_meeting_room
+      summary: Meeting room reference list
+      description: '会议室信息 Original documented title: 会议室信息. Upstream system of record declared by the
+        platform: SYS20230189(会议管理系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation
+        last updated: 2026年06月09日 09时00分45秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/meeting_room/v1_metadata_meeting_meeting_room
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataMeetingMeetingRoomItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - meetingRoomCode: 98b6ea21a54c4c919fdcb89a50921869
+                      meetingRoomName: 济人楼312
+                    - meetingRoomCode: 98b6ea21a54c4c919fdcb89a50921857
+                      meetingRoomName: 济人楼202
+                    - meetingRoomCode: d2f89e1407054085b9c2afca55acf790
+                      meetingRoomName: “驾驶舱”会议厅
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/send_user_types:
+    get:
+      operationId: v1_metadata_teacher_send_user_types
+      summary: Dispatched-staff category code list
+      description: '派遣人员类别 Original documented title: 派遣人员类别. Upstream system of record declared by the
+        platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation
+        last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_send_user_types
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherSendUserTypesItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - sendUserTypeCode: '3'
+                      sendUserTypeName: 双轨制
+                    - sendUserTypeCode: '31'
+                      sendUserTypeName: 双轨制(新)
+                    - sendUserTypeCode: '2'
+                      sendUserTypeName: 劳务派遣
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/status:
+    get:
+      operationId: v1_metadata_teacher_status
+      summary: Faculty and staff employment status code list
+      description: '教职工在校状态 Original documented title: 教职工在校状态. Upstream system of record declared by
+        the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问.
+        Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_status
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherStatusItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - currentStatusCode: '99'
+                      currentStatusName: 其他
+                    - currentStatusCode: '16'
+                      currentStatusName: 停薪
+                    - currentStatusCode: '07'
+                      currentStatusName: 离职
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/tech_job_code:
+    get:
+      operationId: v1_metadata_teacher_tech_job_code
+      summary: Professional-technical post category code list
+      description: '专业技术岗位类别 Original documented title: 专业技术岗位类别. Upstream system of record declared by
+        the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问.
+        Documentation last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_tech_job_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTechJobCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '0'
+                      isUseName: 否
+                      techJobCode: '20001'
+                      techJobName: 教学科研型
+                      updateTime: '2022-05-24 00:00:00'
+                    - isUseCode: '0'
+                      isUseName: 否
+                      techJobCode: '22001'
+                      techJobName: 思政系列
+                      updateTime: '2022-05-24 00:00:00'
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techJobCode: '10'
+                      techJobName: 管理类
+                      updateTime: '2022-05-24 00:00:00'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/tech_job_level_code:
+    get:
+      operationId: v1_metadata_teacher_tech_job_level_code
+      summary: Professional-technical post level code list
+      description: '专业技术职务级别 Original documented title: 专业技术职务级别. Upstream system of record declared by
+        the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问.
+        Documentation last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_tech_job_level_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTechJobLevelCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techJobLevelCode: '99'
+                      techJobLevelName: 其他
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techJobLevelCode: '10'
+                      techJobLevelName: 副科级
+                    - isUseCode: '0'
+                      isUseName: 否
+                      techJobLevelCode: '123'
+                      techJobLevelName: 正厅级
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/tech_level_of_workers_code:
+    get:
+      operationId: v1_metadata_teacher_tech_level_of_workers_code
+      summary: Worker technical grade code list
+      description: '工人技术等级 Original documented title: 工人技术等级. Upstream system of record declared by the
+        platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation
+        last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_tech_level_of_workers_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTechLevelOfWorkersCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techLevelOfWorkersCode: '4'
+                      techLevelOfWorkersName: 职业资格四级(中级)
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techLevelOfWorkersCode: '5'
+                      techLevelOfWorkersName: 职业资格五级(初级)
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techLevelOfWorkersCode: '3'
+                      techLevelOfWorkersName: 职业资格三级(高级)
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/title_code:
+    get:
+      operationId: v1_metadata_teacher_title_code
+      summary: Appointed professional-technical title code list
+      description: '聘任专业技术职务 Original documented title: 聘任专业技术职务. Upstream system of record declared by
+        the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问.
+        Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_title_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTitleCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '1'
+                      isUseName: 是
+                      titleCode: '482'
+                      titleName: 一级飞行通信员
+                    - isUseCode: '1'
+                      isUseName: 是
+                      titleCode: '403'
+                      titleName: 三级公证员
+                    - isUseCode: '1'
+                      isUseName: 是
+                      titleCode: '154'
+                      titleName: 助理编辑
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/types:
+    get:
+      operationId: v1_metadata_teacher_types
+      summary: Faculty and staff personnel category code list
+      description: '教职工人员类别 Original documented title: 教职工人员类别. Upstream system of record declared by
+        the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问.
+        Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_types
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTypesItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - userTypeCode: '10'
+                      userTypeName: 编制类人员
+                    - userTypeCode: '90'
+                      userTypeName: 专职科研人员
+                    - userTypeCode: '5'
+                      userTypeName: 访问学者
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/user/person_idcard_type:
+    get:
+      operationId: v1_metadata_user_person_idcard_type
+      summary: Identity-document type code list
+      description: '人员证件类型 Original documented title: 人员证件类型. Authorization modes declared by the platform:
+        无需授权可直接访问. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/person_info/v1_metadata_user_person_idcard_type
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataUserPersonIdcardTypeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - cardCode: '01'
+                      cardType: 居民身份证
+                    - cardCode: '02'
+                      cardType: 护照
+                    - cardCode: '03'
+                      cardType: 军官证
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/user/sex_code:
+    get:
+      operationId: v1_metadata_user_sex_code
+      summary: Gender code list
+      description: '性别 Original documented title: 性别. Upstream system of record declared by the platform:
+        SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation
+        last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/person_info/v1_metadata_user_sex_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataUserSexCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - sexCode: '0'
+                      sexName: 未知的性别
+                    - sexCode: '9'
+                      sexName: 未说明的性别
+                    - sexCode: '2'
+                      sexName: 女
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/lib/lib_access:
+    get:
+      operationId: v1_rt_lib_lib_access
+      summary: Library gate access records (real time)
+      description: '查询某一时间段内某一个人或全部人的图书馆闸机门禁信息 Original documented title: 图书馆闸机门禁信息-实时. Authorization
+        modes declared by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时08分07秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v1_rt_lib_lib_access
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: direction
+        in: query
+        required: false
+        description: 进出模式，1-入门，2-出门,不传值代表全部
+        schema:
+          type: string
+      - name: dataStartTime
+        in: query
+        required: false
+        description: 开始时间
+        schema:
+          type: string
+      - name: dataEndTime
+        in: query
+        required: false
+        description: 结束时间
+        schema:
+          type: string
+      - name: sinceVisitNo
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V1RtLibLibAccessItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/purchase/contract_info_by_number:
+    get:
+      operationId: v1_rt_purchase_contract_info_by_number
+      summary: Contract record by contract number
+      description: '通过合同编号获取合同信息 Original documented title: 通过合同编号获取合同信息. Upstream system of record declared
+        by the platform: SYS20230012(同济大学采购管理系统（含移动端）). Authorization modes declared by the platform:
+        客户端模式. Documentation last updated: 2026年06月09日 09时00分45秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/contact_info/v1_rt_purchase_contract_info_by_number
+      parameters:
+      - name: contractNumber
+        in: query
+        required: true
+        description: 合同编号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1RtPurchaseContractInfoByNumberItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/purchase/contract_info_by_org_supplier:
+    get:
+      operationId: v1_rt_purchase_contract_info_by_org_supplier
+      summary: Contract records by organization code or supplier name
+      description: '通过组织机构代码或供应商名称获取合同信息 Original documented title: 通过组织机构代码或供应商名称获取合同信息. Upstream system
+        of record declared by the platform: SYS20230012(同济大学采购管理系统（含移动端）). Authorization modes declared
+        by the platform: 客户端模式. Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/contact_info/v1_rt_purchase_contract_info_by_org_supplier
+      parameters:
+      - name: organizationCode
+        in: query
+        required: false
+        description: 供应商组织机构代码
+        schema:
+          type: string
+      - name: supplierName
+        in: query
+        required: false
+        description: 供应商名称
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1RtPurchaseContractInfoByOrgSupplierItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/research/patent:
+    get:
+      operationId: v1_rt_research_patent
+      summary: Research patent records (real time)
+      description: '根据学工号或专利号查询科研专利情况 Original documented title: 科研专利信息-实时. Upstream system of record
+        declared by the platform: SYS20230146(专利管理系统). Authorization modes declared by the platform: 客户端模式,授权码模式.
+        Documentation last updated: 2026年06月09日 08时46分14秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v1_rt_research_patent
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: appNo
+        in: query
+        required: false
+        description: 专利号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        infos:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/V1RtResearchPatentItem'
+                        count:
+                          type: integer
+                          description: Total number of records matched.
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/rt/research/software_works:
+    get:
+      operationId: v1_rt_research_software_works
+      summary: Software copyright registration records (real time)
+      description: '根据软件著作登记号查询软件著作权相关信息 Original documented title: 软件著作权信息-实时. Upstream system of record
+        declared by the platform: SYS20230146(专利管理系统). Authorization modes declared by the platform: 客户端模式,授权码模式.
+        Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v1_rt_research_software_works
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: recordNo
+        in: query
+        required: false
+        description: 登记号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1RtResearchSoftwareWorksItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/asset/equipment_info:
+    get:
+      operationId: v2_dc_asset_equipment_info
+      summary: Equipment asset records
+      description: '根据保管人学工号查询设备信息 Original documented title: 设备信息. Upstream system of record declared
+        by the platform: SYS20230166(设备管理系统). Authorization modes declared by the platform: 客户端模式,授权码模式.
+        Documentation last updated: 2026年06月09日 08时37分25秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/purchase_equipment_info/v2_dc_asset_equipment_info
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 保管人/使用管理人学工号
+        schema:
+          type: string
+      - name: acctUnitCode
+        in: query
+        required: false
+        description: 建账单位
+        schema:
+          type: string
+      - name: statusCode
+        in: query
+        required: false
+        description: 状态代码，0 正常 1 已注销 2 待入库，-1代表全部，不传参数默认为0
+        schema:
+          type: string
+      - name: assetAttributeNo
+        in: query
+        required: false
+        description: 资产属性编号，-1代表全部，不传参数默认为01（学校资产）
+        schema:
+          type: string
+      - name: assetTypeNo
+        in: query
+        required: false
+        description: 资产类型编号，-1代表全部，不传参数默认为ZJ,CLP,JJ
+        schema:
+          type: string
+      - name: cardId
+        in: query
+        required: false
+        description: 卡片ID，-1代表全部，不传参数默认为0，为0代表过滤报废、报失、提前报废的已审批未变动申请单中的资产卡片
+        schema:
+          type: string
+      - name: sinceWid
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcAssetEquipmentInfoItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/asset/purchase_requisition_info:
+    get:
+      operationId: v2_dc_asset_purchase_requisition_info
+      summary: Purchase requisition records
+      description: '根据保管人学工号查询申购信息 Original documented title: 申购信息. Upstream system of record declared
+        by the platform: SYS20230012(同济大学采购管理系统（含移动端）). Authorization modes declared by the platform:
+        客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时37分25秒.'
+      tags:
+      - Assets and Procurement
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/asset_info/purchase_equipment_info/v2_dc_asset_purchase_requisition_info
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 申请人/填写人学工号
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      - name: sinceWid
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcAssetPurchaseRequisitionInfoItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/lib/lend_info_all:
+    get:
+      operationId: v2_dc_lib_lend_info_all
+      summary: Library loan detail records
+      description: '根据学工号查询具体的图书借阅相关信息，包含所有借阅记录 Original documented title: 图书借阅信息详情. Upstream system of
+        record declared by the platform: SYS20230132(汇文文献信息服务系统软件). Authorization modes declared by the
+        platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v2_dc_lib_lend_info_all
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcLibLendInfoAllItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/research/longitudinal_project_for_PD:
+    get:
+      operationId: v2_dc_research_longitudinal_project_for_PD
+      summary: Research project records
+      description: '根据学工号查询以第一申请人申请科研项目情况 Original documented title: 科研项目信息. Upstream system of record
+        declared by the platform: SYS20230147(科研大平台),SYS20230025(同济大学人事系统). Authorization modes declared
+        by the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v2_dc_research_longitudinal_project_for_PD
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: projClassifyCode
+        in: query
+        required: false
+        description: 项目分类代码，1-纵向项目，3-横向项目，5-专利转化，不传参默认获取全部，可以单独传入一个类别，也可以同时传入多个类别，用英文逗号分隔即可
+        schema:
+          type: string
+      - name: sinceId
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcResearchLongitudinalProjectForPdItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/research/longitudinal_project_fund:
+    get:
+      operationId: v2_dc_research_longitudinal_project_fund
+      summary: Research project funds-received records
+      description: '根据学工号查询项目到账情况 Original documented title: 科研项目到账信息. Upstream system of record declared
+        by the platform: SYS20230147(科研大平台),SYS20230025(同济大学人事系统). Authorization modes declared by the
+        platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时21分03秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v2_dc_research_longitudinal_project_fund
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: projClassifyCode
+        in: query
+        required: false
+        description: 项目分类代码，1-纵向项目，3-横向项目，5-专利转化，不传参默认获取全部，可以单独传入一个类别，也可以同时传入多个类别，用英文逗号分隔即可
+        schema:
+          type: string
+      - name: sinceId
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcResearchLongitudinalProjectFundItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/research/patent:
+    get:
+      operationId: v2_dc_research_patent
+      summary: Research patent records
+      description: '根据学工号查询科研专利情况 Original documented title: 科研专利信息. Upstream system of record declared
+        by the platform: SYS20230146(专利管理系统),SYS20230025(同济大学人事系统). Authorization modes declared by the
+        platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时46分13秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v2_dc_research_patent
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: sinceId
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      - name: appNo
+        in: query
+        required: false
+        description: 申请号（专利号）
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcResearchPatentItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/research/reward:
+    get:
+      operationId: v2_dc_research_reward
+      summary: Research award records
+      description: '根据学工号查询科研获奖情况 Original documented title: 科研获奖信息. Upstream system of record declared
+        by the platform: SYS20230147(科研大平台),SYS20230025(同济大学人事系统). Authorization modes declared by the
+        platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时49分03秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v2_dc_research_reward
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: sinceId
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcResearchRewardItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/research/scientific_paper_data:
+    get:
+      operationId: v2_dc_research_scientific_paper_data
+      summary: Research publication records
+      description: '根据学工号查询科研论文数据 Original documented title: 科研论文信息. Upstream system of record declared
+        by the platform: SYS20250154(同济大学机构知识库),SYS20230025(同济大学人事系统). Authorization modes declared by
+        the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时34分32秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v2_dc_research_scientific_paper_data
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: sinceId
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcResearchScientificPaperDataItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/dc/research/work:
+    get:
+      operationId: v2_dc_research_work
+      summary: Research monograph records
+      description: '根据学工号查询科研著作情况 Original documented title: 科研著作信息. Upstream system of record declared
+        by the platform: SYS20230147(科研大平台),SYS20230025(同济大学人事系统). Authorization modes declared by the
+        platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 08时43分34秒.'
+      tags:
+      - Research
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/research/v2_dc_research_work
+      parameters:
+      - name: userId
+        in: query
+        required: false
+        description: 学工号
+        schema:
+          type: string
+      - name: sinceId
+        in: query
+        required: false
+        description: 游标的起始位置，请把响应中的同字段传入，获取下一页，循环往复获取全量数据
+        schema:
+          type: string
+      - name: sinceUpdateTime
+        in: query
+        required: false
+        description: 更新时间，获取该时间点之后信息有更改的数据，此字段格式支持YYYY-MM-DD HH:mm:ss 和 unix时间戳
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/V2DcResearchWorkItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/metadata/student/accom_building_code:
+    get:
+      operationId: v2_metadata_student_accom_building_code
+      summary: Dormitory building code list
+      description: '宿舍楼 Original documented title: 宿舍楼信息. Upstream system of record declared by the platform:
+        SYS20250025(学生社区一站式服务管理信息系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation
+        last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/property_info/v2_metadata_student_accom_building_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V2MetadataStudentAccomBuildingCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f832
+                      accomBuildingName: 友园9号楼
+                      accomRegionCode: '7'
+                      accomRegionName: 嘉定校区
+                      createTime: '2025-10-28T12:25:57'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2025-10-13T00:00:00'
+                    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f852
+                      accomBuildingName: 桃李村13号
+                      accomRegionCode: '2'
+                      accomRegionName: 沪西校区
+                      createTime: '2025-10-28T12:25:57'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2025-10-13T00:00:00'
+                    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f879
+                      accomBuildingName: 生乐A区6号
+                      accomRegionCode: '2'
+                      accomRegionName: 沪西校区
+                      createTime: '2025-10-28T12:25:57'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2025-10-13T00:00:00'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/metadata/student/accom_region_code:
+    get:
+      operationId: v2_metadata_student_accom_region_code
+      summary: Dormitory region code list
+      description: '宿舍区 Original documented title: 宿舍区信息. Upstream system of record declared by the platform:
+        SYS20250025(学生社区一站式服务管理信息系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation
+        last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/property_info/v2_metadata_student_accom_region_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V2MetadataStudentAccomRegionCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - accomRegionCode: '8'
+                      accomRegionName: 彰武路校区
+                      createTime: null
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2026-01-04T00:00:00'
+                    - accomRegionCode: '2'
+                      accomRegionName: 沪西校区
+                      createTime: null
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2026-01-04T00:00:00'
+                    - accomRegionCode: '11'
+                      accomRegionName: 东校区
+                      createTime: '2026-08-05T05:07:41'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2026-08-04T00:00:00'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/rt/book/library_current_borrow:
+    get:
+      operationId: v2_rt_book_library_current_borrow
+      summary: Current library borrowing summary (real time)
+      description: '根据学工号实时查询人员在图书馆借阅最新汇总的情况 Original documented title: 图书当前借阅汇总信息-实时. Upstream system
+        of record declared by the platform: SYS20230132(汇文文献信息服务系统软件). Authorization modes declared by
+        the platform: 客户端模式,授权码模式. Documentation last updated: 2026年06月09日 09时59分29秒.'
+      tags:
+      - Library
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/library/v2_rt_book_library_current_borrow
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        description: 学工号，可批量传参，用英文逗号隔开
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V2RtBookLibraryCurrentBorrowItem'
+        '401':
+          description: access_token missing, expired or invalid.
+        '403':
+          description: The token scope does not cover this interface.
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+components:
+  securitySchemes:
+    openPlatformOAuth:
+      type: oauth2
+      description: 'OAuth 2.0 / OpenID Connect issued by the Open Platform Keycloak realm. Discovery document:
+        https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration (HTTP
+        200, verified 2026-09-01). Access tokens default to 7200 seconds and are sent as Authorization:
+        Bearer <access_token>.'
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes:
+            openid: OpenID Connect subject identity.
+            offline_access: Refresh-token issuance.
+            profile: Profile claims.
+            email: Email claim.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The access_token obtained from the Keycloak realm, presented as Authorization: Bearer
+        <access_token>.'
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data
+        and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1AiAudioTranscriptionsResultItem:
+      type: object
+      description: Record fields for Speech recognition — fetch task result.
+      properties:
+        text:
+          type: string
+          description: 识别文字
+    V1AiAudioTranscriptionsTaskItem:
+      type: object
+      description: Record fields for Speech recognition — submit task.
+      properties:
+        created_time:
+          type: string
+          description: 创建时间
+        state:
+          type: string
+          description: 任务状态
+        task_id:
+          type: string
+          description: 任务id
+    V1AiToolsFile2mdResultItem:
+      type: object
+      description: Record fields for Document OCR / file-to-Markdown — fetch task result.
+      properties:
+        id:
+          type: string
+          description: 是
+        result_url:
+          type: string
+          description: 结果的文件链接
+    V1AiToolsFile2mdTaskItem:
+      type: object
+      description: Record fields for Document OCR / file-to-Markdown — submit task.
+      properties:
+        id:
+          type: string
+          description: 任务id，提交至result接口返回结果
+        detail:
+          type: string
+    V1DcContractInfoContractItem:
+      type: object
+      description: Record fields for Internal contract records.
+      properties:
+        recordDate:
+          type: string
+          description: 登记日期
+        contractNo:
+          type: string
+          description: 合同编号
+        contractName:
+          type: string
+          description: 名称
+        firstParty:
+          type: string
+          description: 甲方
+        secondParty:
+          type: string
+          description: 乙方
+        thirdParty:
+          type: string
+          description: 丙方
+        contractAmt:
+          type: string
+          description: 金额
+          x-documented-type: number
+        currenctName:
+          type: string
+          description: 币种名称
+        rmbAmt:
+          type: string
+          description: 人民币金额
+        conAscriptionDept:
+          type: string
+          description: 合同归属单位
+        userId:
+          type: string
+          description: 项目负责人工号
+        projectLeaderName:
+          type: string
+          description: 项目负责人姓名
+        operatorNo:
+          type: string
+          description: 经办人工号
+        operatorName:
+          type: string
+          description: 经办人姓名
+        conStartDate:
+          type: string
+          description: 起始日期
+        conEndDate:
+          type: string
+          description: 终止日期
+        conSignDeptNo:
+          type: string
+          description: 合同签署管理部门代码
+        conSignDeptName:
+          type: string
+          description: 合同签署管理部门
+        auditRecords:
+          type: string
+          description: 审核记录
+        sealType:
+          type: string
+          description: 盖章种类
+        conImplDeptNo:
+          type: string
+          description: 合同实施管理部门代码
+        conImplDeptName:
+          type: string
+          description: 合同实施管理部门
+        conPereDeptNo:
+          type: string
+          description: 履约部门代码
+        conPereDeptName:
+          type: string
+          description: 履约部门
+        conPereRepNo:
+          type: string
+          description: 履约代表工号
+        conPereRepName:
+          type: string
+          description: 履约代表姓名
+        executionRecord:
+          type: string
+          description: 执行记录
+        conStatus:
+          type: string
+          description: 合同状态
+        fillingDeptNo:
+          type: string
+          description: 归档部门代码
+        fillingDeptName:
+          type: string
+          description: 归档部门
+        fillingOperatorNo:
+          type: string
+          description: 归档联系人工号
+        fillingOperatorName:
+          type: string
+          description: 归档联系人姓名
+        conType:
+          type: string
+          description: 合同类型
+        num:
+          type: string
+          description: 游标
+          x-documented-type: number
+    V1DcLibLibAccessControlItem:
+      type: object
+      description: Record fields for Library gate access records.
+      properties:
+        visitno:
+          type: string
+          description: 流水号
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        type:
+          type: string
+          description: 类型
+        deptName:
+          type: string
+          description: 院系
+        visitTime:
+          type: string
+          description: 刷卡时间
+        gateNo:
+          type: string
+          description: 闸机号
+        direction:
+          type: string
+          description: 进出模式，1-进，2-出
+        door:
+          type: string
+          description: 所属区域
+        libPlace:
+          type: string
+          description: 所属校区
+    V1InfraEducationDataDegreeItem:
+      type: object
+      description: Record fields for Degree award lookup.
+      properties:
+        xm:
+          type: string
+          description: 姓名
+        xb:
+          type: string
+          description: 性别
+        csrq:
+          type: string
+          description: 出生日期
+        xwsydw:
+          type: string
+          description: 学位授予单位
+        xkzy:
+          type: string
+          description: 学科专业
+        xxgdlx:
+          type: string
+          description: 学习或攻读类型
+        xwlb:
+          type: string
+          description: 获学位名称
+        xwzsbh:
+          type: string
+          description: 学位证书编号
+        hxwrq:
+          type: string
+          description: 获学位日期
+        zppath:
+          type: string
+          description: 未知
+    V1InfraEducationDataEducationItem:
+      type: object
+      description: Record fields for Academic qualification lookup.
+      properties:
+        xm:
+          type: string
+          description: 姓名
+        zjhm:
+          type: string
+          description: 证件号码
+        yxmc:
+          type: string
+          description: 毕业学校名称
+        zymc:
+          type: string
+          description: 专业名称
+        cc:
+          type: string
+          description: 层次
+        rxrq:
+          type: string
+          description: 入学日期
+        byrq:
+          type: string
+          description: 毕业日期
+        xxxs:
+          type: string
+          description: 学习形式
+        zsbh:
+          type: string
+          description: 学历证书编号
+    V1InfraEducationDataEmployeeInsuranceItem:
+      type: object
+      description: Record fields for Employee social-insurance enrolment.
+      properties:
+        tyxym:
+          type: string
+          description: 统一信用码
+        dsjzxTaskid:
+          type: string
+          description: 批次号
+        jhptUpdateTime:
+          type: string
+          description: 平台更新时间
+        sfzwss:
+          type: string
+          description: 是否转外省市1：是，0：否
+        jnsj:
+          type: string
+          description: 缴纳时间
+        jndwmc:
+          type: string
+          description: 缴纳单位名称
+        rtsfjn:
+          type: string
+          description: 养老保险是否缴纳1：是，0：否
+        uesfjn:
+          type: string
+          description: 失业保险是否缴纳1：是，0：否
+        gjId:
+          type: string
+          description: 含国籍代码使用中文表述而不使用代码
+        ywUpdateTime:
+          type: string
+          description: 字段描述：业务更新时间
+        sfbj:
+          type: string
+          description: 是否补缴1：是，0：否
+        zjlx:
+          type: string
+          description: 证件类型
+        mdsfjn:
+          type: string
+          description: 医疗保险是否缴纳1：是，0：否
+        jhptUpdateFlag:
+          type: string
+          description: 更新标志
+        jhptDelete:
+          type: string
+          description: 删除标志
+        zjhm:
+          type: string
+          description: 证件号码
+        zhztId:
+          type: string
+          description: 账户状态
+        misfjn:
+          type: string
+          description: 生育保险是否缴纳
+        iwisfjn:
+          type: string
+          description: 工伤保险是否缴纳
+        xm:
+          type: string
+          description: 姓名
+    V1InfraEducationDataFaceCheckItem:
+      type: object
+      description: Record fields for Face verification against national ID record.
+      properties:
+        score:
+          type: string
+          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
+        match:
+          type: boolean
+          description: 是否匹配：true匹配，false不匹配
+        description:
+          type: string
+          description: 认证描述
+    V1InfraEducationDataIdCardInfoCheckItem:
+      type: object
+      description: Record fields for National ID record verification.
+      properties:
+        nameMatchScore:
+          type: string
+          description: 姓名匹配度代码
+        idCardMatchScore:
+          type: string
+          description: 公民身份证号码匹配度代码
+        isTJUser:
+          type: boolean
+          description: 是否为同济大学人员
+    V1InfraEducationDataIdCardInfoQueryItem:
+      type: object
+      description: Record fields for National ID record lookup.
+      properties:
+        idCardNo:
+          type: string
+          description: 公民身份号码（非空项）
+        name:
+          type: string
+          description: 姓名
+        sex:
+          type: string
+          description: 性别
+        nationName:
+          type: string
+          description: 民族
+        birthDate:
+          type: string
+          description: 出生日期
+        country:
+          type: string
+          description: 出生地-国家（地区）
+        nativePlaceName:
+          type: string
+          description: 出生地-省市县（区）
+        idCardMatchScore:
+          type: string
+          description: 公民身份号码-匹配度代码
+        nameMatchScore:
+          type: string
+          description: 姓名-匹配度代码
+        deathFlag:
+          type: string
+          description: 死亡标识（0有效人口，1死亡人口）
+        dataSource:
+          type: string
+          description: 数据来源（1同济大学数据库， 2国家公安部）
+          x-documented-type: number
+        isTJUser:
+          type: boolean
+          description: 是否为同济大学人员
+        tjUserList:
+          type: string
+          description: 同济大学人员学工信息
+          x-documented-type: array[object]
+        deptCode:
+          type: string
+          description: 部门/学院代码
+        deptName:
+          type: string
+          description: 部门/学院名称
+        userId:
+          type: string
+          description: 学工号
+        userTypeCode:
+          type: string
+          description: 人员类型代码
+        userTypeName:
+          type: string
+          description: 人员类型名称
+    V1InfraEducationDataSchoolRollItem:
+      type: object
+      description: Record fields for Student enrolment (school roll) lookup.
+      properties:
+        xm:
+          type: string
+          description: 姓名
+        zjhm:
+          type: string
+          description: 证件号码
+        yxmc:
+          type: string
+          description: 毕业学校名称
+        rxrq:
+          type: string
+          description: 入学日期
+        xz:
+          type: string
+          description: 学制
+        xjzt:
+          type: string
+          description: 学籍状态
+    V1InfraEducationDataShQrcodeQueryItem:
+      type: object
+      description: Record fields for Shanghai Suishenma health-code lookup.
+      properties:
+        name:
+          type: string
+          description: 姓名
+        cardNo:
+          type: string
+          description: 身份证号
+    V1MetadataAssetCampusGateItem:
+      type: object
+      description: Record fields for Campus and campus-gate reference list.
+      properties:
+        lctnId:
+          type: string
+          description: 校区校门代码
+        parentId:
+          type: string
+          description: 校区校门上级代码
+        lctnName:
+          type: string
+          description: 校区校门名称
+        lctnDesc:
+          type: string
+          description: 校区校门分类
+        campus:
+          type: string
+          description: 校区代码
+        campusDesc:
+          type: string
+          description: 校区中文描述
+        allowCarCode:
+          type: string
+          description: 该校门是否允许开车进校，1-允许
+    V1MetadataMeetingMeetingRoomItem:
+      type: object
+      description: Record fields for Meeting room reference list.
+      properties:
+        meetingRoomCode:
+          type: string
+          description: 会议室代码
+        meetingRoomName:
+          type: string
+          description: 会议室名称
+    V1MetadataTeacherSendUserTypesItem:
+      type: object
+      description: Record fields for Dispatched-staff category code list.
+      properties:
+        sendUserTypeCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        sendUserTypeName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataTeacherStatusItem:
+      type: object
+      description: Record fields for Faculty and staff employment status code list.
+      properties:
+        currentStatusCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        currentStatusName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataTeacherTechJobCodeItem:
+      type: object
+      description: Record fields for Professional-technical post category code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        techJobCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        techJobName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        updateTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataTeacherTechJobLevelCodeItem:
+      type: object
+      description: Record fields for Professional-technical post level code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        techJobLevelCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        techJobLevelName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataTeacherTechLevelOfWorkersCodeItem:
+      type: object
+      description: Record fields for Worker technical grade code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        techLevelOfWorkersCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        techLevelOfWorkersName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataTeacherTitleCodeItem:
+      type: object
+      description: Record fields for Appointed professional-technical title code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        titleCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        titleName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataTeacherTypesItem:
+      type: object
+      description: Record fields for Faculty and staff personnel category code list.
+      properties:
+        userTypeCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        userTypeName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataUserPersonIdcardTypeItem:
+      type: object
+      description: Record fields for Identity-document type code list.
+      properties:
+        cardCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        cardType:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1MetadataUserSexCodeItem:
+      type: object
+      description: Record fields for Gender code list.
+      properties:
+        sexCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        sexName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V1RtLibLibAccessItem:
+      type: object
+      description: Record fields for Library gate access records (real time).
+      properties:
+        visitNo:
+          type: string
+          description: 流水号
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        type:
+          type: string
+          description: 类型
+        deptName:
+          type: string
+          description: 院系
+        visitTime:
+          type: string
+          description: 刷卡时间
+        gateNo:
+          type: string
+          description: 闸机号
+        direction:
+          type: string
+          description: 进出模式，1-进，2-出
+        dataEvent:
+          type: string
+          description: 入出门
+        door:
+          type: string
+          description: 所属区域
+        libPlace:
+          type: string
+          description: 所属校区
+    V1RtPurchaseContractInfoByNumberItem:
+      type: object
+      description: Record fields for Contract record by contract number.
+      properties:
+        contractNumber:
+          type: string
+          description: 合同编号
+        contractAmount:
+          type: string
+          description: 合同金额
+        contractName:
+          type: string
+          description: 合同名称
+        contractSignDate:
+          type: string
+          description: 合同签订日期
+        supplierAccount:
+          type: string
+          description: 供应商收款账号
+        supplierName:
+          type: string
+          description: 供应商名称
+    V1RtPurchaseContractInfoByOrgSupplierItem:
+      type: object
+      description: Record fields for Contract records by organization code or supplier name.
+      properties:
+        contractNumber:
+          type: string
+          description: 合同编号
+        contractAmount:
+          type: string
+          description: 合同金额
+        contractName:
+          type: string
+          description: 合同名称
+        contractSignDate:
+          type: string
+          description: 合同签订日期
+        organizationCode:
+          type: string
+          description: 供应商组织机构代码
+        supplierName:
+          type: string
+          description: 供应商名称
+    V1RtResearchPatentItem:
+      type: object
+      description: Record fields for Research patent records (real time).
+      properties:
+        allInventorUserId:
+          type: string
+          description: 所有发明人学工号
+        allInventorName:
+          type: string
+          description: 所有发明人姓名
+        appNo:
+          type: string
+          description: 申请号(专利号)
+        patentTitle:
+          type: string
+          description: 专利名称
+        patentDeptCode:
+          type: string
+          description: 专利所属学院代码
+        patentDeptName:
+          type: string
+          description: 专利所属学院名称
+        appTypeCode:
+          type: string
+          description: 申请类型代码
+        appTypeName:
+          type: string
+          description: 申请类型名称
+        statusCode:
+          type: string
+          description: 案件状态代码
+        statusName:
+          type: string
+          description: 案件状态名称
+        appDate:
+          type: string
+          format: date-time
+          description: 申请日
+        inventorCount:
+          type: integer
+          description: 发明人总数
+        countryName:
+          type: string
+          description: 是否国际专利
+        regPublishDate:
+          type: string
+          format: date-time
+          description: 授权公告日
+    V1RtResearchSoftwareWorksItem:
+      type: object
+      description: Record fields for Software copyright registration records (real time).
+      properties:
+        softwareName:
+          type: string
+          description: 软件名称
+        rightsMethod:
+          type: string
+          description: 权利取得方式
+        rightsScope:
+          type: string
+          description: 权利范围
+        developer:
+          type: string
+          description: 开发者
+        userId:
+          type: string
+          description: 开发者工号
+        version:
+          type: string
+          description: 版本号
+        completionTime:
+          type: string
+          description: 开发完成时间
+        recordDate:
+          type: string
+          description: 登记日
+        recordNo:
+          type: string
+          description: 登记号
+    V2DcAssetEquipmentInfoItem:
+      type: object
+      description: Record fields for Equipment asset records.
+      properties:
+        id:
+          type: string
+          description: id
+        userId:
+          type: string
+          description: 保管人/使用管理人学工号
+        name:
+          type: string
+          description: 保管人/使用管理人姓名
+        acctUnitCode:
+          type: string
+          description: 建账单位
+        acctUnitName:
+          type: string
+          description: 建账单位名称
+        purcReqWriteUserId:
+          type: string
+          description: 申购单填写人学工号
+        purcReqWriteName:
+          type: string
+          description: 申购单填写人姓名
+        equipmentNo:
+          type: string
+          description: 设备编号
+        equipmentName:
+          type: string
+          description: 设备名称
+        model:
+          type: string
+          description: 设备型号
+        purchaseDate:
+          type: string
+          description: 购置日期
+        purcReqNo:
+          type: string
+          description: 申购单号
+        quantity:
+          type: string
+          description: 数量
+        totalPrice:
+          type: string
+          description: 总价
+        storageLocation:
+          type: string
+          description: 存放地点
+        trialProductionName:
+          type: string
+          description: 是否试制
+        accrualDate:
+          type: string
+          description: 计提起始日
+        statusName:
+          type: string
+          description: 状态名称
+        statusCode:
+          type: string
+          description: 状态代码   状态：0 正常 、1 已注销、 2 待入库
+        contactNumber:
+          type: string
+          description: 联系电话
+        ManagementNotes:
+          type: string
+          description: 管理备注
+        note:
+          type: string
+          description: 备注
+        assetAttributeNo:
+          type: string
+          description: 资产属性编号
+        assetAttributeName:
+          type: string
+          description: 资产属性名称
+        assetTypeNo:
+          type: string
+          description: 资产类型编号
+        assetTypeName:
+          type: string
+          description: 资产类型名称
+        cardId:
+          type: string
+          description: 卡片ID
+        wid:
+          type: string
+          description: 主键
+        del:
+          type: string
+          description: 删除标识，D标识删除
+    V2DcAssetPurchaseRequisitionInfoItem:
+      type: object
+      description: Record fields for Purchase requisition records.
+      properties:
+        purcReqId:
+          type: string
+          description: 申购单ID
+        userId:
+          type: string
+          description: 申请人/填写人学工号
+        name:
+          type: string
+          description: 申请人/填写人姓名
+        deptCode:
+          type: string
+          description: 部门代码
+        deptName:
+          type: string
+          description: 部门名称
+        deptTypeCode:
+          type: string
+          description: 一级部门代码
+        deptTypeName:
+          type: string
+          description: 一级部门名称
+        directorUserId:
+          type: string
+          description: 项目负责人学工号
+        directorName:
+          type: string
+          description: 项目负责人姓名
+        assetTypeCode:
+          type: string
+          description: 资产类型代码
+        assetTypeName:
+          type: string
+          description: 资产类型名称
+        purcReqNo:
+          type: string
+          description: 申购单号
+        writeDate:
+          type: string
+          description: 申请日期
+        equipmentName:
+          type: string
+          description: 设备名称
+        equipmentTypeCode:
+          type: string
+          description: 设备类型代码
+        equipmentTypeName:
+          type: string
+          description: 设备类型名称
+        isContractSigningName:
+          type: string
+          description: 是否签订合同
+        isInviteTendersName:
+          type: string
+          description: 是否招标
+        isTaxFreeName:
+          type: string
+          description: 是否免税
+        ownershipSchoolName:
+          type: string
+          description: 产权是否归属学校
+        purchaseModeName:
+          type: string
+          description: 采购方式名称
+        manufacturer:
+          type: string
+          description: 生产厂家
+        model:
+          type: string
+          description: 型号
+        quantity:
+          type: string
+          description: 数量
+        supplier:
+          type: string
+          description: 供货商
+        totalPrice:
+          type: string
+          description: 总价
+        statusName:
+          type: string
+          description: 状态名称
+        wid:
+          type: string
+          description: 主键
+        del:
+          type: string
+          description: 删除标识，D标识删除
+    V2DcLibLendInfoAllItem:
+      type: object
+      description: Record fields for Library loan detail records.
+      properties:
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        deptCode:
+          type: string
+          description: 单位代码
+        deptName:
+          type: string
+          description: 单位名称
+        title:
+          type: string
+          description: 题名(书名)
+        langCode:
+          type: string
+          description: 书籍语种代码
+        langName:
+          type: string
+          description: 书籍语种
+        countryCode:
+          type: string
+          description: 书籍国别代码
+        countryName:
+          type: string
+          description: 书籍国别
+        docTypeCode:
+          type: string
+          description: 文献类型代码
+        docTypeName:
+          type: string
+          description: 文献类型
+        isJournal:
+          type: string
+          description: 暂无描述
+        author:
+          type: string
+          description: 责任者(作者)
+        publisher:
+          type: string
+          description: 出版社
+        pubYear:
+          type: string
+          description: 出版年
+        isbn:
+          type: string
+          description: ISBN编号
+        asbackDate:
+          type: string
+          description: 催还日期
+        lendDate:
+          type: string
+          description: 借出日期
+        renewDate:
+          type: string
+          description: 续借日期
+        renewTimes:
+          type: string
+          description: 续借次数
+          x-documented-type: numeric
+        locationCode:
+          type: string
+          description: 馆藏地代码
+        locationName:
+          type: string
+          description: 名称
+        propNo:
+          type: string
+          description: 财产号
+        totalLendQty:
+          type: string
+          description: 累计借书次数
+          x-documented-type: numeric
+        voltFlag:
+          type: string
+          description: 违章状态标识
+        debtFlag:
+          type: string
+          description: 欠款状态标识
+          x-documented-type: numeric
+        asbackTimes:
+          type: string
+          description: 催还次数
+          x-documented-type: numeric
+        retDate:
+          type: string
+          description: 实际还书时间
+          x-documented-type: numeric
+        callNo:
+          type: string
+          description: 图书类别代码
+          x-documented-type: numeric
+        callNoName:
+          type: string
+          description: 图书类别名称
+          x-documented-type: numeric
+    V2DcResearchLongitudinalProjectForPdItem:
+      type: object
+      description: Record fields for Research project records.
+      properties:
+        count:
+          type: string
+          x-documented-type: number
+        list:
+          type: array
+        projSecondLevelName:
+          type: string
+          description: 纵向项目二级类别名称
+        name:
+          type: string
+          description: 项目负责人姓名
+        projClassifyName:
+          type: string
+          description: 项目分类名称
+        projEstablishmentDate:
+          type: string
+          description: 立项日期
+        projEndDate:
+          type: string
+          description: 结束日期
+        closingDate:
+          type: string
+          description: 完成日期
+        projSecondLevelCode:
+          type: string
+          description: 纵向项目二级类别代码
+        userId:
+          type: string
+          description: 项目负责人工号
+        projFirstLevelCode:
+          type: string
+          description: 纵向项目类别代码
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        id:
+          type: string
+          description: 主键
+        appropriationCompany:
+          type: string
+          description: 资助单位名称
+        participationModeName:
+          type: string
+          description: 项目性质名称
+        projName:
+          type: string
+          description: 项目名称
+        projNo:
+          type: string
+          description: 项目编号
+        projFirstLevelName:
+          type: string
+          description: 纵向项目类别名称
+        contractAmount:
+          type: string
+          description: 合同经费
+        projId:
+          type: string
+          description: 项目id
+        projClassifyCode:
+          type: string
+          description: 项目分类代码
+        projStartDate:
+          type: string
+          description: 开始日期
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        updateTime:
+          type: string
+        projStatusName:
+          type: string
+          description: 项目状态名称
+        participationModeCode:
+          type: string
+          description: 项目性质代码
+        sinceId:
+          type: string
+    V2DcResearchLongitudinalProjectFundItem:
+      type: object
+      description: Record fields for Research project funds-received records.
+      properties:
+        id:
+          type: string
+          description: 主键
+        projId:
+          type: string
+          description: 项目id
+        name:
+          type: string
+          description: 项目负责人姓名
+        userId:
+          type: string
+          description: 项目负责人工号
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        projClassifyCode:
+          type: string
+          description: 项目分类
+        projClassifyName:
+          type: string
+          description: 项目分类名称
+        projFirstLevelCode:
+          type: string
+          description: 项目类别
+        projFirstLevelName:
+          type: string
+          description: 项目类别名称
+        fundCardNo:
+          type: string
+          description: 经费卡卡号
+        partOneName:
+          type: string
+          description: 资助单位
+        initiationDate:
+          type: string
+          format: date-time
+          description: 立项日期
+        billArrivalDate:
+          type: string
+          format: date-time
+          description: 到账日期
+        projectName:
+          type: string
+          description: 项目名称
+        billAmount:
+          type: string
+          description: 到帐金额
+          x-documented-type: numeric
+        outsourceAmount:
+          type: string
+          description: 外包经费
+          x-documented-type: numeric
+        actualTotalAmount:
+          type: string
+          description: 实际到账金额累计
+          x-documented-type: numeric
+    V2DcResearchPatentItem:
+      type: object
+      description: Record fields for Research patent records.
+      properties:
+        id:
+          type: string
+          description: 主键
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        seqNo:
+          type: string
+          description: 排名
+          x-documented-type: integer
+        allinventorUserId:
+          type: string
+          description: 所有发明人学工号
+        allinventorName:
+          type: string
+          description: 所有发明人姓名
+        appNo:
+          type: string
+          description: 申请号
+        patentId:
+          type: string
+          description: 专利id
+        patentTitle:
+          type: string
+          description: 专利名称
+        patentDeptCode:
+          type: string
+          description: 专利所属学院代码
+        patentDeptName:
+          type: string
+          description: 专利所属学院名称
+        appTypeCode:
+          type: string
+          description: 申请类型代码
+        appTypeName:
+          type: string
+          description: 申请类型名称
+        statusCode:
+          type: string
+          description: 案件状态代码
+        statusName:
+          type: string
+          description: 案件状态名称
+        appDate:
+          type: string
+          format: date-time
+          description: 申请日
+        countryName:
+          type: string
+          description: 是否国际专利
+        regpublishDate:
+          type: string
+          format: date-time
+          description: 授权公告日
+        tongJiIsFirstCode:
+          type: string
+          description: 是否同济排名第一代码
+        tongJiIsFirstName:
+          type: string
+          description: 是否同济排名第一名称
+    V2DcResearchRewardItem:
+      type: object
+      description: Record fields for Research award records.
+      properties:
+        id:
+          type: string
+          description: 主键
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        seqNo:
+          type: string
+          description: 作者排名
+          x-documented-type: numeric
+        achievementName:
+          type: string
+          description: 成果名称
+        awardGradeCode:
+          type: string
+          description: 获奖等级代码
+        awardGradeName:
+          type: string
+          description: 获奖等级名称
+        awardLevelCode:
+          type: string
+          description: 获奖级别代码
+        awardLevelName:
+          type: string
+          description: 获奖级别名称
+        awardingUnit:
+          type: string
+          description: 授奖单位
+        awardName:
+          type: string
+          description: 奖励名称
+        awardYear:
+          type: string
+          description: 获奖日期
+        completersNum:
+          type: string
+          description: 成员总数
+          x-documented-type: numeric
+    V2DcResearchScientificPaperDataItem:
+      type: object
+      description: Record fields for Research publication records.
+      properties:
+        id:
+          type: string
+          description: id
+        userId:
+          type: string
+          description: 学工号
+        trueName:
+          type: string
+          description: 作者姓名
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        title:
+          type: string
+          description: 标题
+        formattingDocumentType:
+          type: string
+          description: 成果类型
+        formatYear:
+          type: string
+          description: 出版年
+        publishDate:
+          type: string
+          description: 发表时间
+        earlyAccessDate:
+          type: string
+          description: 提前发表时间
+        issn:
+          type: string
+          description: ISSN
+        volume:
+          type: string
+          description: 卷
+        issue:
+          type: string
+          description: 期
+        page:
+          type: string
+          description: 页码范围
+        source:
+          type: string
+          description: 来源出版物
+        articleUpdateTime:
+          type: string
+          description: 论文更新时间
+        index:
+          type: string
+          description: 作者排序
+        orgIndex:
+          type: string
+          description: 同济大学署名次序
+        authorUpdatedTime:
+          type: string
+          description: 作者更新时间
+        nameOriginal:
+          type: string
+          description: 作者原始署名
+        authors:
+          type: string
+          description: 原始作者署名列表
+        isHighlyCited:
+          type: string
+          description: 是否高被引
+        wosCitedNumber:
+          type: string
+          description: wos核心合集被引次数
+        includedDb:
+          type: string
+          description: 期刊收录数据库名称+收录号
+        language:
+          type: string
+          description: 语言
+        conferenceLocation:
+          type: string
+          description: 会议地点
+        publisher:
+          type: string
+          description: 出版商
+        publisherAddress:
+          type: string
+          description: 出版商地址
+        country:
+          type: string
+          description: 国家及地区
+        supplement:
+          type: string
+          description: 是否增刊
+        insideStatus:
+          type: string
+          description: 是否校内
+        dataSource:
+          type: string
+          description: 回溯或提交
+        matchStatus:
+          type: string
+          description: 匹配状态
+        jcrCurrentPart:
+          type: string
+          description: JCR当年分区
+        jcrCurrentFactor:
+          type: string
+          description: JCR当年影响因子
+        jcrNewestPart:
+          type: string
+          description: JCR最新分区
+        jcrNewestFactor:
+          type: string
+          description: JCR最新年影响因子
+        jcrPreviousPart:
+          type: string
+          description: JCR前一年分区
+        jcrPreviousFactor:
+          type: string
+          description: JCR前一年影响因子
+        zkyCurrentPart:
+          type: string
+          description: 中科院基础版当年分区
+        zkyNewestPart:
+          type: string
+          description: 中科院最新分区
+        zkyPreviousPart:
+          type: string
+          description: 中科院基础版前一年分区
+        zky2CurrentPart:
+          type: string
+          description: 中科院升级版当年分区
+        zky2NewestPart:
+          type: string
+          description: 中科院升级版最新年分区
+        zky2PreviousPart:
+          type: string
+          description: 中科院升级版前一年分区
+        auditStatus:
+          type: string
+          description: 人工提交成果审核状态(职能部门待审=学院审核通过,职能部门-通过)
+        submitor:
+          type: string
+          description: 提交人员
+        importantAchievement:
+          type: string
+          description: 重要成果
+        isFirstAuthor:
+          type: string
+          description: 是否第⼀作者
+        reprint:
+          type: string
+          description: 是否通讯作者
+        isCoFirstAuthor:
+          type: string
+          description: 是否共同第⼀作者
+        isCoCorrespondingAuthor:
+          type: string
+          description: 是否共同通讯作者
+    V2DcResearchWorkItem:
+      type: object
+      description: Record fields for Research monograph records.
+      properties:
+        id:
+          type: string
+          description: 主键
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        seqNo:
+          type: string
+          description: 作者排名
+          x-documented-type: numeric
+        bookName:
+          type: string
+          description: 著作名称
+        bookCategoryCode:
+          type: string
+          description: 著作类别代码
+        bookCategoryName:
+          type: string
+          description: 著作类别名称
+        publicationYear:
+          type: string
+          description: 出版时间
+        publishHouseName:
+          type: string
+          description: 出版社名称
+        totalWords:
+          type: string
+          description: 总字数（万）
+          x-documented-type: numeric
+    V2MetadataStudentAccomBuildingCodeItem:
+      type: object
+      description: Record fields for Dormitory building code list.
+      properties:
+        accomBuildingCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        accomBuildingName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        accomRegionCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        accomRegionName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        createTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        updateTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V2MetadataStudentAccomRegionCodeItem:
+      type: object
+      description: Record fields for Dormitory region code list.
+      properties:
+        accomRegionCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        accomRegionName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        createTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+        updateTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published
+            documentation.
+    V2RtBookLibraryCurrentBorrowItem:
+      type: object
+      description: Record fields for Current library borrowing summary (real time).
+      properties:
+        userId:
+          type: string
+          description: 工号
+        currentBorrow:
+          type: number
+          description: 当前借阅
+        overdueBooks:
+          type: number
+          description: 超期图书
+        entrustBooks:
+          type: number
+          description: 委托到书
+        orderBooks:
+          type: number
+          description: 预约到书

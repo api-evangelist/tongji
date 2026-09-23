@@ -1,0 +1,538 @@
+generated: '2026-09-01'
+method: probed
+source: Live fetch on 2026-09-01 of https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration
+  (HTTP 200, application/json), whose scopes_supported array is the authoritative published list, read
+  together with https://api.tongji.edu.cn/docs/intro/develop/scopes (HTTP 200).
+provider: Tongji University
+providerId: tongji
+x-operator: institution
+summary:
+  total_scopes_published: 491
+  oidc_standard_scopes: 7
+  platform_scopes: 484
+  granularity: per-interface
+  assignment: Scopes are bound to a client_id by the Information Office through the application-and-approval
+    process; they are not self-service and cannot be requested dynamically.
+  enforcement: A token whose scope set does not cover the called interface returns HTTP 403 even when
+    the client_id is valid.
+description: 'Tongji University''s Open Platform publishes 491 OAuth scopes in its own OIDC discovery
+  document — one scope per interface for most of the catalog, plus a smaller set of coarse resource-family
+  scopes. This is unusually fine-grained scope design for a university-operated platform and it is machine-readable,
+  which is why it is recorded here from the discovery document rather than from prose. The naming convention
+  mirrors the route: scope `rt_research_patent` unlocks GET /v1/rt/research/patent, and scope `user_api`
+  unlocks the /v1/rt/user/ prefix.'
+oidc_standard:
+- email
+- microprofile-jwt
+- offline_access
+- openid
+- profile
+- roles
+- web-origins
+families:
+- prefix: dc
+  count: 109
+  description: Data-centre (batch / warehouse) interfaces — the `dc` route prefix, e.g. /v2/dc/research/patent.
+  examples:
+  - dc
+  - dc_asset_all_equipment_info
+  - dc_asset_equipment_info
+  - dc_asset_purchase_requisition_info
+  - dc_car_entry_permit_info
+  - dc_card_account
+- prefix: rt
+  count: 102
+  description: Real-time interfaces — the `rt` route prefix, e.g. /v1/rt/research/patent.
+  examples:
+  - rt
+  - rt_all4u_exam_score
+  - rt_book_library_current_borrow
+  - rt_card_card_access_control
+  - rt_card_card_balance
+  - rt_card_card_current_actual_flow
+- prefix: infra
+  count: 86
+  description: Shared campus capability services — notification, calendar, cloud meeting, electronic signature,
+    face recognition, task centre, education-data verification.
+  examples:
+  - infra
+  - infra_calendar_app_create
+  - infra_calendar_app_update
+  - infra_calendar_delete
+  - infra_calendar_detail
+  - infra_calendar_group_create
+- prefix: openplatform
+  count: 54
+  description: Administrative scopes for the Open Platform console itself (document, backend, data-source,
+    tag and quota management). Not campus data.
+  examples:
+  - openplatform
+  - openplatform_api_add_api_tag
+  - openplatform_api_add_backend
+  - openplatform_api_add_business_code
+  - openplatform_api_add_data_source
+  - openplatform_api_add_docs_directory
+- prefix: ai
+  count: 26
+  description: AI services — speech recognition, OCR / file-to-Markdown, LLM and vision-language model
+    routes.
+  examples:
+  - ai
+  - ai_audio_speech
+  - ai_audio_speech_result
+  - ai_audio_speech_task
+  - ai_audio_transcriptions
+  - ai_audio_transcriptions_result
+- prefix: tool
+  count: 7
+  description: Utility services — weather, map geocoding, IP lookup.
+  examples:
+  - tool
+  - tool_map_district
+  - tool_map_geocode_geo
+  - tool_map_geocode_regeo
+  - tool_map_ip
+  - tool_weather_forcast
+- prefix: student
+  count: 4
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - student
+  - student_employment
+  - student_info
+  - student_work_info
+- prefix: teaching
+  count: 4
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - teaching_achievements
+  - teaching_class
+  - teaching_evaluation
+  - teaching_info
+- prefix: sp
+  count: 3
+  description: Special / municipal integrations, including Shanghai identity and health-code services.
+  examples:
+  - sp
+  - sp_citizen_personal_information_cardno_validate
+  - sp_epidemic_suishenma_result_rt
+- prefix: campus
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - campus_activities
+  - campus_activities_campus_move
+- prefix: card
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - card
+  - card_info
+- prefix: client
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - client
+  - client_get_scopes
+- prefix: file2md
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - file2md
+  - file2md_paddle
+- prefix: hidden
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - hidden_page
+  - hidden_page_v1_openplatform_api_auth_statistics
+- prefix: jwt
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - jwt_revoke
+  - jwt_revoke_revoke_token
+- prefix: meeting
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - meeting
+  - meeting_search
+- prefix: third
+  count: 2
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - third
+  - third_huazhu_login
+- prefix: activity
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - activity
+- prefix: all4u
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - all4u
+- prefix: api
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - api
+- prefix: app
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - app
+- prefix: asr
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - asr
+- prefix: asset
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - asset
+- prefix: audio
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - audio
+- prefix: book
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - book
+- prefix: calendar
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - calendar
+- prefix: car
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - car
+- prefix: citizen
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - citizen_personal_information
+- prefix: class
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - class
+- prefix: classroom
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - classroom
+- prefix: cloud
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - cloud_meeting
+- prefix: contract
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - contract_info
+- prefix: culture
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - culture_plan
+- prefix: door
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - door
+- prefix: education
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - education_data
+- prefix: electricity
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - electricity
+- prefix: electronic
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - electronic_signature
+- prefix: enroll
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - enroll
+- prefix: epidemic
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - epidemic
+- prefix: exit
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - exit_entry
+- prefix: face
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - face
+- prefix: fake
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - fake_api
+- prefix: finance
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - finance
+- prefix: financial
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - financial
+- prefix: geocode
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - geocode
+- prefix: group
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - group
+- prefix: huazhu
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - huazhu
+- prefix: iam
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - iam
+- prefix: lIm
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - lIm
+- prefix: lecture
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - lecture
+- prefix: lib
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - lib
+- prefix: limit
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - limit
+- prefix: llm
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - llm
+- prefix: lordofthering
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - lordofthering
+- prefix: map
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - map
+- prefix: media
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - media
+- prefix: notification
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - notification
+- prefix: nyzx
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - nyzx
+- prefix: oa
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - oa
+- prefix: ocr
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - ocr_paddle
+- prefix: onetongji
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - onetongji
+- prefix: paraformer
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - paraformer
+- prefix: payment
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - payment
+- prefix: person
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - person
+- prefix: purchase
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - purchase
+- prefix: register
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - register
+- prefix: rerank
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - rerank
+- prefix: research
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - research
+- prefix: resource
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - resource_data
+- prefix: sep
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - sep_auth
+- prefix: sms
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - sms
+- prefix: speech
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - speech
+- prefix: star
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - star
+- prefix: system
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - system
+- prefix: tag
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - tag
+- prefix: task
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - task_center
+- prefix: test
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - test
+- prefix: tongji
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - tongji_email
+- prefix: tools
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - tools
+- prefix: transcriptions
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - transcriptions
+- prefix: tts
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - tts
+- prefix: user
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - user
+- prefix: userId
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - userId
+- prefix: v1
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - v1
+- prefix: verify
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - verify_code
+- prefix: vl
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - vl
+- prefix: weather
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - weather
+- prefix: wecom
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - wecom
+- prefix: welcome-task
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - welcome-task
+- prefix: welcome
+  count: 1
+  description: Resource-family scopes named after the interface group they unlock.
+  examples:
+  - welcome_task
+notes: The `openplatform_*` family (54 scopes) governs the platform console's own administrative API —
+  adding documents, backends, data sources, business codes and call quotas. Those are operator scopes,
+  not campus-data scopes, and their presence in the public discovery document is a disclosure observation,
+  not an access grant.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

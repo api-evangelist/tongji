@@ -1,0 +1,885 @@
+openapi: 3.2.0
+info:
+  title: Tongji University Open Platform Reference Metadata API
+  version: '2026-09-01'
+  summary: Institution-operated campus data and capability API platform run by the Tongji University Information Office.
+  description: The Tongji University Open Platform (同济大学开放平台) is operated by the university itself at api.tongji.edu.cn, on China Education and Research Network (CERNET) address space, and exposes campus data and shared capability interfaces to faculty, students and campus applications.
+  contact:
+    name: Tongji University Information Office — Open Platform
+    url: https://api.tongji.edu.cn/docs/intro/apply/contact_us
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://api.tongji.edu.cn/docs — 43 published interface documentation pages fetched 2026-09-01 (HTTP 200), plus live probes of the 13 anonymous interfaces.
+    x-operator: institution
+servers:
+- url: https://api.tongji.edu.cn
+  description: Tongji University Open Platform production host (CERNET, 202.120.182.237).
+security:
+- openPlatformOAuth: []
+tags:
+- name: Reference Metadata
+  description: Openly callable code tables (metadata dictionaries) that define the controlled vocabularies used across every other Open Platform interface.
+paths:
+  /v1/metadata/asset/campus_gate:
+    get:
+      operationId: v1_metadata_asset_campus_gate
+      summary: Campus and campus-gate reference list
+      description: '校区和校门信息 Original documented title: 校区校门. Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时08分07秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/v1_metadata_asset_campus_gate
+      security: []
+      x-anonymous-access: true
+      parameters:
+      - name: isUseCode
+        in: query
+        required: false
+        description: 默认不传查看当前生效数据  传0可以查看全量数据，包含生效和失效的所有记录
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataAssetCampusGateItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - allowCarCode: '1'
+                      campus: A02
+                      campusDesc: 四平路校区
+                      isUseCode: '1'
+                      lctnDesc: 校区
+                      lctnId: '196'
+                      lctnName: 四平路校区
+                      parentId: '127'
+                    - allowCarCode: '1'
+                      campus: A08
+                      campusDesc: 嘉定校区
+                      isUseCode: '1'
+                      lctnDesc: 校区
+                      lctnId: '168'
+                      lctnName: 嘉定校区
+                      parentId: '127'
+                    - allowCarCode: '1'
+                      campus: A06
+                      campusDesc: 南校区
+                      isUseCode: '1'
+                      lctnDesc: 校园大门
+                      lctnId: '131'
+                      lctnName: 赤峰路67号
+                      parentId: '203'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/meeting/meeting_room:
+    get:
+      operationId: v1_metadata_meeting_meeting_room
+      summary: Meeting room reference list
+      description: '会议室信息 Original documented title: 会议室信息. Upstream system of record declared by the platform: SYS20230189(会议管理系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时00分45秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/meeting_room/v1_metadata_meeting_meeting_room
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataMeetingMeetingRoomItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - meetingRoomCode: 98b6ea21a54c4c919fdcb89a50921869
+                      meetingRoomName: 济人楼312
+                    - meetingRoomCode: 98b6ea21a54c4c919fdcb89a50921857
+                      meetingRoomName: 济人楼202
+                    - meetingRoomCode: d2f89e1407054085b9c2afca55acf790
+                      meetingRoomName: “驾驶舱”会议厅
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/send_user_types:
+    get:
+      operationId: v1_metadata_teacher_send_user_types
+      summary: Dispatched-staff category code list
+      description: '派遣人员类别 Original documented title: 派遣人员类别. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_send_user_types
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherSendUserTypesItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - sendUserTypeCode: '3'
+                      sendUserTypeName: 双轨制
+                    - sendUserTypeCode: '31'
+                      sendUserTypeName: 双轨制(新)
+                    - sendUserTypeCode: '2'
+                      sendUserTypeName: 劳务派遣
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/status:
+    get:
+      operationId: v1_metadata_teacher_status
+      summary: Faculty and staff employment status code list
+      description: '教职工在校状态 Original documented title: 教职工在校状态. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_status
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherStatusItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - currentStatusCode: '99'
+                      currentStatusName: 其他
+                    - currentStatusCode: '16'
+                      currentStatusName: 停薪
+                    - currentStatusCode: '07'
+                      currentStatusName: 离职
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/tech_job_code:
+    get:
+      operationId: v1_metadata_teacher_tech_job_code
+      summary: Professional-technical post category code list
+      description: '专业技术岗位类别 Original documented title: 专业技术岗位类别. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_tech_job_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTechJobCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '0'
+                      isUseName: 否
+                      techJobCode: '20001'
+                      techJobName: 教学科研型
+                      updateTime: '2022-05-24 00:00:00'
+                    - isUseCode: '0'
+                      isUseName: 否
+                      techJobCode: '22001'
+                      techJobName: 思政系列
+                      updateTime: '2022-05-24 00:00:00'
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techJobCode: '10'
+                      techJobName: 管理类
+                      updateTime: '2022-05-24 00:00:00'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/tech_job_level_code:
+    get:
+      operationId: v1_metadata_teacher_tech_job_level_code
+      summary: Professional-technical post level code list
+      description: '专业技术职务级别 Original documented title: 专业技术职务级别. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_tech_job_level_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTechJobLevelCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techJobLevelCode: '99'
+                      techJobLevelName: 其他
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techJobLevelCode: '10'
+                      techJobLevelName: 副科级
+                    - isUseCode: '0'
+                      isUseName: 否
+                      techJobLevelCode: '123'
+                      techJobLevelName: 正厅级
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/tech_level_of_workers_code:
+    get:
+      operationId: v1_metadata_teacher_tech_level_of_workers_code
+      summary: Worker technical grade code list
+      description: '工人技术等级 Original documented title: 工人技术等级. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分27秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_tech_level_of_workers_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTechLevelOfWorkersCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techLevelOfWorkersCode: '4'
+                      techLevelOfWorkersName: 职业资格四级(中级)
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techLevelOfWorkersCode: '5'
+                      techLevelOfWorkersName: 职业资格五级(初级)
+                    - isUseCode: '1'
+                      isUseName: 是
+                      techLevelOfWorkersCode: '3'
+                      techLevelOfWorkersName: 职业资格三级(高级)
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/title_code:
+    get:
+      operationId: v1_metadata_teacher_title_code
+      summary: Appointed professional-technical title code list
+      description: '聘任专业技术职务 Original documented title: 聘任专业技术职务. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_title_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTitleCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - isUseCode: '1'
+                      isUseName: 是
+                      titleCode: '482'
+                      titleName: 一级飞行通信员
+                    - isUseCode: '1'
+                      isUseName: 是
+                      titleCode: '403'
+                      titleName: 三级公证员
+                    - isUseCode: '1'
+                      isUseName: 是
+                      titleCode: '154'
+                      titleName: 助理编辑
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/teacher/types:
+    get:
+      operationId: v1_metadata_teacher_types
+      summary: Faculty and staff personnel category code list
+      description: '教职工人员类别 Original documented title: 教职工人员类别. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/teacher_info/v1_metadata_teacher_types
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataTeacherTypesItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - userTypeCode: '10'
+                      userTypeName: 编制类人员
+                    - userTypeCode: '90'
+                      userTypeName: 专职科研人员
+                    - userTypeCode: '5'
+                      userTypeName: 访问学者
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/user/person_idcard_type:
+    get:
+      operationId: v1_metadata_user_person_idcard_type
+      summary: Identity-document type code list
+      description: '人员证件类型 Original documented title: 人员证件类型. Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时21分04秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/person_info/v1_metadata_user_person_idcard_type
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataUserPersonIdcardTypeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - cardCode: '01'
+                      cardType: 居民身份证
+                    - cardCode: '02'
+                      cardType: 护照
+                    - cardCode: '03'
+                      cardType: 军官证
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v1/metadata/user/sex_code:
+    get:
+      operationId: v1_metadata_user_sex_code
+      summary: Gender code list
+      description: '性别 Original documented title: 性别. Upstream system of record declared by the platform: SYS20230025(同济大学人事系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时34分33秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/person_info/v1_metadata_user_sex_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V1MetadataUserSexCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - sexCode: '0'
+                      sexName: 未知的性别
+                    - sexCode: '9'
+                      sexName: 未说明的性别
+                    - sexCode: '2'
+                      sexName: 女
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/metadata/student/accom_building_code:
+    get:
+      operationId: v2_metadata_student_accom_building_code
+      summary: Dormitory building code list
+      description: '宿舍楼 Original documented title: 宿舍楼信息. Upstream system of record declared by the platform: SYS20250025(学生社区一站式服务管理信息系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/property_info/v2_metadata_student_accom_building_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V2MetadataStudentAccomBuildingCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f832
+                      accomBuildingName: 友园9号楼
+                      accomRegionCode: '7'
+                      accomRegionName: 嘉定校区
+                      createTime: '2025-10-28T12:25:57'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2025-10-13T00:00:00'
+                    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f852
+                      accomBuildingName: 桃李村13号
+                      accomRegionCode: '2'
+                      accomRegionName: 沪西校区
+                      createTime: '2025-10-28T12:25:57'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2025-10-13T00:00:00'
+                    - accomBuildingCode: a0b05c9d98594cc5a435d304ffd9f879
+                      accomBuildingName: 生乐A区6号
+                      accomRegionCode: '2'
+                      accomRegionName: 沪西校区
+                      createTime: '2025-10-28T12:25:57'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2025-10-13T00:00:00'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+  /v2/metadata/student/accom_region_code:
+    get:
+      operationId: v2_metadata_student_accom_region_code
+      summary: Dormitory region code list
+      description: '宿舍区 Original documented title: 宿舍区信息. Upstream system of record declared by the platform: SYS20250025(学生社区一站式服务管理信息系统). Authorization modes declared by the platform: 无需授权可直接访问. Documentation last updated: 2026年06月09日 09时59分28秒.'
+      tags:
+      - Reference Metadata
+      externalDocs:
+        description: Tongji University Open Platform interface documentation (Chinese)
+        url: https://api.tongji.edu.cn/docs/interface/metadata/property_info/v2_metadata_student_accom_region_code
+      security: []
+      x-anonymous-access: true
+      responses:
+        '200':
+          description: Success. Envelope code A00000.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Envelope'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/V2MetadataStudentAccomRegionCodeItem'
+              examples:
+                live:
+                  summary: Live response captured 2026-09-01 (truncated to three records)
+                  value:
+                    code: A00000
+                    data:
+                    - accomRegionCode: '8'
+                      accomRegionName: 彰武路校区
+                      createTime: null
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2026-01-04T00:00:00'
+                    - accomRegionCode: '2'
+                      accomRegionName: 沪西校区
+                      createTime: null
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2026-01-04T00:00:00'
+                    - accomRegionCode: '11'
+                      accomRegionName: 东校区
+                      createTime: '2026-08-05T05:07:41'
+                      isUseCode: '1'
+                      isUseName: 是
+                      updateTime: '2026-08-04T00:00:00'
+                    msg: 操作成功
+        '429':
+          description: Rate limit exceeded (default 50 requests per second per application per IP).
+components:
+  schemas:
+    V1MetadataMeetingMeetingRoomItem:
+      type: object
+      description: Record fields for Meeting room reference list.
+      properties:
+        meetingRoomCode:
+          type: string
+          description: 会议室代码
+        meetingRoomName:
+          type: string
+          description: 会议室名称
+    V1MetadataTeacherTechLevelOfWorkersCodeItem:
+      type: object
+      description: Record fields for Worker technical grade code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techLevelOfWorkersCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techLevelOfWorkersName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataUserSexCodeItem:
+      type: object
+      description: Record fields for Gender code list.
+      properties:
+        sexCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        sexName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherTechJobLevelCodeItem:
+      type: object
+      description: Record fields for Professional-technical post level code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techJobLevelCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techJobLevelName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherTitleCodeItem:
+      type: object
+      description: Record fields for Appointed professional-technical title code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        titleCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        titleName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V2MetadataStudentAccomBuildingCodeItem:
+      type: object
+      description: Record fields for Dormitory building code list.
+      properties:
+        accomBuildingCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        accomBuildingName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        accomRegionCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        accomRegionName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        createTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        updateTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataAssetCampusGateItem:
+      type: object
+      description: Record fields for Campus and campus-gate reference list.
+      properties:
+        lctnId:
+          type: string
+          description: 校区校门代码
+        parentId:
+          type: string
+          description: 校区校门上级代码
+        lctnName:
+          type: string
+          description: 校区校门名称
+        lctnDesc:
+          type: string
+          description: 校区校门分类
+        campus:
+          type: string
+          description: 校区代码
+        campusDesc:
+          type: string
+          description: 校区中文描述
+        allowCarCode:
+          type: string
+          description: 该校门是否允许开车进校，1-允许
+    V1MetadataTeacherStatusItem:
+      type: object
+      description: Record fields for Faculty and staff employment status code list.
+      properties:
+        currentStatusCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        currentStatusName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherTechJobCodeItem:
+      type: object
+      description: Record fields for Professional-technical post category code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techJobCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techJobName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        updateTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V2MetadataStudentAccomRegionCodeItem:
+      type: object
+      description: Record fields for Dormitory region code list.
+      properties:
+        accomRegionCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        accomRegionName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        createTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        updateTime:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherTypesItem:
+      type: object
+      description: Record fields for Faculty and staff personnel category code list.
+      properties:
+        userTypeCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        userTypeName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataUserPersonIdcardTypeItem:
+      type: object
+      description: Record fields for Identity-document type code list.
+      properties:
+        cardCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        cardType:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1MetadataTeacherSendUserTypesItem:
+      type: object
+      description: Record fields for Dispatched-staff category code list.
+      properties:
+        sendUserTypeCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        sendUserTypeName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+  securitySchemes:
+    openPlatformOAuth:
+      type: oauth2
+      description: 'OAuth 2.0 / OpenID Connect issued by the Open Platform Keycloak realm. Discovery document: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/.well-known/openid-configuration (HTTP 200, verified 2026-09-01). Access tokens default to 7200 seconds and are sent as Authorization: Bearer <access_token>.'
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/auth
+          tokenUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          refreshUrl: https://api.tongji.edu.cn/keycloak/realms/OpenPlatform/protocol/openid-connect/token
+          scopes:
+            openid: OpenID Connect subject identity.
+            offline_access: Refresh-token issuance.
+            profile: Profile claims.
+            email: Email claim.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The access_token obtained from the Keycloak realm, presented as Authorization: Bearer <access_token>.'
+externalDocs:
+  description: Tongji University Open Platform documentation
+  url: https://api.tongji.edu.cn/docs
