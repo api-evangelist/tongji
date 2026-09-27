@@ -268,227 +268,6 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
-    V1DcContractInfoContractItem:
-      type: object
-      description: Record fields for Internal contract records.
-      properties:
-        recordDate:
-          type: string
-          description: 登记日期
-        contractNo:
-          type: string
-          description: 合同编号
-        contractName:
-          type: string
-          description: 名称
-        firstParty:
-          type: string
-          description: 甲方
-        secondParty:
-          type: string
-          description: 乙方
-        thirdParty:
-          type: string
-          description: 丙方
-        contractAmt:
-          type: string
-          description: 金额
-          x-documented-type: number
-        currenctName:
-          type: string
-          description: 币种名称
-        rmbAmt:
-          type: string
-          description: 人民币金额
-        conAscriptionDept:
-          type: string
-          description: 合同归属单位
-        userId:
-          type: string
-          description: 项目负责人工号
-        projectLeaderName:
-          type: string
-          description: 项目负责人姓名
-        operatorNo:
-          type: string
-          description: 经办人工号
-        operatorName:
-          type: string
-          description: 经办人姓名
-        conStartDate:
-          type: string
-          description: 起始日期
-        conEndDate:
-          type: string
-          description: 终止日期
-        conSignDeptNo:
-          type: string
-          description: 合同签署管理部门代码
-        conSignDeptName:
-          type: string
-          description: 合同签署管理部门
-        auditRecords:
-          type: string
-          description: 审核记录
-        sealType:
-          type: string
-          description: 盖章种类
-        conImplDeptNo:
-          type: string
-          description: 合同实施管理部门代码
-        conImplDeptName:
-          type: string
-          description: 合同实施管理部门
-        conPereDeptNo:
-          type: string
-          description: 履约部门代码
-        conPereDeptName:
-          type: string
-          description: 履约部门
-        conPereRepNo:
-          type: string
-          description: 履约代表工号
-        conPereRepName:
-          type: string
-          description: 履约代表姓名
-        executionRecord:
-          type: string
-          description: 执行记录
-        conStatus:
-          type: string
-          description: 合同状态
-        fillingDeptNo:
-          type: string
-          description: 归档部门代码
-        fillingDeptName:
-          type: string
-          description: 归档部门
-        fillingOperatorNo:
-          type: string
-          description: 归档联系人工号
-        fillingOperatorName:
-          type: string
-          description: 归档联系人姓名
-        conType:
-          type: string
-          description: 合同类型
-        num:
-          type: string
-          description: 游标
-          x-documented-type: number
-    V2DcAssetPurchaseRequisitionInfoItem:
-      type: object
-      description: Record fields for Purchase requisition records.
-      properties:
-        purcReqId:
-          type: string
-          description: 申购单ID
-        userId:
-          type: string
-          description: 申请人/填写人学工号
-        name:
-          type: string
-          description: 申请人/填写人姓名
-        deptCode:
-          type: string
-          description: 部门代码
-        deptName:
-          type: string
-          description: 部门名称
-        deptTypeCode:
-          type: string
-          description: 一级部门代码
-        deptTypeName:
-          type: string
-          description: 一级部门名称
-        directorUserId:
-          type: string
-          description: 项目负责人学工号
-        directorName:
-          type: string
-          description: 项目负责人姓名
-        assetTypeCode:
-          type: string
-          description: 资产类型代码
-        assetTypeName:
-          type: string
-          description: 资产类型名称
-        purcReqNo:
-          type: string
-          description: 申购单号
-        writeDate:
-          type: string
-          description: 申请日期
-        equipmentName:
-          type: string
-          description: 设备名称
-        equipmentTypeCode:
-          type: string
-          description: 设备类型代码
-        equipmentTypeName:
-          type: string
-          description: 设备类型名称
-        isContractSigningName:
-          type: string
-          description: 是否签订合同
-        isInviteTendersName:
-          type: string
-          description: 是否招标
-        isTaxFreeName:
-          type: string
-          description: 是否免税
-        ownershipSchoolName:
-          type: string
-          description: 产权是否归属学校
-        purchaseModeName:
-          type: string
-          description: 采购方式名称
-        manufacturer:
-          type: string
-          description: 生产厂家
-        model:
-          type: string
-          description: 型号
-        quantity:
-          type: string
-          description: 数量
-        supplier:
-          type: string
-          description: 供货商
-        totalPrice:
-          type: string
-          description: 总价
-        statusName:
-          type: string
-          description: 状态名称
-        wid:
-          type: string
-          description: 主键
-        del:
-          type: string
-          description: 删除标识，D标识删除
-    V1RtPurchaseContractInfoByOrgSupplierItem:
-      type: object
-      description: Record fields for Contract records by organization code or supplier name.
-      properties:
-        contractNumber:
-          type: string
-          description: 合同编号
-        contractAmount:
-          type: string
-          description: 合同金额
-        contractName:
-          type: string
-          description: 合同名称
-        contractSignDate:
-          type: string
-          description: 合同签订日期
-        organizationCode:
-          type: string
-          description: 供应商组织机构代码
-        supplierName:
-          type: string
-          description: 供应商名称
     V2DcAssetEquipmentInfoItem:
       type: object
       description: Record fields for Equipment asset records.
@@ -602,6 +381,97 @@ components:
         supplierName:
           type: string
           description: 供应商名称
+    V2DcAssetPurchaseRequisitionInfoItem:
+      type: object
+      description: Record fields for Purchase requisition records.
+      properties:
+        purcReqId:
+          type: string
+          description: 申购单ID
+        userId:
+          type: string
+          description: 申请人/填写人学工号
+        name:
+          type: string
+          description: 申请人/填写人姓名
+        deptCode:
+          type: string
+          description: 部门代码
+        deptName:
+          type: string
+          description: 部门名称
+        deptTypeCode:
+          type: string
+          description: 一级部门代码
+        deptTypeName:
+          type: string
+          description: 一级部门名称
+        directorUserId:
+          type: string
+          description: 项目负责人学工号
+        directorName:
+          type: string
+          description: 项目负责人姓名
+        assetTypeCode:
+          type: string
+          description: 资产类型代码
+        assetTypeName:
+          type: string
+          description: 资产类型名称
+        purcReqNo:
+          type: string
+          description: 申购单号
+        writeDate:
+          type: string
+          description: 申请日期
+        equipmentName:
+          type: string
+          description: 设备名称
+        equipmentTypeCode:
+          type: string
+          description: 设备类型代码
+        equipmentTypeName:
+          type: string
+          description: 设备类型名称
+        isContractSigningName:
+          type: string
+          description: 是否签订合同
+        isInviteTendersName:
+          type: string
+          description: 是否招标
+        isTaxFreeName:
+          type: string
+          description: 是否免税
+        ownershipSchoolName:
+          type: string
+          description: 产权是否归属学校
+        purchaseModeName:
+          type: string
+          description: 采购方式名称
+        manufacturer:
+          type: string
+          description: 生产厂家
+        model:
+          type: string
+          description: 型号
+        quantity:
+          type: string
+          description: 数量
+        supplier:
+          type: string
+          description: 供货商
+        totalPrice:
+          type: string
+          description: 总价
+        statusName:
+          type: string
+          description: 状态名称
+        wid:
+          type: string
+          description: 主键
+        del:
+          type: string
+          description: 删除标识，D标识删除
     Envelope:
       type: object
       description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
@@ -619,6 +489,136 @@ components:
       required:
       - code
       - msg
+    V1RtPurchaseContractInfoByOrgSupplierItem:
+      type: object
+      description: Record fields for Contract records by organization code or supplier name.
+      properties:
+        contractNumber:
+          type: string
+          description: 合同编号
+        contractAmount:
+          type: string
+          description: 合同金额
+        contractName:
+          type: string
+          description: 合同名称
+        contractSignDate:
+          type: string
+          description: 合同签订日期
+        organizationCode:
+          type: string
+          description: 供应商组织机构代码
+        supplierName:
+          type: string
+          description: 供应商名称
+    V1DcContractInfoContractItem:
+      type: object
+      description: Record fields for Internal contract records.
+      properties:
+        recordDate:
+          type: string
+          description: 登记日期
+        contractNo:
+          type: string
+          description: 合同编号
+        contractName:
+          type: string
+          description: 名称
+        firstParty:
+          type: string
+          description: 甲方
+        secondParty:
+          type: string
+          description: 乙方
+        thirdParty:
+          type: string
+          description: 丙方
+        contractAmt:
+          type: string
+          description: 金额
+          x-documented-type: number
+        currenctName:
+          type: string
+          description: 币种名称
+        rmbAmt:
+          type: string
+          description: 人民币金额
+        conAscriptionDept:
+          type: string
+          description: 合同归属单位
+        userId:
+          type: string
+          description: 项目负责人工号
+        projectLeaderName:
+          type: string
+          description: 项目负责人姓名
+        operatorNo:
+          type: string
+          description: 经办人工号
+        operatorName:
+          type: string
+          description: 经办人姓名
+        conStartDate:
+          type: string
+          description: 起始日期
+        conEndDate:
+          type: string
+          description: 终止日期
+        conSignDeptNo:
+          type: string
+          description: 合同签署管理部门代码
+        conSignDeptName:
+          type: string
+          description: 合同签署管理部门
+        auditRecords:
+          type: string
+          description: 审核记录
+        sealType:
+          type: string
+          description: 盖章种类
+        conImplDeptNo:
+          type: string
+          description: 合同实施管理部门代码
+        conImplDeptName:
+          type: string
+          description: 合同实施管理部门
+        conPereDeptNo:
+          type: string
+          description: 履约部门代码
+        conPereDeptName:
+          type: string
+          description: 履约部门
+        conPereRepNo:
+          type: string
+          description: 履约代表工号
+        conPereRepName:
+          type: string
+          description: 履约代表姓名
+        executionRecord:
+          type: string
+          description: 执行记录
+        conStatus:
+          type: string
+          description: 合同状态
+        fillingDeptNo:
+          type: string
+          description: 归档部门代码
+        fillingDeptName:
+          type: string
+          description: 归档部门
+        fillingOperatorNo:
+          type: string
+          description: 归档联系人工号
+        fillingOperatorName:
+          type: string
+          description: 归档联系人姓名
+        conType:
+          type: string
+          description: 合同类型
+        num:
+          type: string
+          description: 游标
+          x-documented-type: number
   securitySchemes:
     openPlatformOAuth:
       type: oauth2

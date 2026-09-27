@@ -372,19 +372,6 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
-    V1InfraEducationDataFaceCheckItem:
-      type: object
-      description: Record fields for Face verification against national ID record.
-      properties:
-        score:
-          type: string
-          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
-        match:
-          type: boolean
-          description: 是否匹配：true匹配，false不匹配
-        description:
-          type: string
-          description: 认证描述
     V1InfraEducationDataShQrcodeQueryItem:
       type: object
       description: Record fields for Shanghai Suishenma health-code lookup.
@@ -417,6 +404,36 @@ components:
         xjzt:
           type: string
           description: 学籍状态
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1InfraEducationDataFaceCheckItem:
+      type: object
+      description: Record fields for Face verification against national ID record.
+      properties:
+        score:
+          type: string
+          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
+        match:
+          type: boolean
+          description: 是否匹配：true匹配，false不匹配
+        description:
+          type: string
+          description: 认证描述
     V1InfraEducationDataDegreeItem:
       type: object
       description: Record fields for Degree award lookup.
@@ -511,6 +528,37 @@ components:
         userTypeName:
           type: string
           description: 人员类型名称
+    V1InfraEducationDataEducationItem:
+      type: object
+      description: Record fields for Academic qualification lookup.
+      properties:
+        xm:
+          type: string
+          description: 姓名
+        zjhm:
+          type: string
+          description: 证件号码
+        yxmc:
+          type: string
+          description: 毕业学校名称
+        zymc:
+          type: string
+          description: 专业名称
+        cc:
+          type: string
+          description: 层次
+        rxrq:
+          type: string
+          description: 入学日期
+        byrq:
+          type: string
+          description: 毕业日期
+        xxxs:
+          type: string
+          description: 学习形式
+        zsbh:
+          type: string
+          description: 学历证书编号
     V1InfraEducationDataEmployeeInsuranceItem:
       type: object
       description: Record fields for Employee social-insurance enrolment.
@@ -575,54 +623,6 @@ components:
         xm:
           type: string
           description: 姓名
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
-    V1InfraEducationDataEducationItem:
-      type: object
-      description: Record fields for Academic qualification lookup.
-      properties:
-        xm:
-          type: string
-          description: 姓名
-        zjhm:
-          type: string
-          description: 证件号码
-        yxmc:
-          type: string
-          description: 毕业学校名称
-        zymc:
-          type: string
-          description: 专业名称
-        cc:
-          type: string
-          description: 层次
-        rxrq:
-          type: string
-          description: 入学日期
-        byrq:
-          type: string
-          description: 毕业日期
-        xxxs:
-          type: string
-          description: 学习形式
-        zsbh:
-          type: string
-          description: 学历证书编号
   securitySchemes:
     openPlatformOAuth:
       type: oauth2
