@@ -372,6 +372,83 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
+    V1InfraEducationDataEmployeeInsuranceItem:
+      type: object
+      description: Record fields for Employee social-insurance enrolment.
+      properties:
+        tyxym:
+          type: string
+          description: 统一信用码
+        dsjzxTaskid:
+          type: string
+          description: 批次号
+        jhptUpdateTime:
+          type: string
+          description: 平台更新时间
+        sfzwss:
+          type: string
+          description: 是否转外省市1：是，0：否
+        jnsj:
+          type: string
+          description: 缴纳时间
+        jndwmc:
+          type: string
+          description: 缴纳单位名称
+        rtsfjn:
+          type: string
+          description: 养老保险是否缴纳1：是，0：否
+        uesfjn:
+          type: string
+          description: 失业保险是否缴纳1：是，0：否
+        gjId:
+          type: string
+          description: 含国籍代码使用中文表述而不使用代码
+        ywUpdateTime:
+          type: string
+          description: 字段描述：业务更新时间
+        sfbj:
+          type: string
+          description: 是否补缴1：是，0：否
+        zjlx:
+          type: string
+          description: 证件类型
+        mdsfjn:
+          type: string
+          description: 医疗保险是否缴纳1：是，0：否
+        jhptUpdateFlag:
+          type: string
+          description: 更新标志
+        jhptDelete:
+          type: string
+          description: 删除标志
+        zjhm:
+          type: string
+          description: 证件号码
+        zhztId:
+          type: string
+          description: 账户状态
+        misfjn:
+          type: string
+          description: 生育保险是否缴纳
+        iwisfjn:
+          type: string
+          description: 工伤保险是否缴纳
+        xm:
+          type: string
+          description: 姓名
+    V1InfraEducationDataFaceCheckItem:
+      type: object
+      description: Record fields for Face verification against national ID record.
+      properties:
+        score:
+          type: string
+          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
+        match:
+          type: boolean
+          description: 是否匹配：true匹配，false不匹配
+        description:
+          type: string
+          description: 认证描述
     V1InfraEducationDataShQrcodeQueryItem:
       type: object
       description: Record fields for Shanghai Suishenma health-code lookup.
@@ -382,6 +459,23 @@ components:
         cardNo:
           type: string
           description: 身份证号
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
     V1InfraEducationDataSchoolRollItem:
       type: object
       description: Record fields for Student enrolment (school roll) lookup.
@@ -404,36 +498,6 @@ components:
         xjzt:
           type: string
           description: 学籍状态
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
-    V1InfraEducationDataFaceCheckItem:
-      type: object
-      description: Record fields for Face verification against national ID record.
-      properties:
-        score:
-          type: string
-          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
-        match:
-          type: boolean
-          description: 是否匹配：true匹配，false不匹配
-        description:
-          type: string
-          description: 认证描述
     V1InfraEducationDataDegreeItem:
       type: object
       description: Record fields for Degree award lookup.
@@ -559,70 +623,6 @@ components:
         zsbh:
           type: string
           description: 学历证书编号
-    V1InfraEducationDataEmployeeInsuranceItem:
-      type: object
-      description: Record fields for Employee social-insurance enrolment.
-      properties:
-        tyxym:
-          type: string
-          description: 统一信用码
-        dsjzxTaskid:
-          type: string
-          description: 批次号
-        jhptUpdateTime:
-          type: string
-          description: 平台更新时间
-        sfzwss:
-          type: string
-          description: 是否转外省市1：是，0：否
-        jnsj:
-          type: string
-          description: 缴纳时间
-        jndwmc:
-          type: string
-          description: 缴纳单位名称
-        rtsfjn:
-          type: string
-          description: 养老保险是否缴纳1：是，0：否
-        uesfjn:
-          type: string
-          description: 失业保险是否缴纳1：是，0：否
-        gjId:
-          type: string
-          description: 含国籍代码使用中文表述而不使用代码
-        ywUpdateTime:
-          type: string
-          description: 字段描述：业务更新时间
-        sfbj:
-          type: string
-          description: 是否补缴1：是，0：否
-        zjlx:
-          type: string
-          description: 证件类型
-        mdsfjn:
-          type: string
-          description: 医疗保险是否缴纳1：是，0：否
-        jhptUpdateFlag:
-          type: string
-          description: 更新标志
-        jhptDelete:
-          type: string
-          description: 删除标志
-        zjhm:
-          type: string
-          description: 证件号码
-        zhztId:
-          type: string
-          description: 账户状态
-        misfjn:
-          type: string
-          description: 生育保险是否缴纳
-        iwisfjn:
-          type: string
-          description: 工伤保险是否缴纳
-        xm:
-          type: string
-          description: 姓名
   securitySchemes:
     openPlatformOAuth:
       type: oauth2

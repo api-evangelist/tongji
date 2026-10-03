@@ -359,6 +359,153 @@ components:
         del:
           type: string
           description: 删除标识，D标识删除
+    V1RtPurchaseContractInfoByOrgSupplierItem:
+      type: object
+      description: Record fields for Contract records by organization code or supplier name.
+      properties:
+        contractNumber:
+          type: string
+          description: 合同编号
+        contractAmount:
+          type: string
+          description: 合同金额
+        contractName:
+          type: string
+          description: 合同名称
+        contractSignDate:
+          type: string
+          description: 合同签订日期
+        organizationCode:
+          type: string
+          description: 供应商组织机构代码
+        supplierName:
+          type: string
+          description: 供应商名称
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1DcContractInfoContractItem:
+      type: object
+      description: Record fields for Internal contract records.
+      properties:
+        recordDate:
+          type: string
+          description: 登记日期
+        contractNo:
+          type: string
+          description: 合同编号
+        contractName:
+          type: string
+          description: 名称
+        firstParty:
+          type: string
+          description: 甲方
+        secondParty:
+          type: string
+          description: 乙方
+        thirdParty:
+          type: string
+          description: 丙方
+        contractAmt:
+          type: string
+          description: 金额
+          x-documented-type: number
+        currenctName:
+          type: string
+          description: 币种名称
+        rmbAmt:
+          type: string
+          description: 人民币金额
+        conAscriptionDept:
+          type: string
+          description: 合同归属单位
+        userId:
+          type: string
+          description: 项目负责人工号
+        projectLeaderName:
+          type: string
+          description: 项目负责人姓名
+        operatorNo:
+          type: string
+          description: 经办人工号
+        operatorName:
+          type: string
+          description: 经办人姓名
+        conStartDate:
+          type: string
+          description: 起始日期
+        conEndDate:
+          type: string
+          description: 终止日期
+        conSignDeptNo:
+          type: string
+          description: 合同签署管理部门代码
+        conSignDeptName:
+          type: string
+          description: 合同签署管理部门
+        auditRecords:
+          type: string
+          description: 审核记录
+        sealType:
+          type: string
+          description: 盖章种类
+        conImplDeptNo:
+          type: string
+          description: 合同实施管理部门代码
+        conImplDeptName:
+          type: string
+          description: 合同实施管理部门
+        conPereDeptNo:
+          type: string
+          description: 履约部门代码
+        conPereDeptName:
+          type: string
+          description: 履约部门
+        conPereRepNo:
+          type: string
+          description: 履约代表工号
+        conPereRepName:
+          type: string
+          description: 履约代表姓名
+        executionRecord:
+          type: string
+          description: 执行记录
+        conStatus:
+          type: string
+          description: 合同状态
+        fillingDeptNo:
+          type: string
+          description: 归档部门代码
+        fillingDeptName:
+          type: string
+          description: 归档部门
+        fillingOperatorNo:
+          type: string
+          description: 归档联系人工号
+        fillingOperatorName:
+          type: string
+          description: 归档联系人姓名
+        conType:
+          type: string
+          description: 合同类型
+        num:
+          type: string
+          description: 游标
+          x-documented-type: number
     V1RtPurchaseContractInfoByNumberItem:
       type: object
       description: Record fields for Contract record by contract number.
@@ -472,153 +619,6 @@ components:
         del:
           type: string
           description: 删除标识，D标识删除
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
-    V1RtPurchaseContractInfoByOrgSupplierItem:
-      type: object
-      description: Record fields for Contract records by organization code or supplier name.
-      properties:
-        contractNumber:
-          type: string
-          description: 合同编号
-        contractAmount:
-          type: string
-          description: 合同金额
-        contractName:
-          type: string
-          description: 合同名称
-        contractSignDate:
-          type: string
-          description: 合同签订日期
-        organizationCode:
-          type: string
-          description: 供应商组织机构代码
-        supplierName:
-          type: string
-          description: 供应商名称
-    V1DcContractInfoContractItem:
-      type: object
-      description: Record fields for Internal contract records.
-      properties:
-        recordDate:
-          type: string
-          description: 登记日期
-        contractNo:
-          type: string
-          description: 合同编号
-        contractName:
-          type: string
-          description: 名称
-        firstParty:
-          type: string
-          description: 甲方
-        secondParty:
-          type: string
-          description: 乙方
-        thirdParty:
-          type: string
-          description: 丙方
-        contractAmt:
-          type: string
-          description: 金额
-          x-documented-type: number
-        currenctName:
-          type: string
-          description: 币种名称
-        rmbAmt:
-          type: string
-          description: 人民币金额
-        conAscriptionDept:
-          type: string
-          description: 合同归属单位
-        userId:
-          type: string
-          description: 项目负责人工号
-        projectLeaderName:
-          type: string
-          description: 项目负责人姓名
-        operatorNo:
-          type: string
-          description: 经办人工号
-        operatorName:
-          type: string
-          description: 经办人姓名
-        conStartDate:
-          type: string
-          description: 起始日期
-        conEndDate:
-          type: string
-          description: 终止日期
-        conSignDeptNo:
-          type: string
-          description: 合同签署管理部门代码
-        conSignDeptName:
-          type: string
-          description: 合同签署管理部门
-        auditRecords:
-          type: string
-          description: 审核记录
-        sealType:
-          type: string
-          description: 盖章种类
-        conImplDeptNo:
-          type: string
-          description: 合同实施管理部门代码
-        conImplDeptName:
-          type: string
-          description: 合同实施管理部门
-        conPereDeptNo:
-          type: string
-          description: 履约部门代码
-        conPereDeptName:
-          type: string
-          description: 履约部门
-        conPereRepNo:
-          type: string
-          description: 履约代表工号
-        conPereRepName:
-          type: string
-          description: 履约代表姓名
-        executionRecord:
-          type: string
-          description: 执行记录
-        conStatus:
-          type: string
-          description: 合同状态
-        fillingDeptNo:
-          type: string
-          description: 归档部门代码
-        fillingDeptName:
-          type: string
-          description: 归档部门
-        fillingOperatorNo:
-          type: string
-          description: 归档联系人工号
-        fillingOperatorName:
-          type: string
-          description: 归档联系人姓名
-        conType:
-          type: string
-          description: 合同类型
-        num:
-          type: string
-          description: 游标
-          x-documented-type: number
   securitySchemes:
     openPlatformOAuth:
       type: oauth2

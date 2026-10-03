@@ -415,79 +415,88 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
-    V2DcResearchWorkItem:
+    V2DcResearchLongitudinalProjectForPdItem:
       type: object
-      description: Record fields for Research monograph records.
+      description: Record fields for Research project records.
       properties:
-        id:
+        count:
           type: string
-          description: 主键
-        userId:
+          x-documented-type: number
+        list:
+          type: array
+        projSecondLevelName:
           type: string
-          description: 学工号
+          description: 纵向项目二级类别名称
         name:
           type: string
-          description: 姓名
+          description: 项目负责人姓名
+        projClassifyName:
+          type: string
+          description: 项目分类名称
+        projEstablishmentDate:
+          type: string
+          description: 立项日期
+        projEndDate:
+          type: string
+          description: 结束日期
+        closingDate:
+          type: string
+          description: 完成日期
+        projSecondLevelCode:
+          type: string
+          description: 纵向项目二级类别代码
+        userId:
+          type: string
+          description: 项目负责人工号
+        projFirstLevelCode:
+          type: string
+          description: 纵向项目类别代码
         deptCode:
           type: string
           description: 人员所属学院代码
+        id:
+          type: string
+          description: 主键
+        appropriationCompany:
+          type: string
+          description: 资助单位名称
+        participationModeName:
+          type: string
+          description: 项目性质名称
+        projName:
+          type: string
+          description: 项目名称
+        projNo:
+          type: string
+          description: 项目编号
+        projFirstLevelName:
+          type: string
+          description: 纵向项目类别名称
+        contractAmount:
+          type: string
+          description: 合同经费
+        projId:
+          type: string
+          description: 项目id
+        projClassifyCode:
+          type: string
+          description: 项目分类代码
+        projStartDate:
+          type: string
+          description: 开始日期
         deptName:
           type: string
           description: 人员所属学院名称
-        seqNo:
+        updateTime:
           type: string
-          description: 作者排名
-          x-documented-type: numeric
-        bookName:
+        projStatusName:
           type: string
-          description: 著作名称
-        bookCategoryCode:
+          description: 项目状态名称
+        participationModeCode:
           type: string
-          description: 著作类别代码
-        bookCategoryName:
+          description: 项目性质代码
+        sinceId:
           type: string
-          description: 著作类别名称
-        publicationYear:
-          type: string
-          description: 出版时间
-        publishHouseName:
-          type: string
-          description: 出版社名称
-        totalWords:
-          type: string
-          description: 总字数（万）
-          x-documented-type: numeric
-    V1RtResearchSoftwareWorksItem:
-      type: object
-      description: Record fields for Software copyright registration records (real time).
-      properties:
-        softwareName:
-          type: string
-          description: 软件名称
-        rightsMethod:
-          type: string
-          description: 权利取得方式
-        rightsScope:
-          type: string
-          description: 权利范围
-        developer:
-          type: string
-          description: 开发者
-        userId:
-          type: string
-          description: 开发者工号
-        version:
-          type: string
-          description: 版本号
-        completionTime:
-          type: string
-          description: 开发完成时间
-        recordDate:
-          type: string
-          description: 登记日
-        recordNo:
-          type: string
-          description: 登记号
     V1RtResearchPatentItem:
       type: object
       description: Record fields for Research patent records (real time).
@@ -536,6 +545,23 @@ components:
           type: string
           format: date-time
           description: 授权公告日
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
     V2DcResearchScientificPaperDataItem:
       type: object
       description: Record fields for Research publication records.
@@ -696,178 +722,37 @@ components:
         isCoCorrespondingAuthor:
           type: string
           description: 是否共同通讯作者
-    V2DcResearchPatentItem:
+    V1RtResearchSoftwareWorksItem:
       type: object
-      description: Record fields for Research patent records.
+      description: Record fields for Software copyright registration records (real time).
       properties:
-        id:
+        softwareName:
           type: string
-          description: 主键
+          description: 软件名称
+        rightsMethod:
+          type: string
+          description: 权利取得方式
+        rightsScope:
+          type: string
+          description: 权利范围
+        developer:
+          type: string
+          description: 开发者
         userId:
           type: string
-          description: 学工号
-        name:
+          description: 开发者工号
+        version:
           type: string
-          description: 姓名
-        deptCode:
+          description: 版本号
+        completionTime:
           type: string
-          description: 人员所属学院代码
-        deptName:
+          description: 开发完成时间
+        recordDate:
           type: string
-          description: 人员所属学院名称
-        seqNo:
+          description: 登记日
+        recordNo:
           type: string
-          description: 排名
-          x-documented-type: integer
-        allinventorUserId:
-          type: string
-          description: 所有发明人学工号
-        allinventorName:
-          type: string
-          description: 所有发明人姓名
-        appNo:
-          type: string
-          description: 申请号
-        patentId:
-          type: string
-          description: 专利id
-        patentTitle:
-          type: string
-          description: 专利名称
-        patentDeptCode:
-          type: string
-          description: 专利所属学院代码
-        patentDeptName:
-          type: string
-          description: 专利所属学院名称
-        appTypeCode:
-          type: string
-          description: 申请类型代码
-        appTypeName:
-          type: string
-          description: 申请类型名称
-        statusCode:
-          type: string
-          description: 案件状态代码
-        statusName:
-          type: string
-          description: 案件状态名称
-        appDate:
-          type: string
-          format: date-time
-          description: 申请日
-        countryName:
-          type: string
-          description: 是否国际专利
-        regpublishDate:
-          type: string
-          format: date-time
-          description: 授权公告日
-        tongJiIsFirstCode:
-          type: string
-          description: 是否同济排名第一代码
-        tongJiIsFirstName:
-          type: string
-          description: 是否同济排名第一名称
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
-    V2DcResearchLongitudinalProjectForPdItem:
-      type: object
-      description: Record fields for Research project records.
-      properties:
-        count:
-          type: string
-          x-documented-type: number
-        list:
-          type: array
-        projSecondLevelName:
-          type: string
-          description: 纵向项目二级类别名称
-        name:
-          type: string
-          description: 项目负责人姓名
-        projClassifyName:
-          type: string
-          description: 项目分类名称
-        projEstablishmentDate:
-          type: string
-          description: 立项日期
-        projEndDate:
-          type: string
-          description: 结束日期
-        closingDate:
-          type: string
-          description: 完成日期
-        projSecondLevelCode:
-          type: string
-          description: 纵向项目二级类别代码
-        userId:
-          type: string
-          description: 项目负责人工号
-        projFirstLevelCode:
-          type: string
-          description: 纵向项目类别代码
-        deptCode:
-          type: string
-          description: 人员所属学院代码
-        id:
-          type: string
-          description: 主键
-        appropriationCompany:
-          type: string
-          description: 资助单位名称
-        participationModeName:
-          type: string
-          description: 项目性质名称
-        projName:
-          type: string
-          description: 项目名称
-        projNo:
-          type: string
-          description: 项目编号
-        projFirstLevelName:
-          type: string
-          description: 纵向项目类别名称
-        contractAmount:
-          type: string
-          description: 合同经费
-        projId:
-          type: string
-          description: 项目id
-        projClassifyCode:
-          type: string
-          description: 项目分类代码
-        projStartDate:
-          type: string
-          description: 开始日期
-        deptName:
-          type: string
-          description: 人员所属学院名称
-        updateTime:
-          type: string
-        projStatusName:
-          type: string
-          description: 项目状态名称
-        participationModeCode:
-          type: string
-          description: 项目性质代码
-        sinceId:
-          type: string
+          description: 登记号
     V2DcResearchLongitudinalProjectFundItem:
       type: object
       description: Record fields for Research project funds-received records.
@@ -981,6 +866,121 @@ components:
         completersNum:
           type: string
           description: 成员总数
+          x-documented-type: numeric
+    V2DcResearchPatentItem:
+      type: object
+      description: Record fields for Research patent records.
+      properties:
+        id:
+          type: string
+          description: 主键
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        seqNo:
+          type: string
+          description: 排名
+          x-documented-type: integer
+        allinventorUserId:
+          type: string
+          description: 所有发明人学工号
+        allinventorName:
+          type: string
+          description: 所有发明人姓名
+        appNo:
+          type: string
+          description: 申请号
+        patentId:
+          type: string
+          description: 专利id
+        patentTitle:
+          type: string
+          description: 专利名称
+        patentDeptCode:
+          type: string
+          description: 专利所属学院代码
+        patentDeptName:
+          type: string
+          description: 专利所属学院名称
+        appTypeCode:
+          type: string
+          description: 申请类型代码
+        appTypeName:
+          type: string
+          description: 申请类型名称
+        statusCode:
+          type: string
+          description: 案件状态代码
+        statusName:
+          type: string
+          description: 案件状态名称
+        appDate:
+          type: string
+          format: date-time
+          description: 申请日
+        countryName:
+          type: string
+          description: 是否国际专利
+        regpublishDate:
+          type: string
+          format: date-time
+          description: 授权公告日
+        tongJiIsFirstCode:
+          type: string
+          description: 是否同济排名第一代码
+        tongJiIsFirstName:
+          type: string
+          description: 是否同济排名第一名称
+    V2DcResearchWorkItem:
+      type: object
+      description: Record fields for Research monograph records.
+      properties:
+        id:
+          type: string
+          description: 主键
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        deptCode:
+          type: string
+          description: 人员所属学院代码
+        deptName:
+          type: string
+          description: 人员所属学院名称
+        seqNo:
+          type: string
+          description: 作者排名
+          x-documented-type: numeric
+        bookName:
+          type: string
+          description: 著作名称
+        bookCategoryCode:
+          type: string
+          description: 著作类别代码
+        bookCategoryName:
+          type: string
+          description: 著作类别名称
+        publicationYear:
+          type: string
+          description: 出版时间
+        publishHouseName:
+          type: string
+          description: 出版社名称
+        totalWords:
+          type: string
+          description: 总字数（万）
           x-documented-type: numeric
   securitySchemes:
     openPlatformOAuth:
