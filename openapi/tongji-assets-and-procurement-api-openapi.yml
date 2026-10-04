@@ -268,97 +268,6 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
-    V2DcAssetEquipmentInfoItem:
-      type: object
-      description: Record fields for Equipment asset records.
-      properties:
-        id:
-          type: string
-          description: id
-        userId:
-          type: string
-          description: 保管人/使用管理人学工号
-        name:
-          type: string
-          description: 保管人/使用管理人姓名
-        acctUnitCode:
-          type: string
-          description: 建账单位
-        acctUnitName:
-          type: string
-          description: 建账单位名称
-        purcReqWriteUserId:
-          type: string
-          description: 申购单填写人学工号
-        purcReqWriteName:
-          type: string
-          description: 申购单填写人姓名
-        equipmentNo:
-          type: string
-          description: 设备编号
-        equipmentName:
-          type: string
-          description: 设备名称
-        model:
-          type: string
-          description: 设备型号
-        purchaseDate:
-          type: string
-          description: 购置日期
-        purcReqNo:
-          type: string
-          description: 申购单号
-        quantity:
-          type: string
-          description: 数量
-        totalPrice:
-          type: string
-          description: 总价
-        storageLocation:
-          type: string
-          description: 存放地点
-        trialProductionName:
-          type: string
-          description: 是否试制
-        accrualDate:
-          type: string
-          description: 计提起始日
-        statusName:
-          type: string
-          description: 状态名称
-        statusCode:
-          type: string
-          description: 状态代码   状态：0 正常 、1 已注销、 2 待入库
-        contactNumber:
-          type: string
-          description: 联系电话
-        ManagementNotes:
-          type: string
-          description: 管理备注
-        note:
-          type: string
-          description: 备注
-        assetAttributeNo:
-          type: string
-          description: 资产属性编号
-        assetAttributeName:
-          type: string
-          description: 资产属性名称
-        assetTypeNo:
-          type: string
-          description: 资产类型编号
-        assetTypeName:
-          type: string
-          description: 资产类型名称
-        cardId:
-          type: string
-          description: 卡片ID
-        wid:
-          type: string
-          description: 主键
-        del:
-          type: string
-          description: 删除标识，D标识删除
     V1RtPurchaseContractInfoByOrgSupplierItem:
       type: object
       description: Record fields for Contract records by organization code or supplier name.
@@ -613,6 +522,97 @@ components:
         statusName:
           type: string
           description: 状态名称
+        wid:
+          type: string
+          description: 主键
+        del:
+          type: string
+          description: 删除标识，D标识删除
+    V2DcAssetEquipmentInfoItem:
+      type: object
+      description: Record fields for Equipment asset records.
+      properties:
+        id:
+          type: string
+          description: id
+        userId:
+          type: string
+          description: 保管人/使用管理人学工号
+        name:
+          type: string
+          description: 保管人/使用管理人姓名
+        acctUnitCode:
+          type: string
+          description: 建账单位
+        acctUnitName:
+          type: string
+          description: 建账单位名称
+        purcReqWriteUserId:
+          type: string
+          description: 申购单填写人学工号
+        purcReqWriteName:
+          type: string
+          description: 申购单填写人姓名
+        equipmentNo:
+          type: string
+          description: 设备编号
+        equipmentName:
+          type: string
+          description: 设备名称
+        model:
+          type: string
+          description: 设备型号
+        purchaseDate:
+          type: string
+          description: 购置日期
+        purcReqNo:
+          type: string
+          description: 申购单号
+        quantity:
+          type: string
+          description: 数量
+        totalPrice:
+          type: string
+          description: 总价
+        storageLocation:
+          type: string
+          description: 存放地点
+        trialProductionName:
+          type: string
+          description: 是否试制
+        accrualDate:
+          type: string
+          description: 计提起始日
+        statusName:
+          type: string
+          description: 状态名称
+        statusCode:
+          type: string
+          description: 状态代码   状态：0 正常 、1 已注销、 2 待入库
+        contactNumber:
+          type: string
+          description: 联系电话
+        ManagementNotes:
+          type: string
+          description: 管理备注
+        note:
+          type: string
+          description: 备注
+        assetAttributeNo:
+          type: string
+          description: 资产属性编号
+        assetAttributeName:
+          type: string
+          description: 资产属性名称
+        assetTypeNo:
+          type: string
+          description: 资产类型编号
+        assetTypeName:
+          type: string
+          description: 资产类型名称
+        cardId:
+          type: string
+          description: 卡片ID
         wid:
           type: string
           description: 主键

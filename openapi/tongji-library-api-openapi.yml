@@ -207,23 +207,6 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
     V2DcLibLendInfoAllItem:
       type: object
       description: Record fields for Library loan detail records.
@@ -325,43 +308,23 @@ components:
           type: string
           description: 图书类别名称
           x-documented-type: numeric
-    V1RtLibLibAccessItem:
+    Envelope:
       type: object
-      description: Record fields for Library gate access records (real time).
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
       properties:
-        visitNo:
+        code:
           type: string
-          description: 流水号
-        userId:
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
           type: string
-          description: 学工号
-        name:
-          type: string
-          description: 姓名
-        type:
-          type: string
-          description: 类型
-        deptName:
-          type: string
-          description: 院系
-        visitTime:
-          type: string
-          description: 刷卡时间
-        gateNo:
-          type: string
-          description: 闸机号
-        direction:
-          type: string
-          description: 进出模式，1-进，2-出
-        dataEvent:
-          type: string
-          description: 入出门
-        door:
-          type: string
-          description: 所属区域
-        libPlace:
-          type: string
-          description: 所属校区
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
     V1DcLibLibAccessControlItem:
       type: object
       description: Record fields for Library gate access records.
@@ -415,6 +378,43 @@ components:
         orderBooks:
           type: number
           description: 预约到书
+    V1RtLibLibAccessItem:
+      type: object
+      description: Record fields for Library gate access records (real time).
+      properties:
+        visitNo:
+          type: string
+          description: 流水号
+        userId:
+          type: string
+          description: 学工号
+        name:
+          type: string
+          description: 姓名
+        type:
+          type: string
+          description: 类型
+        deptName:
+          type: string
+          description: 院系
+        visitTime:
+          type: string
+          description: 刷卡时间
+        gateNo:
+          type: string
+          description: 闸机号
+        direction:
+          type: string
+          description: 进出模式，1-进，2-出
+        dataEvent:
+          type: string
+          description: 入出门
+        door:
+          type: string
+          description: 所属区域
+        libPlace:
+          type: string
+          description: 所属校区
   securitySchemes:
     openPlatformOAuth:
       type: oauth2

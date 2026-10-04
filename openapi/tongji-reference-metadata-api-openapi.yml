@@ -654,78 +654,6 @@ components:
         titleName:
           type: string
           description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-    V1MetadataAssetCampusGateItem:
-      type: object
-      description: Record fields for Campus and campus-gate reference list.
-      properties:
-        lctnId:
-          type: string
-          description: 校区校门代码
-        parentId:
-          type: string
-          description: 校区校门上级代码
-        lctnName:
-          type: string
-          description: 校区校门名称
-        lctnDesc:
-          type: string
-          description: 校区校门分类
-        campus:
-          type: string
-          description: 校区代码
-        campusDesc:
-          type: string
-          description: 校区中文描述
-        allowCarCode:
-          type: string
-          description: 该校门是否允许开车进校，1-允许
-    V1MetadataTeacherSendUserTypesItem:
-      type: object
-      description: Record fields for Dispatched-staff category code list.
-      properties:
-        sendUserTypeCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        sendUserTypeName:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-    V1MetadataUserSexCodeItem:
-      type: object
-      description: Record fields for Gender code list.
-      properties:
-        sexCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        sexName:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-    V1MetadataTeacherStatusItem:
-      type: object
-      description: Record fields for Faculty and staff employment status code list.
-      properties:
-        currentStatusCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        currentStatusName:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
     V2MetadataStudentAccomBuildingCodeItem:
       type: object
       description: Record fields for Dormitory building code list.
@@ -754,6 +682,59 @@ components:
         updateTime:
           type: string
           description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherTechJobLevelCodeItem:
+      type: object
+      description: Record fields for Professional-technical post level code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techJobLevelCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techJobLevelName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataUserPersonIdcardTypeItem:
+      type: object
+      description: Record fields for Identity-document type code list.
+      properties:
+        cardCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        cardType:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataMeetingMeetingRoomItem:
+      type: object
+      description: Record fields for Meeting room reference list.
+      properties:
+        meetingRoomCode:
+          type: string
+          description: 会议室代码
+        meetingRoomName:
+          type: string
+          description: 会议室名称
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
     V2MetadataStudentAccomRegionCodeItem:
       type: object
       description: Record fields for Dormitory region code list.
@@ -776,6 +757,22 @@ components:
         updateTime:
           type: string
           description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherTechLevelOfWorkersCodeItem:
+      type: object
+      description: Record fields for Worker technical grade code list.
+      properties:
+        isUseCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        isUseName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techLevelOfWorkersCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        techLevelOfWorkersName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
     V1MetadataTeacherTypesItem:
       type: object
       description: Record fields for Faculty and staff personnel category code list.
@@ -784,6 +781,61 @@ components:
           type: string
           description: Field observed in the live response on 2026-09-01; not described in the published documentation.
         userTypeName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataAssetCampusGateItem:
+      type: object
+      description: Record fields for Campus and campus-gate reference list.
+      properties:
+        lctnId:
+          type: string
+          description: 校区校门代码
+        parentId:
+          type: string
+          description: 校区校门上级代码
+        lctnName:
+          type: string
+          description: 校区校门名称
+        lctnDesc:
+          type: string
+          description: 校区校门分类
+        campus:
+          type: string
+          description: 校区代码
+        campusDesc:
+          type: string
+          description: 校区中文描述
+        allowCarCode:
+          type: string
+          description: 该校门是否允许开车进校，1-允许
+    V1MetadataUserSexCodeItem:
+      type: object
+      description: Record fields for Gender code list.
+      properties:
+        sexCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        sexName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherSendUserTypesItem:
+      type: object
+      description: Record fields for Dispatched-staff category code list.
+      properties:
+        sendUserTypeCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        sendUserTypeName:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+    V1MetadataTeacherStatusItem:
+      type: object
+      description: Record fields for Faculty and staff employment status code list.
+      properties:
+        currentStatusCode:
+          type: string
+          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
+        currentStatusName:
           type: string
           description: Field observed in the live response on 2026-09-01; not described in the published documentation.
     V1MetadataTeacherTechJobCodeItem:
@@ -803,58 +855,6 @@ components:
           type: string
           description: Field observed in the live response on 2026-09-01; not described in the published documentation.
         updateTime:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-    V1MetadataUserPersonIdcardTypeItem:
-      type: object
-      description: Record fields for Identity-document type code list.
-      properties:
-        cardCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        cardType:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-    V1MetadataTeacherTechJobLevelCodeItem:
-      type: object
-      description: Record fields for Professional-technical post level code list.
-      properties:
-        isUseCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        isUseName:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        techJobLevelCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        techJobLevelName:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-    V1MetadataMeetingMeetingRoomItem:
-      type: object
-      description: Record fields for Meeting room reference list.
-      properties:
-        meetingRoomCode:
-          type: string
-          description: 会议室代码
-        meetingRoomName:
-          type: string
-          description: 会议室名称
-    V1MetadataTeacherTechLevelOfWorkersCodeItem:
-      type: object
-      description: Record fields for Worker technical grade code list.
-      properties:
-        isUseCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        isUseName:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        techLevelOfWorkersCode:
-          type: string
-          description: Field observed in the live response on 2026-09-01; not described in the published documentation.
-        techLevelOfWorkersName:
           type: string
           description: Field observed in the live response on 2026-09-01; not described in the published documentation.
   securitySchemes:

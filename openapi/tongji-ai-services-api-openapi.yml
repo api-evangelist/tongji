@@ -173,6 +173,19 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
+    V1AiAudioTranscriptionsTaskItem:
+      type: object
+      description: Record fields for Speech recognition — submit task.
+      properties:
+        created_time:
+          type: string
+          description: 创建时间
+        state:
+          type: string
+          description: 任务状态
+        task_id:
+          type: string
+          description: 任务id
     Envelope:
       type: object
       description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
@@ -190,19 +203,6 @@ components:
       required:
       - code
       - msg
-    V1AiAudioTranscriptionsTaskItem:
-      type: object
-      description: Record fields for Speech recognition — submit task.
-      properties:
-        created_time:
-          type: string
-          description: 创建时间
-        state:
-          type: string
-          description: 任务状态
-        task_id:
-          type: string
-          description: 任务id
     V1AiAudioTranscriptionsResultItem:
       type: object
       description: Record fields for Speech recognition — fetch task result.
