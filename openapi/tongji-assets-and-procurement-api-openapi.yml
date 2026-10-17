@@ -268,9 +268,9 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
-    V1RtPurchaseContractInfoByOrgSupplierItem:
+    V1RtPurchaseContractInfoByNumberItem:
       type: object
-      description: Record fields for Contract records by organization code or supplier name.
+      description: Record fields for Contract record by contract number.
       properties:
         contractNumber:
           type: string
@@ -284,29 +284,12 @@ components:
         contractSignDate:
           type: string
           description: 合同签订日期
-        organizationCode:
+        supplierAccount:
           type: string
-          description: 供应商组织机构代码
+          description: 供应商收款账号
         supplierName:
           type: string
           description: 供应商名称
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
     V1DcContractInfoContractItem:
       type: object
       description: Record fields for Internal contract records.
@@ -415,28 +398,6 @@ components:
           type: string
           description: 游标
           x-documented-type: number
-    V1RtPurchaseContractInfoByNumberItem:
-      type: object
-      description: Record fields for Contract record by contract number.
-      properties:
-        contractNumber:
-          type: string
-          description: 合同编号
-        contractAmount:
-          type: string
-          description: 合同金额
-        contractName:
-          type: string
-          description: 合同名称
-        contractSignDate:
-          type: string
-          description: 合同签订日期
-        supplierAccount:
-          type: string
-          description: 供应商收款账号
-        supplierName:
-          type: string
-          description: 供应商名称
     V2DcAssetPurchaseRequisitionInfoItem:
       type: object
       description: Record fields for Purchase requisition records.
@@ -528,6 +489,28 @@ components:
         del:
           type: string
           description: 删除标识，D标识删除
+    V1RtPurchaseContractInfoByOrgSupplierItem:
+      type: object
+      description: Record fields for Contract records by organization code or supplier name.
+      properties:
+        contractNumber:
+          type: string
+          description: 合同编号
+        contractAmount:
+          type: string
+          description: 合同金额
+        contractName:
+          type: string
+          description: 合同名称
+        contractSignDate:
+          type: string
+          description: 合同签订日期
+        organizationCode:
+          type: string
+          description: 供应商组织机构代码
+        supplierName:
+          type: string
+          description: 供应商名称
     V2DcAssetEquipmentInfoItem:
       type: object
       description: Record fields for Equipment asset records.
@@ -619,6 +602,23 @@ components:
         del:
           type: string
           description: 删除标识，D标识删除
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
   securitySchemes:
     openPlatformOAuth:
       type: oauth2

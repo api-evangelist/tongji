@@ -372,6 +372,76 @@ paths:
           description: Rate limit exceeded (default 50 requests per second per application per IP).
 components:
   schemas:
+    V1InfraEducationDataIdCardInfoQueryItem:
+      type: object
+      description: Record fields for National ID record lookup.
+      properties:
+        idCardNo:
+          type: string
+          description: 公民身份号码（非空项）
+        name:
+          type: string
+          description: 姓名
+        sex:
+          type: string
+          description: 性别
+        nationName:
+          type: string
+          description: 民族
+        birthDate:
+          type: string
+          description: 出生日期
+        country:
+          type: string
+          description: 出生地-国家（地区）
+        nativePlaceName:
+          type: string
+          description: 出生地-省市县（区）
+        idCardMatchScore:
+          type: string
+          description: 公民身份号码-匹配度代码
+        nameMatchScore:
+          type: string
+          description: 姓名-匹配度代码
+        deathFlag:
+          type: string
+          description: 死亡标识（0有效人口，1死亡人口）
+        dataSource:
+          type: string
+          description: 数据来源（1同济大学数据库， 2国家公安部）
+          x-documented-type: number
+        isTJUser:
+          type: boolean
+          description: 是否为同济大学人员
+        tjUserList:
+          type: string
+          description: 同济大学人员学工信息
+          x-documented-type: array[object]
+        deptCode:
+          type: string
+          description: 部门/学院代码
+        deptName:
+          type: string
+          description: 部门/学院名称
+        userId:
+          type: string
+          description: 学工号
+        userTypeCode:
+          type: string
+          description: 人员类型代码
+        userTypeName:
+          type: string
+          description: 人员类型名称
+    V1InfraEducationDataShQrcodeQueryItem:
+      type: object
+      description: Record fields for Shanghai Suishenma health-code lookup.
+      properties:
+        name:
+          type: string
+          description: 姓名
+        cardNo:
+          type: string
+          description: 身份证号
     V1InfraEducationDataEmployeeInsuranceItem:
       type: object
       description: Record fields for Employee social-insurance enrolment.
@@ -436,106 +506,6 @@ components:
         xm:
           type: string
           description: 姓名
-    Envelope:
-      type: object
-      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
-      properties:
-        code:
-          type: string
-          description: Business status code. A00000 indicates success.
-          examples:
-          - A00000
-        msg:
-          type: string
-          description: Human-readable result message.
-        data:
-          description: Interface-specific payload.
-      required:
-      - code
-      - msg
-    V1InfraEducationDataFaceCheckItem:
-      type: object
-      description: Record fields for Face verification against national ID record.
-      properties:
-        score:
-          type: string
-          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
-        match:
-          type: boolean
-          description: 是否匹配：true匹配，false不匹配
-        description:
-          type: string
-          description: 认证描述
-    V1InfraEducationDataShQrcodeQueryItem:
-      type: object
-      description: Record fields for Shanghai Suishenma health-code lookup.
-      properties:
-        name:
-          type: string
-          description: 姓名
-        cardNo:
-          type: string
-          description: 身份证号
-    V1InfraEducationDataIdCardInfoQueryItem:
-      type: object
-      description: Record fields for National ID record lookup.
-      properties:
-        idCardNo:
-          type: string
-          description: 公民身份号码（非空项）
-        name:
-          type: string
-          description: 姓名
-        sex:
-          type: string
-          description: 性别
-        nationName:
-          type: string
-          description: 民族
-        birthDate:
-          type: string
-          description: 出生日期
-        country:
-          type: string
-          description: 出生地-国家（地区）
-        nativePlaceName:
-          type: string
-          description: 出生地-省市县（区）
-        idCardMatchScore:
-          type: string
-          description: 公民身份号码-匹配度代码
-        nameMatchScore:
-          type: string
-          description: 姓名-匹配度代码
-        deathFlag:
-          type: string
-          description: 死亡标识（0有效人口，1死亡人口）
-        dataSource:
-          type: string
-          description: 数据来源（1同济大学数据库， 2国家公安部）
-          x-documented-type: number
-        isTJUser:
-          type: boolean
-          description: 是否为同济大学人员
-        tjUserList:
-          type: string
-          description: 同济大学人员学工信息
-          x-documented-type: array[object]
-        deptCode:
-          type: string
-          description: 部门/学院代码
-        deptName:
-          type: string
-          description: 部门/学院名称
-        userId:
-          type: string
-          description: 学工号
-        userTypeCode:
-          type: string
-          description: 人员类型代码
-        userTypeName:
-          type: string
-          description: 人员类型名称
     V1InfraEducationDataEducationItem:
       type: object
       description: Record fields for Academic qualification lookup.
@@ -623,6 +593,36 @@ components:
         zppath:
           type: string
           description: 未知
+    Envelope:
+      type: object
+      description: Standard Tongji Open Platform response envelope. Every interface returns code, data and msg.
+      properties:
+        code:
+          type: string
+          description: Business status code. A00000 indicates success.
+          examples:
+          - A00000
+        msg:
+          type: string
+          description: Human-readable result message.
+        data:
+          description: Interface-specific payload.
+      required:
+      - code
+      - msg
+    V1InfraEducationDataFaceCheckItem:
+      type: object
+      description: Record fields for Face verification against national ID record.
+      properties:
+        score:
+          type: string
+          description: 得分：600分以下是非同一人，600-700分是疑似同一人，700分及以上是同一人
+        match:
+          type: boolean
+          description: 是否匹配：true匹配，false不匹配
+        description:
+          type: string
+          description: 认证描述
   securitySchemes:
     openPlatformOAuth:
       type: oauth2
