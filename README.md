@@ -1,4 +1,4 @@
-# Tongji University (tongji)
+# Tongji University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,68 +64,156 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Tongji University (同济大学) is a public research university in Shanghai, China, in the national Double First-Class programme and ranked around #192 in the QS World University Rankings. This repository catalogs the university's public developer/API footprint as an [APIs.json](https://apis.json.org) provider profile.
+Tongji University (同济大学) is a public research university in Shanghai, China, in the national Double First-Class programme and ranked around #192 in the QS World University Rankings. Unlike most of the university cohort, its programmable footprint is real and it is the university's own engineering, not a vendor's: the Tongji University Information Office operates an institutional Open Platform at api.tongji.edu.cn — on China Education and Research Network address space, behind a KrakenD gateway, with its own Keycloak authorization server — publishing roughly 234 documented interfaces across fifteen families covering personnel, student, teaching, research, campus-card, library, asset, procurement, education-data verification, AI and notification services. Its OpenID Connect discovery document is live and lists 491 named OAuth scopes, one per interface for most of the catalog. Thirteen reference-metadata interfaces are documented as requiring no authorization and were confirmed anonymously callable, returning live JSON code tables; everything else is gated behind a faculty or student application-and-approval process. The university also runs its own Shibboleth SAML 2.0 identity provider, registered into eduGAIN through CARSI, China's national research-and-education identity federation. What it does not have is a published contract: no OpenAPI, Swagger, Postman collection, sitemap, robots.txt, llms.txt or changelog is served anywhere on the platform, all documentation is Chinese-only, and there is no institutional repository, OAI-PMH endpoint, open-data portal, DataCite or Crossref membership. Every OpenAPI in this repo is API Evangelist's derivation from Tongji's published documentation, not a Tongji artifact.
 
-Unlike most of the university cohort, Tongji's programmable footprint is real and it is the university's own engineering, not a vendor's. The Tongji University Information Office operates an institutional Open Platform at `api.tongji.edu.cn` — on China Education and Research Network (CERNET) address space, behind a KrakenD gateway with its own Keycloak authorization server — documenting roughly 234 interfaces across fifteen families. Thirteen reference-metadata interfaces are documented as requiring no authorization and were confirmed anonymously callable on 2026-09-01. The university also runs its own Shibboleth SAML 2.0 identity provider, federated through CARSI into eduGAIN.
+**Areas:** University · Higher Education · Education · China · Shanghai · Double First-Class · Open Platform · Campus Data · Identity Federation · Research Data · Library · Course Catalog
 
-APIs.json: https://raw.githubusercontent.com/api-evangelist/tongji/refs/heads/main/apis.yml
+## Tongji University on APIs.io
 
-Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=tongji-api-evangelist&utm_content=repo
+Everything profiled for Tongji University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tongji/](https://apis.io/providers/tongji/)** — or go straight to one of the APIs or properties below.
 
-## Type
+### APIs (8)
 
-- University (Public Research University)
-- Index
-- Consumer
-- 3rd-Party
+- [Tongji University Shibboleth Identity Provider (CARSI / eduGAIN)](https://apis.io/apis/tongji/identity-provider/) — Tongji University's own SAML 2.0 identity provider, registered into eduGAIN by CARSI, the CERNET Authentication and Resource Sharing Infrastructure —…
+- [ROR Organization Registration](https://apis.io/apis/tongji/ror/) — Tongji University is registered in the Research Organization Registry with ROR ID https://ror.org/03rc6as71 (同济大学, Shanghai, China). This is a registry…
+- [Tongji University AI Services API](https://apis.io/apis/tongji/tongji-ai-services-api/) — Asynchronous speech-recognition and document-OCR services offered to campus applications by the Tongji University Information Office.
+- [Tongji University Assets and Procurement API](https://apis.io/apis/tongji/tongji-assets-and-procurement-api/) — Contract, equipment-asset and purchase-requisition records drawn from the university procurement and asset-management systems.
+- [Tongji University Education Data Verification API](https://apis.io/apis/tongji/tongji-education-data-verification-api/) — Identity, qualification, degree, enrolment and insurance verification services backed by national and Shanghai municipal education data sources.
+- [Tongji University Library API](https://apis.io/apis/tongji/tongji-library-api/) — Library gate-access and loan records from the Tongji University Library systems.
+- [Tongji University Reference Metadata API](https://apis.io/apis/tongji/tongji-reference-metadata-api/) — Openly callable code tables (metadata dictionaries) that define the controlled vocabularies used across every other Open Platform interface.
+- [Tongji University Research API](https://apis.io/apis/tongji/tongji-research-api/) — Patent, software-copyright, project, funding, award, publication and monograph records from the university research-management systems.
 
-## Tags
+### Published properties
 
-University, Higher Education, Education, China, Shanghai, Double First-Class, Open Platform, Campus Data, Identity Federation, Research Data, Library, Course Catalog, Reference Data
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Surfaces, by operator
+#### JSON Schema (3)
 
-| Surface | Operator | What it is |
-|---|---|---|
-| [Tongji University Open Platform](https://api.tongji.edu.cn/docs) | `institution` | The university's own campus data and capability API platform. OAuth 2.0 / OIDC via a self-run Keycloak realm, 491 published scopes, 50 req/s token-bucket rate limit, thirteen anonymously callable reference-metadata interfaces. |
-| [Shibboleth Identity Provider](https://idp2.tongji.edu.cn/idp/shibboleth) | `federation` | Tongji's own SAML 2.0 IdP, registered into eduGAIN by CARSI since 2020-02-22. |
-| [ROR registration](https://ror.org/03rc6as71) | `registry` | Registry membership. The ROR API is ROR's; only the membership is Tongji's. |
+The data models the API reads and writes.
 
-No `tenant` and no `vendor` surfaces were found — there is no Figshare, Pure, Ex Libris, Dataverse or Symplectic contract running under this institution's name.
+- [Tongji University Open Platform Response Envelope](https://apis.io/schemas/tongji/tongji-open-platform-envelope/)
+- [Tongji University Open Platform Record Schemas](https://apis.io/schemas/tongji/tongji-open-platform-records/)
+- [Tongji University Open Platform Reference Metadata Code Table](https://apis.io/schemas/tongji/tongji-reference-metadata-code-table/)
 
-## Artifacts
+#### JSON-LD (1)
 
-- OpenAPI (derived from Tongji's own documentation, split per tag): [openapi/](openapi/) — master in [openapi/_original/](openapi/_original/)
-- Authentication: [authentication/tongji-open-platform-authentication.yml](authentication/tongji-open-platform-authentication.yml)
-- Scopes (491, from the live OIDC discovery document): [scopes/](scopes/)
-- Errors: [errors/tongji-open-platform-errors.yml](errors/tongji-open-platform-errors.yml)
-- Vocabulary (13 live code tables, 730 rows): [vocabulary/tongji-open-platform-reference-metadata.yml](vocabulary/tongji-open-platform-reference-metadata.yml)
-- Examples (live, unauthenticated captures): [examples/](examples/)
-- JSON Schema: [json-schema/](json-schema/)
-- Rules: [rules/tongji-open-platform-rules.yml](rules/tongji-open-platform-rules.yml)
-- Lifecycle: [lifecycle/tongji-open-platform-lifecycle.yml](lifecycle/tongji-open-platform-lifecycle.yml)
-- Conformance (education regime): [conformance/tongji-education-standards-conformance.yml](conformance/tongji-education-standards-conformance.yml)
-- Identity federation: [identity-federation/](identity-federation/)
-- Plans: [plans/tongji-plans-pricing.yml](plans/tongji-plans-pricing.yml)
-- Rate limits: [rate-limits/tongji-rate-limits.yml](rate-limits/tongji-rate-limits.yml)
-- FinOps: [finops/tongji-finops.yml](finops/tongji-finops.yml)
+Linked-data contexts for the provider's vocabulary.
 
-## Timestamps
+- [Tongji Context](https://apis.io/jsonld/tongji/tongji-context/)
 
-- Created: 2026-06-03
-- Modified: 2026-09-01
+#### Examples (13)
 
-## Notes
+Example requests and responses.
 
-- **Correction, 2026-09-01.** The 2026-06-03 profile stated that "no openly callable public endpoints were confirmed". That was wrong. Thirteen interfaces under `/v1/metadata/` and `/v2/metadata/` are documented as 无需授权可直接访问 and every one returned HTTP 200 `application/json` to an unauthenticated GET. The June profile also missed the live OpenID Connect discovery document and the university's eduGAIN-registered Shibboleth IdP entirely.
-- The deep-documentation 404s the June review recorded were an artefact of guessing SPA routes. The real routes, recovered from the rendered navigation, all resolve 200.
-- Every OpenAPI in this repo is **API Evangelist's derivation** from Tongji's own published Chinese-language documentation. Tongji publishes no OpenAPI, Swagger or Postman collection of its own — `/swagger.json`, `/v3/api-docs` and `/.well-known/openapi.json` all return 404, as do `/sitemap.xml`, `/robots.txt` and `/llms.txt`.
-- No institutional repository, OAI-PMH endpoint or open-data portal was found. Tongji is not a DataCite member and not a Crossref member.
-- `github.com/Tongji-University` exists but is empty, unnamed and undescribed, so no GitHub organization is claimed.
-- `api.tongji.edu.cn/docs/intro/other/policies` is a privacy-policy **template** the Information Office hands to campus developers, not the university's own privacy policy, and is deliberately not recorded as one.
-- All documentation is Chinese-only.
-- No endpoints, properties or URLs were fabricated. Every artifact carries its `method` and `source`.
+- [Tongji V1 Metadata Asset Campus Gate Example](https://apis.io/examples/tongji/tongji-v1-metadata-asset-campus-gate-example/)
+- [Tongji V1 Metadata Meeting Meeting Room Example](https://apis.io/examples/tongji/tongji-v1-metadata-meeting-meeting-room-example/)
+- [Tongji V1 Metadata Teacher Send User Types Example](https://apis.io/examples/tongji/tongji-v1-metadata-teacher-send-user-types-example/)
+- [Tongji V1 Metadata Teacher Status Example](https://apis.io/examples/tongji/tongji-v1-metadata-teacher-status-example/)
+- [Tongji V1 Metadata Teacher Tech Job Code Example](https://apis.io/examples/tongji/tongji-v1-metadata-teacher-tech-job-code-example/)
+- [Tongji V1 Metadata Teacher Tech Job Level Code Example](https://apis.io/examples/tongji/tongji-v1-metadata-teacher-tech-job-level-code-example/)
+- [Tongji V1 Metadata Teacher Tech Level Of Workers Code Example](https://apis.io/examples/tongji/tongji-v1-metadata-teacher-tech-level-of-workers-code-example/)
+- [Tongji V1 Metadata Teacher Title Code Example](https://apis.io/examples/tongji/tongji-v1-metadata-teacher-title-code-example/)
+- [Tongji V1 Metadata Teacher Types Example](https://apis.io/examples/tongji/tongji-v1-metadata-teacher-types-example/)
+- [Tongji V1 Metadata User Person Idcard Type Example](https://apis.io/examples/tongji/tongji-v1-metadata-user-person-idcard-type-example/)
+- [Tongji V1 Metadata User Sex Code Example](https://apis.io/examples/tongji/tongji-v1-metadata-user-sex-code-example/)
+- [Tongji V2 Metadata Student Accom Building Code Example](https://apis.io/examples/tongji/tongji-v2-metadata-student-accom-building-code-example/)
+- [Tongji V2 Metadata Student Accom Region Code Example](https://apis.io/examples/tongji/tongji-v2-metadata-student-accom-region-code-example/)
 
-## Maintainers
+#### Governance rules (1)
 
-- Kin Lane — kin@apievangelist.com
+Spectral rulesets for the provider's contracts.
+
+- [Tongji University — open platform rules](https://apis.io/rules/tongji/tongji-open-platform-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Tongji Domain Security](https://apis.io/security/tongji/tongji-domain-security/)
+- [Tongji Open Platform Authentication](https://apis.io/security/tongji/tongji-open-platform-authentication/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Tongji Open Platform Scopes](https://apis.io/scopes/tongji/tongji-open-platform-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Tongji Plans Pricing](https://apis.io/plans/tongji/tongji-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Tongji Rate Limits](https://apis.io/rate-limits/tongji/tongji-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Tongji Finops](https://apis.io/finops/tongji/tongji-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.tongji.edu.cn/)
+- [Documentation](https://api.tongji.edu.cn/docs)
+- [API reference](https://api.tongji.edu.cn/docs/interface)
+- [Support](https://api.tongji.edu.cn/docs/intro/apply/contact_us)
+
+## API Evangelist rating
+
+**Kin Score 33.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 27.7 |
+| Contract governance | 15.2 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 21.1 |
+
+**Agent readiness 25.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 26.5** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tongji/](https://apis.io/providers/tongji/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Tongji University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tongji/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
